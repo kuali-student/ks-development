@@ -10,8 +10,8 @@
 # svn propset svn:externals -F svn.externals .
 #
 
-ks-api http://svn.kuali.org/repos/student/enrollment/ks-api/trunk
-ks-core http://svn.kuali.org/repos/student/enrollment/ks-core/trunk
-ks-lum http://svn.kuali.org/repos/student/enrollment/ks-lum/trunk
-ks-enroll http://svn.kuali.org/repos/student/enrollment/ks-enroll/trunk
-ks-deployments http://svn.kuali.org/repos/student/enrollment/ks-deployments/trunk
+ks-api http://svn.kuali.org/repos/student/enrollment/ks-api/branches/services
+ks-core http://svn.kuali.org/repos/student/enrollment/ks-core/branches/services
+ks-lum http://svn.kuali.org/repos/student/enrollment/ks-lum/branches/services
+ks-enroll http://svn.kuali.org/repos/student/enrollment/ks-enroll/branches/services
+ks-deployments http://svn.kuali.org/repos/student/enrollment/ks-deployments/branches/services
