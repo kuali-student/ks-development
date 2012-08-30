@@ -93,9 +93,9 @@
         </profile>
     </profiles>
     <scm>
-        <connection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</connection>
-        <developerConnection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</developerConnection>
-        <url>https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</url>
+        <connection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</connection>
+        <developerConnection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</developerConnection>
+        <url>https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</url>
     </scm>
     <properties>
         <ks.api.version>2.0.0-M5-SNAPSHOT</ks.api.version>
