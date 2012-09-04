@@ -29,17 +29,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>kuali.nexus.build</id>
-            <name>Nexus Repository Manager</name>
-            <url>http://nexus.kuali.org/content/repositories/kuali-builds</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
     </repositories>
     <ciManagement>
         <system>hudson</system>
@@ -116,7 +105,7 @@
         <commons.lang.version>2.6</commons.lang.version>
         <cxf.version>2.3.8</cxf.version>
         <cxf.javadoc.version>latest-2.3.x</cxf.javadoc.version>
-        <derby.version>10.4.2.0</derby.version>
+        <derby.version>10.9.1.0</derby.version>
         <dozer.version>5.3.2</dozer.version>
         <eclipselink.version>1.0</eclipselink.version>
         <ehcache.version>2.5.0</ehcache.version>
@@ -137,7 +126,7 @@
         <jta.version>1.1</jta.version>
         <junit.version>4.10</junit.version>
         <ks-contract-docs.plugin.version>1.0.2</ks-contract-docs.plugin.version>
-        <kuali.rice.version>2.2.0-myplan-build-26</kuali.rice.version>
+        <kuali.rice.version>2.2.0-M3</kuali.rice.version>
         <log4j.version>1.2.16</log4j.version>
         <log4j.javadoc.version>1.2</log4j.javadoc.version>
         <logkit.version>2.0</logkit.version>
@@ -320,8 +309,8 @@
                                     <version>${maven.min.version}</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <message>To build this project, java ${jdk.min.version} (or higher - but not 1.7) is required. Please install the specified version.</message>
-                                    <version>[${jdk.min.version}},1.7)</version>
+                                    <message>To build this project, java ${jdk.min.version} (or higher) is required. Please install the specified version.</message>
+                                    <version>${jdk.min.version}</version>
                                 </requireJavaVersion>
                                 <requirePluginVersions>
                                     <message>Build reproducibility: It is a best practice to explicitly specify plugin versions!</message>
