@@ -82,16 +82,16 @@
         </profile>
     </profiles>
     <scm>
-        <connection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</connection>
-        <developerConnection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</developerConnection>
-        <url>https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</url>
+        <connection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</connection>
+        <developerConnection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</developerConnection>
+        <url>https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</url>
     </scm>
     <properties>
-        <ks.api.version>2.0.0-M5-SNAPSHOT</ks.api.version>
-        <ks.core.version>2.0.0-SNAPSHOT</ks.core.version>
-        <ks.enroll.version>1.0.0-SNAPSHOT</ks.enroll.version>
-        <ks.lum.version>2.0.0-SNAPSHOT</ks.lum.version>
-        <ks.deployments.version>2.0.0-SNAPSHOT</ks.deployments.version>
+        <ks.api.version>2.0.0-M6-SNAPSHOT</ks.api.version>
+        <ks.core.version>2.0.0-M6-SNAPSHOT</ks.core.version>
+        <ks.enroll.version>1.0.0-M6-SNAPSHOT</ks.enroll.version>
+        <ks.lum.version>2.0.0-M6-SNAPSHOT</ks.lum.version>
+        <ks.deployments.version>2.0.0-M6-SNAPSHOT</ks.deployments.version>
 
         <!-- 3rd party library/plugin version definitions -->
         <antlr.runtime.version>3.1.1</antlr.runtime.version>
@@ -126,7 +126,7 @@
         <jsr107cache.version>1.0</jsr107cache.version>
         <jta.version>1.1</jta.version>
         <junit.version>4.10</junit.version>
-        <ks-contract-docs.plugin.version>1.0.2</ks-contract-docs.plugin.version>
+        <ks-contract-docs.plugin.version>1.0.3</ks-contract-docs.plugin.version>
         <kuali.rice.version>2.2.0-M3</kuali.rice.version>
         <log4j.version>1.2.16</log4j.version>
         <log4j.javadoc.version>1.2</log4j.javadoc.version>
