@@ -15,8 +15,8 @@
 # the external paths
 #
 
-ks-api http://svn.kuali.org/repos/student/enrollment/ks-api/branches/M6
-ks-core http://svn.kuali.org/repos/student/enrollment/ks-core/branches/services
-ks-lum http://svn.kuali.org/repos/student/enrollment/ks-lum/branches/services
-ks-enroll http://svn.kuali.org/repos/student/enrollment/ks-enroll/branches/services
-ks-deployments http://svn.kuali.org/repos/student/enrollment/ks-deployments/branches/services
+ks-api https://svn.kuali.org/repos/student/enrollment/ks-api/branches/M6
+ks-core https://svn.kuali.org/repos/student/enrollment/ks-core/branches/services
+ks-lum https://svn.kuali.org/repos/student/enrollment/ks-lum/branches/services
+ks-enroll https://svn.kuali.org/repos/student/enrollment/ks-enroll/branches/services
+ks-deployments https://svn.kuali.org/repos/student/enrollment/ks-deployments/branches/services
