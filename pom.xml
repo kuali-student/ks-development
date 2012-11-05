@@ -40,10 +40,6 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>ks-deployments</module>
-                <module>ks-core</module>
-                <module>ks-lum</module>
-                <module>ks-enroll</module>
                 <module>ks-api</module>
             </modules>
         </profile>
