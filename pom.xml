@@ -173,7 +173,7 @@
                             <mapping>
                                 <module>ks-api</module>
                                 <versionProperty>ks.api.version</versionProperty>
-                            </mapping>                            
+                            </mapping>
                         </mappings>
                     </configuration>
                 </plugin>
@@ -1218,4 +1218,3 @@
         </dependencies>
     </dependencyManagement>
 </project>
-
