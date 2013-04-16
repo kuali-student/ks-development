@@ -8,11 +8,11 @@
 #
 # The SVN command for using this file to create SVN external definitions is
 # 
-# svn propset svn:externals -F svn.externals.services .
+# svn propset svn:externals -F svn.externals .
 #
 # *** IMPORTANT ***
 # you must rerun the svn propset command and commit after editing any of
 # the external paths
 #
 
-ks-api https://svn.kuali.org/repos/student/enrollment/ks-api/branches/M7
+ks-api https://svn.kuali.org/repos/student/enrollment/ks-api/trunk

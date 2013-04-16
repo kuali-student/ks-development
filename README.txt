@@ -5,5 +5,4 @@ The svn.externals file controls what local directories appear in the checkout, a
 actual location inside Subversion they represent.
 
 Even though this directory appears to be blank when browsing it over http, Subversion clients
-will detect the svn:externals definitions and checkout the mapped locations when checking out
-the top level project.
+will detect the svn:externals property definitions and checkout the mapped locations when checking out the top level project.
