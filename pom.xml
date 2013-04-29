@@ -169,7 +169,7 @@
                     <groupId>org.kuali.maven.plugins</groupId>
                     <artifactId>externals-maven-plugin</artifactId>
                     <configuration>
-                        <file>${project.build.directory}/checkout/svn.externals.services</file>
+                        <file>${project.build.directory}/checkout/svn.externals</file>
                         <commitMessage>[externals-maven-plugin] Automated pom formatting</commitMessage>
                         <mappings>
                             <mapping>
