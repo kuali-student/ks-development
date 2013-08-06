@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.kuali.pom</groupId>
         <artifactId>kuali-common</artifactId>
-        <version>2.0.9</version>
+        <version>3.3.3</version>
     </parent>
     <groupId>org.kuali.student</groupId>
     <artifactId>student</artifactId>
@@ -12,9 +12,9 @@
     <packaging>pom</packaging>
     <name>Kuali Student</name>
     <description>
-        Kuali Student is a modular, open source, standards-based next generation student system that offers a flexible, scalable,
-        cost-effective system that can be configured to meet the business requirements of any higher education institution
-    </description>
+    Kuali Student is a modular, open source, standards-based next generation student system that offers a flexible, scalable,
+    cost-effective system that can be configured to meet the business requirements of any higher education institution
+  </description>
     <url>http://${kuali.site.hostname}/student/${project.version}/</url>
     <repositories>
         <repository>
@@ -33,47 +33,20 @@
         <system>jenkins</system>
         <url>http://ci.rice.kuali.org</url>
     </ciManagement>
-    <profiles>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>ks-api</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>skip-ui</id>
-            <modules>
-                <module>ks-api</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>skip-all-wars</id>
-            <modules>
-                <module>ks-api</module>
-            </modules>
-        </profile>
-    </profiles>
-    <scm>
-        <connection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</connection>
-        <developerConnection>scm:svn:https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</developerConnection>
-        <url>https://svn.kuali.org/repos/student/enrollment/aggregate/branches/services</url>
-    </scm>
     <properties>
-        <ks.api.version>2.0.0-services-M7-SNAPSHOT</ks.api.version>
+        <ks.api.version>2.0.0-services-M9-SNAPSHOT</ks.api.version>
         <!-- 3rd party library/plugin version definitions -->
         <antlr.runtime.version>3.1.1</antlr.runtime.version>
         <antlr.legacy.version>2.7.7</antlr.legacy.version>
         <aspectj.version>1.6.8</aspectj.version>
-        <atomikos.version>3.6.4</atomikos.version>
+        <atomikos.version>3.8.0</atomikos.version>
         <backport-util-concurrent.version>3.1</backport-util-concurrent.version>
         <cglib.nodep.version>2.1_3</cglib.nodep.version>
         <com.lowagie.itext.version>2.1.7</com.lowagie.itext.version>
+        <commons.beanutils.version>1.8.3-kuali-4</commons.beanutils.version>
         <commons.digester.version>2.1</commons.digester.version>
         <commons.lang.version>2.6</commons.lang.version>
-        <cxf.version>2.3.8</cxf.version>
+        <cxf.version>2.7.0</cxf.version>
         <cxf.javadoc.version>latest-2.3.x</cxf.javadoc.version>
         <derby.version>10.9.1.0</derby.version>
         <dozer.version>5.3.2</dozer.version>
@@ -92,28 +65,28 @@
         <jaxws.spring.version>1.8</jaxws.spring.version>
         <jetty.plugin.version>7.3.1.v20110307</jetty.plugin.version>
         <jetty.version>6.1.6</jetty.version>
-        <jdk.min.version>1.6</jdk.min.version>
         <jsr107cache.version>1.0</jsr107cache.version>
         <jta.version>1.1</jta.version>
-        <junit.version>4.10</junit.version>
+        <junit.version>4.11</junit.version>
         <ks-contract-docs.plugin.version>1.0.6</ks-contract-docs.plugin.version>
-        <!--<ks-contract-docs.plugin.version>1.0.7-SNAPSHOT</ks-contract-docs.plugin.version>-->
-        <kuali.rice.version>2.2.0-M4</kuali.rice.version>
+        <kuali.rice.version>2.3.0-krms-SNAPSHOT</kuali.rice.version>
         <log4j.version>1.2.16</log4j.version>
         <log4j.javadoc.version>1.2</log4j.javadoc.version>
         <logkit.version>2.0</logkit.version>
         <maven.min.version>3.0.4</maven.min.version>
         <metro.version>1.4</metro.version>
-        <mysql.connector.version>5.1.18</mysql.connector.version>
+        <mysql.version>5.1.22</mysql.version>
         <net.sf.jasperreports.version>4.0.1</net.sf.jasperreports.version>
         <net.sf.jasperreports.fonts.version>4.0.0</net.sf.jasperreports.fonts.version>
         <net.sourceforge.jexcelapi.version>2.6.10</net.sourceforge.jexcelapi.version>
         <openjpa.version>1.2.1</openjpa.version>
         <opensaml.version>1.1</opensaml.version>
         <org.apache.poi.version>3.6</org.apache.poi.version>
-        <oracle.ojdbc.version>10.2.0.3.0</oracle.ojdbc.version>
-        <plugin.impex.version>1.0.31</plugin.impex.version>
-        <plugin.enforcer.version>1.1.1</plugin.enforcer.version>
+        <!-- Oracle values sync'd with the deploy environments -->
+        <oracle.version>11.2.0.2</oracle.version>
+        <oracle.artifactId>ojdbc6_g</oracle.artifactId>
+        <plugin.enforcer.version>1.2</plugin.enforcer.version>
+        <project.jdk.min.version>1.7.0-21</project.jdk.min.version>
         <selenium.version>2.7.0</selenium.version>
         <servlet.api.version>2.5</servlet.api.version>
         <slf4j.version>1.6.2</slf4j.version>
@@ -154,11 +127,165 @@
         <ks.java2ws.phase>none</ks.java2ws.phase>
         <ks.gwt.compile.phase>process-classes</ks.gwt.compile.phase>
         <ks.mockimpl.phase>none</ks.mockimpl.phase>
-        <!--<ks.conftest.phase>none</ks.conftest.phase>-->
         <!-- should align to the same or earlier phase than the contract doc or dictionary doc phase -->
         <ks.prepare-contract-dependencies.phase>site</ks.prepare-contract-dependencies.phase>
         <ks.vdecorator.phase>none</ks.vdecorator.phase>
+        <!-- Spring config that creates META-INF files describing SQL resources -->
+        <metainf.sql.context>org.kuali.common.util.metainf.spring.MetaInfExecutableConfig</metainf.sql.context>
+        <metainf.sql.propertySource>org.kuali.student.deploy.spring.SqlMetaInfPropertySourceConfig</metainf.sql.propertySource>
+        <jdk6.rt.jar>/var/lib/jenkins/tools/jdk6/jre/lib/rt.jar</jdk6.rt.jar>
+        <kuali-impex.version>${impex.version}</kuali-impex.version>
+        <!-- Remove this once the top level Kuali pom is on this version (or higher) -->
+        <plugin.externals.version>1.0.10</plugin.externals.version>
     </properties>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>ks-deployments</module>
+                <module>ks-core</module>
+                <module>ks-lum</module>
+                <module>ks-enroll</module>
+                <module>ks-api</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>skip-ui</id>
+            <modules>
+                <module>ks-core</module>
+                <module>ks-lum</module>
+                <module>ks-enroll</module>
+                <module>ks-api</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>skip-all-wars</id>
+            <modules>
+                <module>ks-core</module>
+                <module>ks-lum</module>
+                <module>ks-enroll</module>
+                <module>ks-api</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>impex-only</id>
+            <modules>
+                <module>ks-deployments</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>sql-only</id>
+            <modules>
+                <module>ks-deployments</module>
+                <module>ks-core</module>
+                <module>ks-lum</module>
+                <module>ks-enroll</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>jdk7-with-jdk6-bytecode</id>
+            <modules>
+                <module>ks-deployments</module>
+                <module>ks-core</module>
+                <module>ks-lum</module>
+                <module>ks-enroll</module>
+                <module>ks-api</module>
+            </modules>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>enforce-rules-for-cross-compilation</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <phase>${ks.enforcer.phase}</phase>
+                                <configuration>
+                                    <rules>
+                                    <requireJavaVersion>
+                                    <version>1.7</version>
+                                    </requireJavaVersion>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>${project.java.version}</source>
+                            <target>${project.java.version}</target>
+                            <fork>true</fork>
+                            <compilerArguments>
+                                <bootclasspath>${jdk6.rt.jar}</bootclasspath>
+                                <extdirs/>
+                            </compilerArguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>sonar</id>
+            <properties>
+                <ks-db-validation.resource.path>ks-deployments/ks-dbs/ks-db-validation/src/main/resources/org/kuali/student/db/ks-db-validation</ks-db-validation.resource.path>
+                <ks-impex-app-db.artifactId>ks-impex-app-db</ks-impex-app-db.artifactId>
+                <ks-impex-app-db.resource.path>ks-deployments/ks-dbs/ks-impex/${ks-impex-app-db.artifactId}/src/main/resources/org/kuali/student/${ks-impex-app-db.artifactId}/</ks-impex-app-db.resource.path>
+                <ks.sonar.schemafile>schema.xml</ks.sonar.schemafile>
+                <!-- configuration for foreign key validation in ks-sonar plugin -->
+                <kuali.student.sonar.fkvalidation.driver>oracle.jdbc.driver.OracleDriver</kuali.student.sonar.fkvalidation.driver>
+                <kuali.student.sonar.fkvalidation.username>KSAPP_SONAR</kuali.student.sonar.fkvalidation.username>
+                <kuali.student.sonar.fkvalidation.password>KSAPP_SONAR</kuali.student.sonar.fkvalidation.password>
+                <kuali.student.sonar.fkvalidation.url>jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE</kuali.student.sonar.fkvalidation.url>
+                <kuali.student.sonar.fkvalidation.query.path>${ks-db-validation.resource.path}/foreignKey/</kuali.student.sonar.fkvalidation.query.path>
+                <kuali.student.sonar.fkvalidation.query.filename>missing_foreign_key_query.sql</kuali.student.sonar.fkvalidation.query.filename>
+                <!-- configuration for schema comparison in ks-sonar plugin -->
+                <kuali.student.sonar.schemacompare.app.name>KSAPP</kuali.student.sonar.schemacompare.app.name>
+                <kuali.student.sonar.schemacompare.app.path>${ks-impex-app-db.resource.path}</kuali.student.sonar.schemacompare.app.path>
+                <kuali.student.sonar.schemacompare.app.schemafile>${ks.sonar.schemafile}</kuali.student.sonar.schemacompare.app.schemafile>
+                <kuali.student.sonar.schemacompare.app.constraintsfile>${ks.sonar.schemafile}</kuali.student.sonar.schemacompare.app.constraintsfile>
+                <kuali.student.sonar.schemacompare.ddl.name>DDL</kuali.student.sonar.schemacompare.ddl.name>
+                <kuali.student.sonar.schemacompare.ddl.path>${ks-db-validation.resource.path}/ddl/</kuali.student.sonar.schemacompare.ddl.path>
+                <kuali.student.sonar.schemacompare.ddl.schemafile>${ks.sonar.schemafile}</kuali.student.sonar.schemacompare.ddl.schemafile>
+                <kuali.student.sonar.schemacompare.ddl.constraintsfile>${ks.sonar.schemafile}</kuali.student.sonar.schemacompare.ddl.constraintsfile>
+                <!-- properties to create the KSAPP_SONAR db -->
+                <properties.decrypt>true</properties.decrypt>
+                <oracle.dba.username>master</oracle.dba.username>
+                <oracle.dba.password>ENC(eEFVZmL4+y/5KlzDMCt6dGlBKQzXevFp)</oracle.dba.password>
+                <oracle.dba.url>jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE</oracle.dba.url>
+            </properties>
+            <modules>
+                <module>ks-core</module>
+                <module>ks-lum</module>
+                <module>ks-enroll</module>
+                <module>ks-api</module>
+                <module>ks-deployments/ks-dbs/ks-db-validation</module>
+            </modules>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>sonar-maven-plugin</artifactId>
+                            <configuration>
+                                <sonarHostURL>${sonar.host.url}</sonarHostURL>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+    <scm>
+        <connection>scm:${project.scm.vendor}:https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</connection>
+        <developerConnection>scm:${project.scm.vendor}:https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</developerConnection>
+        <url>https://svn.kuali.org/repos/student/enrollment/aggregate/trunk</url>
+    </scm>
     <prerequisites>
         <maven>${maven.min.version}</maven>
     </prerequisites>
@@ -167,14 +294,50 @@
             <plugins>
                 <plugin>
                     <groupId>org.kuali.maven.plugins</groupId>
+                    <artifactId>spring-maven-plugin</artifactId>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.kuali.common</groupId>
+                            <artifactId>kuali-deploy</artifactId>
+                            <version>${kuali-deploy.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.kuali.common</groupId>
+                            <artifactId>kuali-jdbc</artifactId>
+                            <version>${kuali-jdbc.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.kuali.common</groupId>
+                            <artifactId>kuali-util</artifactId>
+                            <version>${kuali-util.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.kuali.maven.plugins</groupId>
                     <artifactId>externals-maven-plugin</artifactId>
                     <configuration>
-                        <file>${project.build.directory}/checkout/svn.externals</file>
                         <commitMessage>[externals-maven-plugin] Automated pom formatting</commitMessage>
                         <mappings>
                             <mapping>
                                 <module>ks-api</module>
                                 <versionProperty>ks.api.version</versionProperty>
+                            </mapping>
+                            <mapping>
+                                <module>ks-core</module>
+                                <versionProperty>ks.core.version</versionProperty>
+                            </mapping>
+                            <mapping>
+                                <module>ks-enroll</module>
+                                <versionProperty>ks.enroll.version</versionProperty>
+                            </mapping>
+                            <mapping>
+                                <module>ks-lum</module>
+                                <versionProperty>ks.lum.version</versionProperty>
+                            </mapping>
+                            <mapping>
+                                <module>ks-deployments</module>
+                                <versionProperty>ks.deployments.version</versionProperty>
                             </mapping>
                         </mappings>
                     </configuration>
@@ -197,8 +360,7 @@
                     <version>${gwt.codehaus.plugin.version}</version>
                     <configuration>
                         <webappDirectory>${project.build.directory}/${project.artifactId}-webapp</webappDirectory>
-                        <buildOutputDirectory>${project.build.directory}/${project.artifactId}-webapp/WEB-INF/classes
-            </buildOutputDirectory>
+                        <buildOutputDirectory>${project.build.directory}/${project.artifactId}-webapp/WEB-INF/classes</buildOutputDirectory>
                         <hostedWebapp>${project.build.directory}/${project.artifactId}-webapp</hostedWebapp>
                         <extraJvmArgs>-Xss32m -Xmx1g</extraJvmArgs>
                         <style>${ks.gwt.compile.style}</style>
@@ -243,8 +405,8 @@
                     <dependencies>
                         <dependency>
                             <groupId>com.oracle</groupId>
-                            <artifactId>ojdbc14</artifactId>
-                            <version>${oracle.ojdbc.version}</version>
+                            <artifactId>${oracle.artifactId}</artifactId>
+                            <version>${oracle.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -286,8 +448,8 @@
                                     <version>${maven.min.version}</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <message>To build this project, java ${jdk.min.version} (or higher) is required. Please install the specified version.</message>
-                                    <version>${jdk.min.version}</version>
+                                    <message>To build this project, java ${project.jdk.min.version} (or higher) is required. Please install the specified version.</message>
+                                    <version>${project.jdk.min.version}</version>
                                 </requireJavaVersion>
                                 <requirePluginVersions>
                                     <message>Build reproducibility: It is a best practice to explicitly specify plugin versions!</message>
@@ -305,7 +467,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
                     <execution>
@@ -507,7 +668,7 @@
                     </exclusion>
                     <exclusion>
                         <groupId>com.oracle</groupId>
-                        <artifactId>ojdbc14</artifactId>
+                        <artifactId>${oracle.artifactId}</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>mysql</groupId>
@@ -610,7 +771,7 @@
             </dependency>
             <dependency>
                 <groupId>org.kuali.rice</groupId>
-                <artifactId>rice-development-tools</artifactId>
+                <artifactId>rice-krad-development-tools</artifactId>
                 <version>${kuali.rice.version}</version>
             </dependency>
             <dependency>
@@ -618,6 +779,11 @@
                 <artifactId>rice-it-internal-tools</artifactId>
                 <version>${kuali.rice.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.kuali.commons</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons.beanutils.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate.javax.persistence</groupId>
@@ -676,38 +842,6 @@
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons.lang.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-tools</artifactId>
-                <version>${velocity.tools.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-digester</groupId>
-                        <artifactId>commons-digester</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-beanutils</groupId>
-                        <artifactId>commons-beanutils</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.struts</groupId>
-                        <artifactId>struts-taglib</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.struts</groupId>
-                        <artifactId>struts-tiles</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.struts</groupId>
-                        <artifactId>struts-core</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>${velocity.version}</version>
             </dependency>
             <dependency>
                 <groupId>logkit</groupId>
@@ -1147,13 +1281,13 @@
             </dependency>
             <dependency>
                 <groupId>com.oracle</groupId>
-                <artifactId>ojdbc14</artifactId>
-                <version>${oracle.ojdbc.version}</version>
+                <artifactId>${oracle.artifactId}</artifactId>
+                <version>${oracle.version}</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.connector.version}</version>
+                <version>${mysql.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.opensaml</groupId>
