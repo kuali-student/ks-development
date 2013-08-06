@@ -145,28 +145,18 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>ks-deployments</module>
-                <module>ks-core</module>
-                <module>ks-lum</module>
-                <module>ks-enroll</module>
                 <module>ks-api</module>
             </modules>
         </profile>
         <profile>
             <id>skip-ui</id>
             <modules>
-                <module>ks-core</module>
-                <module>ks-lum</module>
-                <module>ks-enroll</module>
                 <module>ks-api</module>
             </modules>
         </profile>
         <profile>
             <id>skip-all-wars</id>
             <modules>
-                <module>ks-core</module>
-                <module>ks-lum</module>
-                <module>ks-enroll</module>
                 <module>ks-api</module>
             </modules>
         </profile>
@@ -177,21 +167,8 @@
             </modules>
         </profile>
         <profile>
-            <id>sql-only</id>
-            <modules>
-                <module>ks-deployments</module>
-                <module>ks-core</module>
-                <module>ks-lum</module>
-                <module>ks-enroll</module>
-            </modules>
-        </profile>
-        <profile>
             <id>jdk7-with-jdk6-bytecode</id>
             <modules>
-                <module>ks-deployments</module>
-                <module>ks-core</module>
-                <module>ks-lum</module>
-                <module>ks-enroll</module>
                 <module>ks-api</module>
             </modules>
             <build>
