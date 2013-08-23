@@ -201,7 +201,7 @@
         LBL="Kuali Student Credit Course Parent Document"
         OBJ_ID="DE30C093-E98A-2AFF-7DA8-5818E1A39D1C" PARNT_ID="3036"
         RTE_VER_NBR="2" VER_NBR="3"/>
-    <KREW_DOC_TYP_T ACTV_IND="0" CUR_IND="0"
+    <KREW_DOC_TYP_T ACTV_IND="1" CUR_IND="0"
         DOC_TYP_DESC="Credit Course Retirement" DOC_TYP_ID="3002"
         DOC_TYP_NM="kuali.proposal.type.course.retire"
         DOC_TYP_VER_NBR="0" LBL="Credit Course Retirement"
@@ -275,7 +275,7 @@
         DOC_TYP_NM="ActivityOfferingInfoMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="org.kuali.student.r2.lum.course.infc.Activity Offering Info Maintenance Document"
-        OBJ_ID="E4A69778918DAF7BE040440A9B9A1A54" PARNT_ID="2681"
+        OBJ_ID="E4A6DB1C357DE245E040440A9B9A20F1" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
     <KREW_DOC_TYP_T ACTV_IND="1" BLNKT_APPR_GRP_ID="1" CUR_IND="1"
@@ -285,7 +285,7 @@
         DOC_TYP_NM="CourseOfferingEditMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="org.kuali.student.r2.lum.course.infc.Course Offering Info Edit Maintenance Document"
-        OBJ_ID="E4A69778918FAF7BE040440A9B9A1A54" PARNT_ID="2681"
+        OBJ_ID="E4A6DB1C357FE245E040440A9B9A20F1" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
     <KREW_DOC_TYP_T ACTV_IND="1" BLNKT_APPR_GRP_ID="1" CUR_IND="1"
@@ -295,7 +295,7 @@
         DOC_TYP_NM="CourseOfferingCreateMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="org.kuali.student.r2.lum.course.infc.Course Offering Info Maintenance Document"
-        OBJ_ID="E4A697789190AF7BE040440A9B9A1A54" PARNT_ID="2681"
+        OBJ_ID="E4A6DB1C3580E245E040440A9B9A20F1" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
     <KREW_DOC_TYP_T ACTV_IND="1" BLNKT_APPR_GRP_ID="1" CUR_IND="1"
@@ -305,7 +305,7 @@
         DOC_TYP_NM="PopulationWrapperMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="Population Maintenance Document"
-        OBJ_ID="E4A697789191AF7BE040440A9B9A1A54" PARNT_ID="2681"
+        OBJ_ID="E4A6DB1C3581E245E040440A9B9A20F1" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
     <KREW_DOC_TYP_T ACTV_IND="1" BLNKT_APPR_GRP_ID="1" CUR_IND="1"
@@ -378,7 +378,7 @@
         LBL="Kuali Student Major Discipline Parent Document"
         OBJ_ID="a2d9776b-e132-42de-914c-e0e54b3a1f6d" PARNT_ID="3037"
         RTE_VER_NBR="2" VER_NBR="3"/>
-    <KREW_DOC_TYP_T ACTV_IND="1" CUR_IND="1"
+    <KREW_DOC_TYP_T ACTV_IND="0" CUR_IND="1"
         DOC_HDLR_URL="${lum.application.url}/org.kuali.student.lum.lu.ui.main.LUMMain/LUMMain.jsp?view=COURSE_RETIRE_BY_PROPOSAL&amp;idType=documentNumber"
         DOC_TYP_DESC="Credit Course Retirement" DOC_TYP_ID="3040"
         DOC_TYP_NM="kuali.proposal.type.course.retire"
@@ -452,7 +452,7 @@
         DOC_TYP_NM="KitchenSinkPopulationInfoMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="KSKS PopulationInfo Maintenance Document"
-        OBJ_ID="E4A6977891AEAF7BE040440A9B9A1A54" PARNT_ID="2681"
+        OBJ_ID="E4A6DB1C359EE245E040440A9B9A20F1" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
 </dataset>
