@@ -69,7 +69,8 @@
         <jta.version>1.1</jta.version>
         <junit.version>4.11</junit.version>
         <ks-contract-docs.plugin.version>1.0.6</ks-contract-docs.plugin.version>
-        <kuali.rice.version>2.3.0-krms-SNAPSHOT</kuali.rice.version>
+        <kuali.rice.version>2.3.0</kuali.rice.version>
+        <lesscss.version>1.3.3</lesscss.version>
         <log4j.version>1.2.16</log4j.version>
         <log4j.javadoc.version>1.2</log4j.javadoc.version>
         <logkit.version>2.0</logkit.version>
@@ -93,7 +94,7 @@
         <spring.security.version>3.1.0.RELEASE</spring.security.version>
         <spring.security.javadoc.version>3.1.x</spring.security.javadoc.version>
         <spring.security-cas.version>3.1.0.RELEASE</spring.security-cas.version>
-        <spring.version>3.1.0.RELEASE</spring.version>
+        <spring.version>3.2.3.RELEASE</spring.version>
         <stax-ex.version>1.2</stax-ex.version>
         <struts.version>1.3.10</struts.version>
         <tomcat.plugin.version>1.1</tomcat.plugin.version>
@@ -111,6 +112,7 @@
         <kuali.javadoc.link.7>http://site.kuali.org/rice/${kuali.rice.version}/apidocs/</kuali.javadoc.link.7>
         <kuali.javadoc.link.8>http://logging.apache.org/log4j/${log4j.javadoc.version}/apidocs/</kuali.javadoc.link.8>
         <kuali.javadoc.link.9>http://ws.apache.org/wss4j/apidocs/</kuali.javadoc.link.9>
+        <kuali.javadoc.maxmemory>1g</kuali.javadoc.maxmemory>
         <!-- gwt properties -->
         <ks.gwt.compile.draftCompile>false</ks.gwt.compile.draftCompile>
         <ks.gwt.compile.force>false</ks.gwt.compile.force>
@@ -146,24 +148,6 @@
             </activation>
             <modules>
                 <module>ks-api</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>skip-ui</id>
-            <modules>
-                <module>ks-api</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>skip-all-wars</id>
-            <modules>
-                <module>ks-api</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>impex-only</id>
-            <modules>
-                <module>ks-deployments</module>
             </modules>
         </profile>
         <profile>
@@ -269,6 +253,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.lesscss</groupId>
+                    <artifactId>lesscss-maven-plugin</artifactId>
+                    <version>${lesscss.version}</version>
+                </plugin>
                 <plugin>
                     <groupId>org.kuali.maven.plugins</groupId>
                     <artifactId>spring-maven-plugin</artifactId>
@@ -1327,6 +1316,17 @@
                 <artifactId>httpclient</artifactId>
                 <version>${httpcomponents.httpclient.version}</version>
                 <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.lesscss</groupId>
+                <artifactId>lesscss</artifactId>
+                <version>${lesscss.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
