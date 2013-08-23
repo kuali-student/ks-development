@@ -728,21 +728,21 @@
                                     <groupId>org.kuali.student.core</groupId>
                                     <artifactId>ks-core-sql</artifactId>
                                     <version>${ks.core.version}</version>
-                                    <includes>**\/*.sql</includes>
+                                    <includes>org/kuali/student/ks-core-sql/**\*.sql</includes>
                                     <outputDirectory>${project.build.directory}/gen/data</outputDirectory>
                                     </artifactItem>
                                     <artifactItem>
                                     <groupId>org.kuali.student.core</groupId>
                                     <artifactId>ks-rice-sql</artifactId>
                                     <version>${ks.core.version}</version>
-                                    <includes>**\/*.sql</includes>
+                                    <includes>org/kuali/student/ks-rice-sql/**\/*.sql</includes>
                                     <outputDirectory>${project.build.directory}/gen/data</outputDirectory>
                                     </artifactItem>
                                     <artifactItem>
                                     <groupId>org.kuali.student.lum</groupId>
                                     <artifactId>ks-lum-sql</artifactId>
                                     <version>${ks.lum.version}</version>
-                                    <includes>**\/*.sql</includes>
+                                    <includes>org/kuali/student/ks-lum-sql/**\/*.sql</includes>
                                     <outputDirectory>${project.build.directory}/gen/data</outputDirectory>
                                     </artifactItem>
                                     <artifactItem>
@@ -778,6 +778,39 @@
                                 <version>${project.version}</version>
                             </dependency>
                         </dependencies>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <id>flatten-upgrade-sql</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <copy todir="${project.build.directory}/gen/data">
+                                            <fileset dir="${project.build.directory}/gen/data/org/kuali/student/ks-core-sql">
+                                                <include name="**/upgrades/**/*.sql"/>
+                                            </fileset>
+                                        </copy>
+                                        <copy todir="${project.build.directory}/gen/data">
+                                            <fileset dir="${project.build.directory}/gen/data/org/kuali/student/ks-rice-sql">
+                                                <include name="**/upgrades/**/*.sql"/>
+                                            </fileset>
+                                        </copy>
+                                        <copy todir="${project.build.directory}/gen/data">
+                                            <fileset dir="${project.build.directory}/gen/data/org/kuali/student/ks-lum-sql">
+                                                <include name="**/upgrades/**/*.sql"/>
+                                            </fileset>
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.kuali.maven.plugins</groupId>
@@ -819,6 +852,7 @@
                             </execution>
                         </executions>
                     </plugin>
+
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>sql-maven-plugin</artifactId>
@@ -848,7 +882,7 @@
                                     <fileset>
                                     <basedir>${project.build.directory}/gen/data</basedir>
                                     <includes>
-                                    <include>initial-db/*/*-create-schema.sql</include>
+                                    <include>org/kuali/student/*/initial-db/*/*-create-schema.sql</include>
                                     </includes>
                                     </fileset>
                                 </configuration>
@@ -863,7 +897,7 @@
                                     <fileset>
                                     <basedir>${project.build.directory}/gen/data</basedir>
                                     <includes>
-                                    <include>initial-db/*/*data/*.sql</include>
+                                    <include>org/kuali/student/*/initial-db/*/*data/*.sql</include>
                                     </includes>
                                     </fileset>
                                 </configuration>
@@ -878,7 +912,7 @@
                                     <fileset>
                                     <basedir>${project.build.directory}/gen/data</basedir>
                                     <includes>
-                                    <include>initial-db/*/*-constraints.sql</include>
+                                    <include>org/kuali/student/*/initial-db/*/*-constraints.sql</include>
                                     </includes>
                                     </fileset>
                                 </configuration>
