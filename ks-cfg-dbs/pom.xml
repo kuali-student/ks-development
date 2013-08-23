@@ -779,6 +779,7 @@
                             </dependency>
                         </dependencies>
                     </plugin>
+                    <!--
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
@@ -812,6 +813,7 @@
                             </execution>
                         </executions>
                     </plugin>
+                    -->
                     <plugin>
                         <groupId>org.kuali.maven.plugins</groupId>
                         <artifactId>maven-impex-plugin</artifactId>
@@ -927,7 +929,7 @@
                                     <fileset>
                                     <basedir>${project.build.directory}/gen/data</basedir>
                                     <includes>
-                                    <include>upgrades/**/*.sql</include>
+                                    <include>org/kuali/student/*/upgrades/**/*.sql</include>
                                     </includes>
                                     </fileset>
                                 </configuration>
