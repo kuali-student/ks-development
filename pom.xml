@@ -183,6 +183,12 @@
         <!-- should align to the same or earlier phase than the contract doc or dictionary doc phase -->
         <ks.prepare-contract-dependencies.phase>site</ks.prepare-contract-dependencies.phase>
         <ks.vdecorator.phase>none</ks.vdecorator.phase>
+        <!-- Spring config that creates META-INF files describing SQL resources -->
+        <metainf.sql.context>org.kuali.common.util.metainf.spring.MetaInfExecutableConfig</metainf.sql.context>
+        <metainf.sql.propertySource>org.kuali.student.deploy.spring.SqlMetaInfPropertySourceConfig</metainf.sql.propertySource>
+        <!-- Overrides for impex 3 and related plugins/dependencies -->
+        <plugin.spring.version>2.1.0</plugin.spring.version>
+        <kuali-util.version>4.3.2</kuali-util.version>
     </properties>
     <prerequisites>
         <maven>${maven.min.version}</maven>
