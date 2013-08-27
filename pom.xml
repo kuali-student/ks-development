@@ -26,6 +26,7 @@
         <profile>
             <id>impex-only</id>
             <modules>
+                <module>ks-deployment-resources</module>
                 <module>ks-cfg-dbs</module>
             </modules>
         </profile>
