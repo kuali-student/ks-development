@@ -18,7 +18,6 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>ks-deployment-resources</module>
                 <module>ks-cfg-dbs</module>
                 <module>ks-web</module>
             </modules>
@@ -32,7 +31,6 @@
         <profile>
             <id>web-only</id>
             <modules>
-                <module>ks-deployment-resources</module>
                 <module>ks-web</module>
             </modules>
         </profile>
