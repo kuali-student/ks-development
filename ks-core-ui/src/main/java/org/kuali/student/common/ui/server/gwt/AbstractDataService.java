@@ -193,9 +193,8 @@ public abstract class AbstractDataService implements DataService{
             }
             String namespaceCode = type.getPermissionNamespace();
             String permissionTemplateName = type.getPermissionTemplateName();
-
+            
             Map<String,String> roleQuals = new LinkedHashMap<String,String>();
-            Map<String,String> permissionDetails = new LinkedHashMap<String,String>();
             if (attributes != null) {
                 //Determine permission details and role qualifiers to pass into permission service.
                 //We will use same attributes for permission details and role qualifiers (never hurts to use more than needed)
@@ -230,8 +229,6 @@ public abstract class AbstractDataService implements DataService{
                     }
                 }
                 
-                permissionDetails.putAll(attributes);
-                
                 //Put in additional random number for role qualifiers. This is to avoid this request from being cached. 
                 //Might want to do this only for specific templates to take advantage of caching
                 attributes.put("RAND_NO_CACHE", UUID.randomUUID().toString());
@@ -239,7 +236,7 @@ public abstract class AbstractDataService implements DataService{
             }
             if (StringUtils.isNotBlank(namespaceCode) && StringUtils.isNotBlank(permissionTemplateName)) {
                 LOG.info("Checking Permission '" + namespaceCode + "/" + permissionTemplateName + "' for user '" + user + "'");
-                result = getPermissionService().isAuthorizedByTemplate(user, namespaceCode, permissionTemplateName, permissionDetails, roleQuals);
+                result = getPermissionService().isAuthorizedByTemplate(user, namespaceCode, permissionTemplateName, new LinkedHashMap<String,String>(), roleQuals);
             }
             else {
                 LOG.info("Can not check Permission with namespace '" + namespaceCode + "' and template name '" + permissionTemplateName + "' for user '" + user + "'");
