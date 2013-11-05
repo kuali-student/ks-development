@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.kuali.pom</groupId>
         <artifactId>kuali-common</artifactId>
-        <version>3.3.3</version>
+        <version>3.3.29</version>
     </parent>
     <groupId>org.kuali.student</groupId>
     <artifactId>student</artifactId>
@@ -48,9 +48,8 @@
         <commons.lang.version>2.6</commons.lang.version>
         <cxf.version>2.7.0</cxf.version>
         <cxf.javadoc.version>latest-2.3.x</cxf.javadoc.version>
-        <derby.version>10.9.1.0</derby.version>
+        <derby.version>10.10.1.1</derby.version>
         <dozer.version>5.3.2</dozer.version>
-        <easymock.version>2.4</easymock.version>
         <eclipselink.version>1.0</eclipselink.version>
         <ehcache.version>2.5.0</ehcache.version>
         <google.gwtx.version>1.5.3</google.gwtx.version>
@@ -59,18 +58,15 @@
         <gwt.version>2.3.0</gwt.version>
         <hibernate.jpa.version>1.0.1.Final</hibernate.jpa.version>
         <hibernate.version>3.6.9.Final</hibernate.version>
-        <htmlunit.version>2.6</htmlunit.version>
-        <httpcomponents.httpclient.version>4.1.2</httpcomponents.httpclient.version>
         <jaxb.api.version>2.1</jaxb.api.version>
-        <jaxws.spring.version>1.8</jaxws.spring.version>
+        <jaxws.spring.version>1.9</jaxws.spring.version>
         <jetty.plugin.version>7.3.1.v20110307</jetty.plugin.version>
         <jetty.version>6.1.6</jetty.version>
         <jsr107cache.version>1.0</jsr107cache.version>
         <jta.version>1.1</jta.version>
         <junit.version>4.11</junit.version>
-        <ks-contract-docs.plugin.version>1.0.6</ks-contract-docs.plugin.version>
-        <kuali.rice.version>2.3.0</kuali.rice.version>
-        <lesscss.version>1.3.3</lesscss.version>
+        <ks-contract-docs.plugin.version>1.0.7</ks-contract-docs.plugin.version>
+        <kuali.rice.version>2.3.2</kuali.rice.version>
         <log4j.version>1.2.16</log4j.version>
         <log4j.javadoc.version>1.2</log4j.javadoc.version>
         <logkit.version>2.0</logkit.version>
@@ -86,7 +82,7 @@
         <!-- Oracle values sync'd with the deploy environments -->
         <oracle.version>11.2.0.2</oracle.version>
         <oracle.artifactId>ojdbc6_g</oracle.artifactId>
-        <plugin.enforcer.version>1.2</plugin.enforcer.version>
+        <plugin.enforcer.version>1.3.1</plugin.enforcer.version>
         <project.jdk.min.version>1.7.0-21</project.jdk.min.version>
         <selenium.version>2.7.0</selenium.version>
         <servlet.api.version>2.5</servlet.api.version>
@@ -95,8 +91,6 @@
         <spring.security.javadoc.version>3.1.x</spring.security.javadoc.version>
         <spring.security-cas.version>3.1.0.RELEASE</spring.security-cas.version>
         <spring.version>3.2.3.RELEASE</spring.version>
-        <stax-ex.version>1.2</stax-ex.version>
-        <struts.version>1.3.10</struts.version>
         <tomcat.plugin.version>1.1</tomcat.plugin.version>
         <velocity.version>1.6.4</velocity.version>
         <velocity.tools.version>2.0</velocity.tools.version>
@@ -112,7 +106,6 @@
         <kuali.javadoc.link.7>http://site.kuali.org/rice/${kuali.rice.version}/apidocs/</kuali.javadoc.link.7>
         <kuali.javadoc.link.8>http://logging.apache.org/log4j/${log4j.javadoc.version}/apidocs/</kuali.javadoc.link.8>
         <kuali.javadoc.link.9>http://ws.apache.org/wss4j/apidocs/</kuali.javadoc.link.9>
-        <kuali.javadoc.maxmemory>1g</kuali.javadoc.maxmemory>
         <!-- gwt properties -->
         <ks.gwt.compile.draftCompile>false</ks.gwt.compile.draftCompile>
         <ks.gwt.compile.force>false</ks.gwt.compile.force>
@@ -133,12 +126,10 @@
         <ks.prepare-contract-dependencies.phase>site</ks.prepare-contract-dependencies.phase>
         <ks.vdecorator.phase>none</ks.vdecorator.phase>
         <!-- Spring config that creates META-INF files describing SQL resources -->
-        <metainf.sql.context>org.kuali.common.util.metainf.spring.MetaInfExecutableConfig</metainf.sql.context>
-        <metainf.sql.propertySource>org.kuali.student.deploy.spring.SqlMetaInfPropertySourceConfig</metainf.sql.propertySource>
+        <metainf.sql.context>org.kuali.common.util.metainf.spring.SqlConfig</metainf.sql.context>
+        <metainf.sql.propertySource>org.kuali.student.deploy.spring.SqlPropertySourceConfig</metainf.sql.propertySource>
         <jdk6.rt.jar>/var/lib/jenkins/tools/jdk6/jre/lib/rt.jar</jdk6.rt.jar>
         <kuali-impex.version>${impex.version}</kuali-impex.version>
-        <!-- Remove this once the top level Kuali pom is on this version (or higher) -->
-        <plugin.externals.version>1.0.10</plugin.externals.version>
     </properties>
     <profiles>
         <profile>
@@ -254,11 +245,6 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.lesscss</groupId>
-                    <artifactId>lesscss-maven-plugin</artifactId>
-                    <version>${lesscss.version}</version>
-                </plugin>
-                <plugin>
                     <groupId>org.kuali.maven.plugins</groupId>
                     <artifactId>spring-maven-plugin</artifactId>
                     <dependencies>
@@ -276,6 +262,11 @@
                             <groupId>org.kuali.common</groupId>
                             <artifactId>kuali-util</artifactId>
                             <version>${kuali-util.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.kuali.rice</groupId>
+                            <artifactId>rice-krad-theme-builder</artifactId>
+                            <version>${kuali.rice.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -386,6 +377,13 @@
                         <stopPort>9999</stopPort>
                         <webApp>${project.build.directory}/${project.artifactId}-webapp</webApp>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.oracle</groupId>
+                            <artifactId>${oracle.artifactId}</artifactId>
+                            <version>${oracle.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -709,6 +707,12 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <artifactId>rice-it-krms</artifactId>
+                <groupId>org.kuali.rice</groupId>
+                <version>${kuali.rice.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.kuali.rice</groupId>
                 <artifactId>rice-web</artifactId>
                 <version>${kuali.rice.version}</version>
@@ -716,9 +720,9 @@
             </dependency>
             <dependency>
                 <groupId>org.kuali.rice</groupId>
-                <artifactId>rice-web</artifactId>
+                <artifactId>rice-krad-web</artifactId>
                 <version>${kuali.rice.version}</version>
-                <type>pom</type>
+                <type>war</type>
             </dependency>
             <dependency>
                 <groupId>org.kuali.rice</groupId>
@@ -779,12 +783,6 @@
             </dependency>
             <dependency>
                 <groupId>net.sf.ehcache</groupId>
-                <artifactId>ehcache</artifactId>
-                <version>${ehcache.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>net.sf.ehcache</groupId>
                 <artifactId>ehcache-core</artifactId>
                 <version>${ehcache.version}</version>
             </dependency>
@@ -840,16 +838,6 @@
                 <artifactId>derby</artifactId>
                 <version>${derby.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.derby</groupId>
-                <artifactId>derbynet</artifactId>
-                <version>${derby.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.derby</groupId>
-                <artifactId>derbyclient</artifactId>
-                <version>${derby.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mortbay.jetty</groupId>
@@ -934,36 +922,6 @@
                     <exclusion>
                         <groupId>org.apache.geronimo.specs</groupId>
                         <artifactId>geronimo-jaxws_2.1_spec</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-common-utilities</artifactId>
-                <version>${cxf.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.xml.bind</groupId>
-                        <artifactId>jaxb-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-tools-common</artifactId>
-                <version>${cxf.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.apache.geronimo.specs</groupId>
-                        <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>javax.xml.soap</groupId>
-                        <artifactId>saaj-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.velocity</groupId>
-                        <artifactId>velocity</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -1138,14 +1096,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <!-- stax-ex 1.0 POM is a v3 POM with no version inside it so
-        it is causing maven-site-plugin failures, therefore we are
-        trying with a higher version here -->
-            <dependency>
-                <groupId>org.jvnet.staxex</groupId>
-                <artifactId>stax-ex</artifactId>
-                <version>${stax-ex.version}</version>
-            </dependency>
             <!-- GWT Dependencies -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
@@ -1261,25 +1211,6 @@
                 <version>${opensaml.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.struts</groupId>
-                <artifactId>struts-core</artifactId>
-                <version>${struts.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>commons-logging</artifactId>
-                        <groupId>commons-logging</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>antlr</artifactId>
-                        <groupId>antlr</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>commons-beanutils</artifactId>
-                        <groupId>commons-beanutils</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
                 <groupId>net.sf.dozer</groupId>
                 <artifactId>dozer</artifactId>
                 <version>${dozer.version}</version>
@@ -1291,42 +1222,10 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.easymock</groupId>
-                <artifactId>easymock</artifactId>
-                <version>${easymock.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>net.sourceforge.htmlunit</groupId>
-                <artifactId>htmlunit</artifactId>
-                <version>${htmlunit.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
                 <version>${selenium.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <!-- This httpclient dependency works with the Selenium tests, but must
-        have compile scope. Please see ks-common/ks-common-ui/pom.xml and ks-lum/ks-lum-ui/pom.xml
-        for more info. -->
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${httpcomponents.httpclient.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.lesscss</groupId>
-                <artifactId>lesscss</artifactId>
-                <version>${lesscss.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
