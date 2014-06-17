@@ -120,7 +120,7 @@
         <jta.version>1.1</jta.version>
         <junit.version>4.10</junit.version>
         <ks-contract-docs.plugin.version>1.0.4</ks-contract-docs.plugin.version>
-        <kuali.rice.version>2.2.0</kuali.rice.version>
+        <kuali.rice.version>2.2.7</kuali.rice.version>
         <!-- added as result of KSCM-840 - no need to merge to trunk -->
         <kuali-deploy.version>1.2.17-ks-cm</kuali-deploy.version>
         <log4j.version>1.2.16</log4j.version>
