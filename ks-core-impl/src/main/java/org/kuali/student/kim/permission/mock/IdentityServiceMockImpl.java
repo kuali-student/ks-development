@@ -337,12 +337,22 @@ public class IdentityServiceMockImpl implements IdentityService, MockService {
     }
 
     @Override
+    public List<Principal> getPrincipalsByEntityId(@WebParam(name = "entityId") String s) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Principal> getPrincipalsByEmployeeId(@WebParam(name = "employeeId") String s) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public Principal getPrincipalByPrincipalName(String string) throws RiceIllegalArgumentException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Principal getPrincipalByPrincipalNameAndPassword(String string, String string1) throws RiceIllegalArgumentException {
+         public Principal getPrincipalByPrincipalNameAndPassword(String string, String string1) throws RiceIllegalArgumentException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

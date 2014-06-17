@@ -220,6 +220,16 @@ public class IdentityServiceDecorator implements IdentityService {
     }
 
     @Override
+    public List<Principal> getPrincipalsByEntityId(@WebParam(name = "entityId") String entityId) {
+        return nextDecorator.getPrincipalsByEntityId(entityId);
+    }
+
+    @Override
+    public List<Principal> getPrincipalsByEmployeeId(@WebParam(name = "employeeId") String employeeId) {
+        return nextDecorator.getPrincipalsByEmployeeId(employeeId);
+    }
+
+    @Override
     public CodedAttribute getPhoneType(String string) throws RiceIllegalArgumentException {
         return nextDecorator.getPhoneType(string);
     }
