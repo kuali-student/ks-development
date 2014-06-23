@@ -14,10 +14,11 @@
 -- limitations under the License.
 --
 
-
 --
--- KULRICE-8985: Add Index to prevent deadlocks during deletion of KSB entries
+-- KULRICE-9288  - Column 'SESN_ID' cannot be null causes issues
 --
 
-CREATE INDEX KRSB_SVC_DEF_TI4 ON KRSB_SVC_DEF_T(SVC_DSCRPTR_ID)
+UPDATE KRNS_PESSIMISTIC_LOCK_T SET SESN_ID = 'undefined' WHERE SESN_ID IS NULL OR SESN_ID = ''
+/
+ALTER TABLE KRNS_PESSIMISTIC_LOCK_T MODIFY (SESN_ID DEFAULT 'undefined')
 /
