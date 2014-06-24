@@ -5,7 +5,7 @@
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Allows creation and modification of agendas via the agenda editor"
         NM="Maintain KRMS Agenda" NMSPC_CD="KR-RULE-TEST"
-        OBJ_ID="E956B3E76C74D5C5E040440A9B9A4D23" PERM_ID="10000"
+        OBJ_ID="FC9ACF02D9819BD5E040440A9B9A72D2" PERM_ID="10000"
         PERM_TMPL_ID="10000" VER_NBR="1"/>
     <KRIM_PERM_T ACTV_IND="Y" NM="Add Collaborator with Acknowledge"
         NMSPC_CD="KS-SYS" OBJ_ID="EDD9ADB13981434E8971DE96B67F3AD7"
@@ -280,17 +280,17 @@
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Open Create Course Route Status R"
         NM="Open Create Course Route Status R" NMSPC_CD="KS-SYS"
-        OBJ_ID="E956B3E76CD7D5C5E040440A9B9A4D23" PERM_ID="10057"
+        OBJ_ID="FC9ACF02D9E49BD5E040440A9B9A72D2" PERM_ID="10057"
         PERM_TMPL_ID="10001" VER_NBR="1"/>
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Open Modify Course Route Status R"
         NM="Open Modify Course Route Status R" NMSPC_CD="KS-SYS"
-        OBJ_ID="E956B3E76CDBD5C5E040440A9B9A4D23" PERM_ID="10058"
+        OBJ_ID="FC9ACF02D9E89BD5E040440A9B9A72D2" PERM_ID="10058"
         PERM_TMPL_ID="10001" VER_NBR="1"/>
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Open Course Retirement Route Status R"
         NM="Open Course Retirement Route Status R" NMSPC_CD="KS-SYS"
-        OBJ_ID="E956B3E76CDFD5C5E040440A9B9A4D23" PERM_ID="10059"
+        OBJ_ID="FC9ACF02D9EC9BD5E040440A9B9A72D2" PERM_ID="10059"
         PERM_TMPL_ID="10001" VER_NBR="1"/>
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Allows users to access the Document Operation screen."
@@ -584,7 +584,7 @@
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Allows use of the cache administration screen"
         NM="Use Cache Adminstration Screen" NMSPC_CD="KR-SYS"
-        OBJ_ID="E956B3E76C7BD5C5E040440A9B9A4D23" PERM_ID="3114"
+        OBJ_ID="FC9ACF02D9889BD5E040440A9B9A72D2" PERM_ID="3114"
         PERM_TMPL_ID="29" VER_NBR="1"/>
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Allows user to create a new Term maintainence document"
@@ -602,12 +602,12 @@
         NMSPC_CD="KR-NS" OBJ_ID="02bd9acd-48d9-4fec-acbd-6a441c5ea8c2"
         PERM_ID="3117" PERM_TMPL_ID="42" VER_NBR="1"/>
     <KRIM_PERM_T ACTV_IND="Y" NM="Recall Document" NMSPC_CD="KR-WKFLW"
-        OBJ_ID="E956B3E76CB8D5C5E040440A9B9A4D23" PERM_ID="3118"
+        OBJ_ID="FC9ACF02D9C59BD5E040440A9B9A72D2" PERM_ID="3118"
         PERM_TMPL_ID="137" VER_NBR="1"/>
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Authorizes users to send Complete ad hoc requests for Kuali Documents"
         NM="Send Complete Request Kuali Document" NMSPC_CD="KR-SYS"
-        OBJ_ID="E956B3E76CBDD5C5E040440A9B9A4D23" PERM_ID="3119"
+        OBJ_ID="FC9ACF02D9CA9BD5E040440A9B9A72D2" PERM_ID="3119"
         PERM_TMPL_ID="49" VER_NBR="1"/>
     <KRIM_PERM_T ACTV_IND="Y"
         DESC_TXT="Authorizes users to send FYI ad hoc requests for Kuali Documents"
@@ -737,4 +737,9 @@
     <KRIM_PERM_T ACTV_IND="Y" NM="Add Message to Route Log"
         NMSPC_CD="KUALI" OBJ_ID="65677409-89e4-11df-98b1-1300c9ee50c1"
         PERM_ID="841" PERM_TMPL_ID="51" VER_NBR="1"/>
+    <KRIM_PERM_T ACTV_IND="Y"
+        DESC_TXT="Authorizes users to take the Complete action on documents routed to them."
+        NM="Take Requested Complete Action" NMSPC_CD="KUALI"
+        OBJ_ID="FC9ACF02DA009BD5E040440A9B9A72D2" PERM_ID="KR1000"
+        PERM_TMPL_ID="8" VER_NBR="1"/>
 </dataset>

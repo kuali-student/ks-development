@@ -147,8 +147,9 @@
         RTE_VER_NBR="2" VER_NBR="0"/>
     <KREW_DOC_TYP_T ACTV_IND="1" CUR_IND="1" DOC_TYP_ID="2994"
         DOC_TYP_NM="IdentityManagementDocument" DOC_TYP_VER_NBR="0"
-        LBL="Undefined" OBJ_ID="944596CD-A7FC-0DEE-EDE1-52A52BED85CC"
-        PARNT_ID="2681" RTE_VER_NBR="2" VER_NBR="0"/>
+        LBL="Identity Management Document"
+        OBJ_ID="944596CD-A7FC-0DEE-EDE1-52A52BED85CC" PARNT_ID="2681"
+        RTE_VER_NBR="2" VER_NBR="0"/>
     <KREW_DOC_TYP_T ACTV_IND="1" CUR_IND="1"
         DOC_HDLR_URL="${kim.url}/identityManagementRoleDocument.do?methodToCall=docHandler"
         DOC_TYP_ID="2995" DOC_TYP_NM="IdentityManagementRoleDocument"
@@ -275,7 +276,7 @@
         DOC_TYP_NM="ActivityOfferingInfoMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="org.kuali.student.r2.lum.course.infc.Activity Offering Info Maintenance Document"
-        OBJ_ID="E956B3E76CC3D5C5E040440A9B9A4D23" PARNT_ID="2681"
+        OBJ_ID="FC9ACF02D9D09BD5E040440A9B9A72D2" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
     <KREW_DOC_TYP_T ACTV_IND="1" BLNKT_APPR_GRP_ID="1" CUR_IND="1"
@@ -285,7 +286,7 @@
         DOC_TYP_NM="CourseOfferingEditMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="org.kuali.student.r2.lum.course.infc.Course Offering Info Edit Maintenance Document"
-        OBJ_ID="E956B3E76CC5D5C5E040440A9B9A4D23" PARNT_ID="2681"
+        OBJ_ID="FC9ACF02D9D29BD5E040440A9B9A72D2" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
     <KREW_DOC_TYP_T ACTV_IND="1" BLNKT_APPR_GRP_ID="1" CUR_IND="1"
@@ -295,7 +296,7 @@
         DOC_TYP_NM="CourseOfferingCreateMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="org.kuali.student.r2.lum.course.infc.Course Offering Info Maintenance Document"
-        OBJ_ID="E956B3E76CC6D5C5E040440A9B9A4D23" PARNT_ID="2681"
+        OBJ_ID="FC9ACF02D9D39BD5E040440A9B9A72D2" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
     <KREW_DOC_TYP_T ACTV_IND="1" BLNKT_APPR_GRP_ID="1" CUR_IND="1"
@@ -305,7 +306,7 @@
         DOC_TYP_NM="PopulationWrapperMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="Population Maintenance Document"
-        OBJ_ID="E956B3E76CC7D5C5E040440A9B9A4D23" PARNT_ID="2681"
+        OBJ_ID="FC9ACF02D9D49BD5E040440A9B9A72D2" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
     <KREW_DOC_TYP_T ACTV_IND="1" BLNKT_APPR_GRP_ID="1" CUR_IND="1"
@@ -452,7 +453,7 @@
         DOC_TYP_NM="KitchenSinkPopulationInfoMaintenanceDocument"
         DOC_TYP_VER_NBR="0" GRP_ID="1"
         LBL="KSKS PopulationInfo Maintenance Document"
-        OBJ_ID="E956B3E76CE4D5C5E040440A9B9A4D23" PARNT_ID="2681"
+        OBJ_ID="FC9ACF02D9F19BD5E040440A9B9A72D2" PARNT_ID="2681"
         POST_PRCSR="org.kuali.rice.krad.workflow.postprocessor.KualiPostProcessor"
         RTE_VER_NBR="2" VER_NBR="1"/>
 </dataset>
