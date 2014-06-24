@@ -1,5 +1,5 @@
 --
--- Copyright 2005-2012 The Kuali Foundation
+-- Copyright 2005-2014 The Kuali Foundation
 --
 -- Licensed under the Educational Community License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
@@ -18,22 +18,22 @@
 --     KULRICE-8349 - guest user access
 --
 
-INSERT INTO KRIM_ENTITY_T (ENTITY_ID, OBJ_ID, VER_NBR, ACTV_IND, LAST_UPDT_DT)
-VALUES (krim_entity_addr_id_s.nextval, sys_guid(), 1, 'Y', sysdate)
+insert into krim_entity_t (ENTITY_ID, OBJ_ID, VER_NBR, ACTV_IND, LAST_UPDT_DT)
+values ('KR1000', sys_guid(), 1, 'Y', sysdate)
 /
 
-INSERT INTO KRIM_ENTITY_ENT_TYP_T (ENT_TYP_CD, ENTITY_ID, OBJ_ID, VER_NBR, ACTV_IND, LAST_UPDT_DT)
-VALUES ('PERSON', krim_entity_addr_id_s.currval, sys_guid(), 1, 'Y', sysdate)
+insert into krim_entity_ent_typ_t (ENT_TYP_CD, ENTITY_ID, OBJ_ID, VER_NBR, ACTV_IND, LAST_UPDT_DT)
+values ('PERSON', 'KR1000', sys_guid(), 1, 'Y', sysdate)
 /
 
-INSERT INTO KRIM_PRNCPL_T (PRNCPL_ID, OBJ_ID, VER_NBR, PRNCPL_NM, ENTITY_ID, PRNCPL_PSWD, ACTV_IND, LAST_UPDT_DT)
-VALUES ('guest', sys_guid(), 1, 'guest', krim_entity_addr_id_s.currval, '', 'Y', sysdate)
+insert into krim_prncpl_t (PRNCPL_ID, OBJ_ID, VER_NBR, PRNCPL_NM, ENTITY_ID, PRNCPL_PSWD, ACTV_IND, LAST_UPDT_DT)
+values ('guest', sys_guid(), 1, 'guest', 'KR1000', '', 'Y', sysdate)
 /
 
-INSERT INTO KRIM_ROLE_T (ROLE_ID, OBJ_ID, VER_NBR, ROLE_NM, NMSPC_CD, DESC_TXT, KIM_TYP_ID, ACTV_IND, LAST_UPDT_DT)
-VALUES (krim_role_id_s.nextval, sys_guid(), 1, 'GuestRole', 'KUALI', 'This role is used for no login guest users.', '1', 'Y', sysdate)
+insert into krim_role_t (ROLE_ID, OBJ_ID, VER_NBR, ROLE_NM, NMSPC_CD, DESC_TXT, KIM_TYP_ID, ACTV_IND, LAST_UPDT_DT)
+values ('KR1000', sys_guid(), 1, 'GuestRole', 'KUALI', 'This role is used for no login guest users.', '1', 'Y', sysdate)
 /
 
-INSERT INTO KRIM_ROLE_MBR_T (ROLE_MBR_ID, VER_NBR, OBJ_ID, ROLE_ID, MBR_ID, MBR_TYP_CD, ACTV_FRM_DT, ACTV_TO_DT, LAST_UPDT_DT)
-VALUES (krim_role_mbr_id_s.nextval, 1, sys_guid(), krim_role_id_s.currval, 'guest', 'P', null, null, sysdate)
+insert into krim_role_mbr_t (ROLE_MBR_ID, VER_NBR, OBJ_ID, ROLE_ID, MBR_ID, MBR_TYP_CD, ACTV_FRM_DT, ACTV_TO_DT, LAST_UPDT_DT)
+values ('KR1000', 1, sys_guid(), 'KR1000', 'guest', 'P', null, null, sysdate)
 /
