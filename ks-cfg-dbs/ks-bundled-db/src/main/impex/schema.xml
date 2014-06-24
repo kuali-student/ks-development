@@ -6,12 +6,12 @@
         <column name="NMSPC_CD" primaryKey="true" size="20" type="VARCHAR"/>
         <column name="CMPNT_CD" primaryKey="true" size="100" type="VARCHAR"/>
         <column name="MSG_KEY" primaryKey="true" size="100" type="VARCHAR"/>
-        <column name="LOC" primaryKey="true" size="255" type="VARCHAR"/>
+        <column name="LOC" primaryKey="true" size="80" type="VARCHAR"/>
         <column name="OBJ_ID" required="true" size="36" type="VARCHAR"/>
         <column default="1" name="VER_NBR" required="true" size="8" type="DECIMAL"/>
         <column name="MSG_DESC" size="255" type="VARCHAR"/>
         <column name="TXT" size="4000" type="VARCHAR"/>
-        <unique name="KRAD_MSG_TC2">
+        <unique name="KRAD_MSG_TC0">
             <unique-column name="OBJ_ID"/>
         </unique>
     </table>
@@ -800,6 +800,7 @@
         <column name="OBJ_ID" required="true" size="36" type="VARCHAR"/>
         <column name="DOC_SEARCH_HELP_URL" size="4000" type="VARCHAR"/>
         <column name="DOC_HDR_ID" size="40" type="VARCHAR"/>
+        <column default="" name="AUTHORIZER" size="255" type="VARCHAR"/>
         <unique name="KREW_DOC_TYP_TC0">
             <unique-column name="OBJ_ID"/>
         </unique>
@@ -3486,6 +3487,8 @@
         <column name="DOC_HDR_ID" required="true" size="14" type="VARCHAR"/>
         <column name="GNRT_DT" required="true" type="DATE"/>
         <column name="PRNCPL_ID" required="true" size="40" type="VARCHAR"/>
+        <column default="undefined" name="SESN_ID" required="true"
+            size="40" type="VARCHAR"/>
         <unique name="KRNS_PESSIMISTIC_LOCK_TC0">
             <unique-column name="OBJ_ID"/>
         </unique>
@@ -3742,6 +3745,9 @@
         </index>
         <index name="KRSB_SVC_DEF_TI3">
             <index-column name="STAT_CD"/>
+        </index>
+        <index name="KRSB_SVC_DEF_TI4">
+            <index-column name="SVC_DSCRPTR_ID"/>
         </index>
     </table>
     <table name="KRSB_SVC_DSCRPTR_T">
@@ -7512,7 +7518,7 @@
     <sequence name="KRIM_ATTR_DEFN_ID_S" nextval="10011"/>
     <sequence name="KRIM_DLGN_ID_S" nextval="10000"/>
     <sequence name="KRIM_DLGN_MBR_ID_S" nextval="10000"/>
-    <sequence name="KRIM_ENTITY_ADDR_ID_S" nextval="10001"/>
+    <sequence name="KRIM_ENTITY_ADDR_ID_S" nextval="10000"/>
     <sequence name="KRIM_ENTITY_AFLTN_ID_S" nextval="10000"/>
     <sequence name="KRIM_ENTITY_CTZNSHP_ID_S" nextval="10000"/>
     <sequence name="KRIM_ENTITY_EMAIL_ID_S" nextval="10000"/>
@@ -7531,8 +7537,8 @@
     <sequence name="KRIM_PERM_RQRD_ATTR_ID_S" nextval="10000"/>
     <sequence name="KRIM_PERM_TMPL_ID_S" nextval="10005"/>
     <sequence name="KRIM_PRNCPL_ID_S" nextval="10000"/>
-    <sequence name="KRIM_ROLE_ID_S" nextval="10027"/>
-    <sequence name="KRIM_ROLE_MBR_ID_S" nextval="10025"/>
+    <sequence name="KRIM_ROLE_ID_S" nextval="10026"/>
+    <sequence name="KRIM_ROLE_MBR_ID_S" nextval="10024"/>
     <sequence name="KRIM_ROLE_PERM_ID_S" nextval="1112"/>
     <sequence name="KRIM_ROLE_RSP_ACTN_ID_S" nextval="10000"/>
     <sequence name="KRIM_ROLE_RSP_ID_S" nextval="10000"/>
