@@ -19,9 +19,9 @@ package org.kuali.student.r2.lum.program.infc;
 import java.util.Date;
 import java.util.List;
 
+import org.kuali.student.r2.common.dto.RichTextInfo;
+import org.kuali.student.r2.common.dto.TimeAmountInfo;
 import org.kuali.student.r2.common.infc.IdNamelessEntity;
-import org.kuali.student.r2.common.infc.RichText;
-import org.kuali.student.r2.common.infc.TimeAmount;
 import org.kuali.student.r2.lum.clu.infc.Accreditation;
 import org.kuali.student.r2.lum.clu.infc.CluInstructor;
 import org.kuali.student.r2.lum.course.dto.LoDisplayInfo;
@@ -127,7 +127,7 @@ public interface MinorDiscipline extends IdNamelessEntity {
      *
      * @name Standard Duration
      */
-    public TimeAmount getStdDuration();
+    public TimeAmountInfo getStdDuration();
 
     /**
      * Division Deployment for the program variation
@@ -194,7 +194,7 @@ public interface MinorDiscipline extends IdNamelessEntity {
     /**
      * @name Catalog Descr
      */
-    public RichText getCatalogDescr();
+    public RichTextInfo getCatalogDescr();
 
     /**
      * @name Catalog Publication Targets

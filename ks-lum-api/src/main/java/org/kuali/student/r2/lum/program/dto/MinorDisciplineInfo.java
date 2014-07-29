@@ -27,9 +27,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import org.kuali.student.r2.common.dto.IdNamelessEntityInfo;
+import org.kuali.student.r2.common.dto.RichTextInfo;
 import org.kuali.student.r2.common.dto.TimeAmountInfo;
-import org.kuali.student.r2.common.infc.RichText;
-import org.kuali.student.r2.common.infc.TimeAmount;
 import org.kuali.student.r2.lum.clu.dto.AccreditationInfo;
 import org.kuali.student.r2.lum.clu.dto.CluInstructorInfo;
 import org.kuali.student.r2.lum.clu.infc.Accreditation;
@@ -40,7 +39,6 @@ import org.kuali.student.r2.lum.program.infc.MinorDiscipline;
 @XmlType(name = "MinorDisciplineInfo", propOrder = {"id",
         "typeKey",
         "stateKey",
-        "version",
         "descr",
         "code",
         "shortTitle",
@@ -121,7 +119,7 @@ public class MinorDisciplineInfo extends IdNamelessEntityInfo implements MinorDi
     @XmlElement
     private List<String> resultOptions;
     @XmlElement
-    private TimeAmount stdDuration;
+    private TimeAmountInfo stdDuration;
 
     @XmlElement
     private List<String> divisionsDeployment;
@@ -168,7 +166,7 @@ public class MinorDisciplineInfo extends IdNamelessEntityInfo implements MinorDi
     private List<LoDisplayInfo> learningObjectives;
 
     @XmlElement
-    private RichText catalogDescr;
+    private RichTextInfo catalogDescr;
     @XmlElement
     private List<String> catalogPublicationTargets;
     @XmlElement
@@ -428,7 +426,7 @@ public class MinorDisciplineInfo extends IdNamelessEntityInfo implements MinorDi
     }
 
     @Override
-    public TimeAmount getStdDuration() {
+    public TimeAmountInfo getStdDuration() {
         return stdDuration;
     }
 
@@ -513,7 +511,7 @@ public class MinorDisciplineInfo extends IdNamelessEntityInfo implements MinorDi
     }
 
     @Override
-    public RichText getCatalogDescr() {
+    public RichTextInfo getCatalogDescr() {
         return catalogDescr;
     }
 
@@ -650,7 +648,7 @@ public class MinorDisciplineInfo extends IdNamelessEntityInfo implements MinorDi
         this.transcriptTitle = transcriptTitle;
     }
 
-    public void setCatalogDescr(RichText catalogDescr) {
+    public void setCatalogDescr(RichTextInfo catalogDescr) {
         this.catalogDescr = catalogDescr;
     }
 

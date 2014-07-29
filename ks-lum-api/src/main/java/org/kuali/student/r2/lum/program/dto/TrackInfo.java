@@ -16,9 +16,8 @@
 package org.kuali.student.r2.lum.program.dto;
 
 import org.kuali.student.r2.common.dto.IdNamelessEntityInfo;
+import org.kuali.student.r2.common.dto.RichTextInfo;
 import org.kuali.student.r2.common.dto.TimeAmountInfo;
-import org.kuali.student.r2.common.infc.RichText;
-import org.kuali.student.r2.common.infc.TimeAmount;
 import org.kuali.student.r2.lum.clu.dto.AccreditationInfo;
 import org.kuali.student.r2.lum.clu.dto.CluInstructorInfo;
 import org.kuali.student.r2.lum.clu.infc.Accreditation;
@@ -39,7 +38,7 @@ import java.util.List;
 @XmlType(name = "TrackInfo", propOrder = {"id",
         "typeKey",
         "stateKey",
-        "version",
+        "minorDisciplineId",
         "descr",
         "code",
         "shortTitle",
@@ -114,7 +113,7 @@ public class TrackInfo extends IdNamelessEntityInfo implements Track {
     @XmlElement
     private List<String> resultOptions;
     @XmlElement
-    private TimeAmount stdDuration;
+    private TimeAmountInfo stdDuration;
 
     @XmlElement
     private List<String> divisionsDeployment;
@@ -161,7 +160,7 @@ public class TrackInfo extends IdNamelessEntityInfo implements Track {
     private List<LoDisplayInfo> learningObjectives;
 
     @XmlElement
-    private RichText catalogDescr;
+    private RichTextInfo catalogDescr;
     @XmlElement
     private List<String> catalogPublicationTargets;
     @XmlElement
@@ -392,7 +391,7 @@ public class TrackInfo extends IdNamelessEntityInfo implements Track {
     }
 
     @Override
-    public TimeAmount getStdDuration() {
+    public TimeAmountInfo getStdDuration() {
         return stdDuration;
     }
 
@@ -477,7 +476,7 @@ public class TrackInfo extends IdNamelessEntityInfo implements Track {
     }
 
     @Override
-    public RichText getCatalogDescr() {
+    public RichTextInfo getCatalogDescr() {
         return catalogDescr;
     }
 
@@ -614,7 +613,7 @@ public class TrackInfo extends IdNamelessEntityInfo implements Track {
         this.transcriptTitle = transcriptTitle;
     }
 
-    public void setCatalogDescr(RichText catalogDescr) {
+    public void setCatalogDescr(RichTextInfo catalogDescr) {
         this.catalogDescr = catalogDescr;
     }
 
