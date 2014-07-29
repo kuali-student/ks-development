@@ -16,6 +16,7 @@
  */package org.kuali.student.enrollment.courseoffering.service;
 
 
+import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 
 import javax.jws.WebParam;
@@ -32,25 +33,37 @@ public interface CourseOfferingCallbackService {
      *
      *
      * @param courseOfferingIds ids created.
+     * @param contextInfo information containing the principalId and
+     *                              locale information about the caller of
+     *                              service operation
      * @return nothing
      */
-    public StatusInfo newCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds);
+    public StatusInfo newCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds,
+                                         @WebParam(name = "contextInfo")ContextInfo contextInfo);
 
     /**
      * Callback for when CourseOfferings are updated.
      *
      *
      * @param courseOfferingIds ids updated.
+     * @param contextInfo information containing the principalId and
+     *                              locale information about the caller of
+     *                              service operation
      * @return nothing
      */
-    public StatusInfo updateCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds);
+    public StatusInfo updateCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds,
+                                            @WebParam(name = "contextInfo")ContextInfo contextInfo);
 
     /**
      * Callback for when CourseOfferings are deleted.
      *
      *
      * @param courseOfferingIds ids deleted.
+     * @param contextInfo information containing the principalId and
+     *                              locale information about the caller of
+     *                              service operation
      * @return nothing
      */
-    public StatusInfo deleteCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds);
+    public StatusInfo deleteCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds,
+                                            @WebParam(name = "contextInfo")ContextInfo contextInfo );
 }
