@@ -85,7 +85,7 @@ public interface MinorDiscipline extends IdNamelessEntity {
     public String getHegisCode();
 
     /**
-     * Specifies if the Major is Selective Major, Limited Enrollment program or
+     * Specifies if the Minor is Selective Minor, Limited Enrollment program or
      * Selective Admissions
      */
     public String getSelectiveEnrollmentCode();

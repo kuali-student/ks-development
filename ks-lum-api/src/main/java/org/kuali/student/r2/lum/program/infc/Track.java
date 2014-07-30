@@ -40,14 +40,14 @@ public interface Track extends IdNamelessEntity {
     public String getMinorDisciplineId();
 
     /**
-     * Term when this minor is next slated to be reviewed
+     * Term when this track is next slated to be reviewed
      *
      * @name Next Review Period
      */
     public String getNextReviewPeriod();
 
     /**
-     * Instructors associated with this Minor.
+     * Instructors associated with this Track.
      *
      * This may not be an exhaustive list, and instead may only be used to
      * indicate potential instructors in publication.
@@ -57,14 +57,14 @@ public interface Track extends IdNamelessEntity {
     public List<? extends CluInstructor> getPublishedInstructors();
 
     /**
-     * Identifier of the credential program under which the minor belongs
+     * Identifier of the credential program under which the track belongs
      *
      * @name Credential Program Id
      */
     public String getCredentialProgramId();
 
     /**
-     * External Agencies that accredit this minor
+     * External Agencies that accredit this track
      *
      * @name Accrediting Agencies
      */
@@ -78,7 +78,7 @@ public interface Track extends IdNamelessEntity {
     public String getIntensity();
 
     /**
-     * Specifies if the Major is Selective Major, Limited Enrollment program or
+     * Specifies if the Track is Selective Track, Limited Enrollment program or
      * Selective Admissions
      */
     public String getSelectiveEnrollmentCode();
