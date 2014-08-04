@@ -84,6 +84,49 @@ public interface CourseSeatCountService {
             PermissionDeniedException;
 
     /**
+     * Gets the CourseSeatCount for a particular activity.
+     *
+     * @param activityOfferingId the identifier for the activityOffering that you want the seatcount.
+     * @param contextInfo Context information containing the principalId and locale information about the caller of service
+     * operation
+     * @return CourseSeatCount.
+     * @throws InvalidParameterException activityOfferingId or contextInfo is not valid
+     * @throws MissingParameterException activityOfferingId or contextInfo is missing or null
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+
+    public CourseSeatCountInfo getCourseSeatCountByActivityOffering(
+
+            @WebParam(name = "activityOfferingId") String activityOfferingId,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
+
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+    /**
+     * Gets the CourseSeatCount for a list of activitys.
+     *
+     * @param activityOfferingIds the identifier for the activityOfferings that you want the seatcounts.
+     * @param contextInfo Context information containing the principalId and locale information about the caller of service
+     * operation
+     * @return CourseSeatCounts.
+     * @throws InvalidParameterException activityOfferingId or contextInfo is not valid
+     * @throws MissingParameterException activityOfferingId or contextInfo is missing or null
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public List<CourseSeatCountInfo> getSeatCountsByActivityOfferings(
+
+            @WebParam(name = "activityOfferingIds") List<String> activityOfferingIds,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
+
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+    /**
      * Retrieves a list of CourseSeatCount Ids by CourseSeatCount type.
      *
      * @param courseSeatCountTypeKey the personTypeKey to search by
@@ -167,7 +210,7 @@ public interface CourseSeatCountService {
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public List<ValidationResultInfo> validatePerson(
+    public List<ValidationResultInfo> validateCourseSeatCount(
 
             @WebParam(name = "validationTypeKey") String validationTypeKey,
             @WebParam(name = "courseSeatCountTypeKey") String courseSeatCountTypeKey,
@@ -256,7 +299,7 @@ public interface CourseSeatCountService {
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public StatusInfo deletePerson(
+    public StatusInfo deleteCourseSeatCount(
 
             @WebParam(name = "courseSeatCountId") String courseSeatCountId,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
@@ -266,53 +309,7 @@ public interface CourseSeatCountService {
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
-    /**
-     * Gets the CourseSeatCount for a particular activity.
-     *
-     * @param activityOfferingId the identifier for the activityOffering that you want the seatcount.
-     * @param contextInfo Context information containing the principalId and locale information about the caller of service
-     * operation
-     * @return CourseSeatCount.
-     * @throws DoesNotExistException activityOfferingId is not found
-     * @throws InvalidParameterException activityOfferingId or contextInfo is not valid
-     * @throws MissingParameterException activityOfferingId or contextInfo is missing or null
-     * @throws OperationFailedException unable to complete request
-     * @throws PermissionDeniedException an authorization failure occurred
-     */
 
-    public CourseSeatCountInfo getCourseSeatCountByActivityOffering(
-
-            @WebParam(name = "activityOfferingId") String activityOfferingId,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
-
-            DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException;
-    /**
-     * Gets the CourseSeatCount for a list of activitys.
-     *
-     * @param activityOfferingIds the identifier for the activityOfferings that you want the seatcounts.
-     * @param contextInfo Context information containing the principalId and locale information about the caller of service
-     * operation
-     * @return CourseSeatCounts.
-     * @throws DoesNotExistException activityOfferingId is not found
-     * @throws InvalidParameterException activityOfferingId or contextInfo is not valid
-     * @throws MissingParameterException activityOfferingId or contextInfo is missing or null
-     * @throws OperationFailedException unable to complete request
-     * @throws PermissionDeniedException an authorization failure occurred
-     */
-    public List<CourseSeatCountInfo> getSeatCountsByActivityOfferings(
-
-            @WebParam(name = "activityOfferingIds") List<String> activityOfferingIds,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
-
-            DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException;
 
 
 
