@@ -31,12 +31,13 @@ public interface CourseSeatCount extends IdNamelessEntity {
     String getActivityOfferingId();
     /**
      * Total number of seats
+     * @name Total Seats
      */
     Integer getTotalSeats();
 
     /**
      * Number of seats taken by registered students
-     * @return An integer that represents the number of registered seats
+     * @name Used Seats
      */
     Integer getUsedSeats();
 
@@ -44,11 +45,13 @@ public interface CourseSeatCount extends IdNamelessEntity {
      * Number of unused seats.  In general, the sum of available and used
      * seats equal the total seats though that definition is most clear
      * for activity offerings
+     * @name Available Seats
      */
     Integer getAvailableSeats();
 
     /**
      * The approximate timestamp of when the seatcount was taken
+     * @name Timestamp
      */
     Date getTimestamp();
 

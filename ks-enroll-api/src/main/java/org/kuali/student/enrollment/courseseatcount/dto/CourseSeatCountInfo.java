@@ -29,7 +29,7 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MessageInfo", propOrder = {"key", "typeKey", "stateKey","name","descr","courseSeatCountId",
-        "activityOfferingId","totalSeats","usedSeats","availableSeats","timeStamp","meta", "attributes", "_futureElements" })
+        "activityOfferingId","totalSeats","usedSeats","availableSeats","timestamp","meta", "attributes", "_futureElements" })
 public class CourseSeatCountInfo extends IdNamelessEntityInfo implements CourseSeatCount {
 
     @XmlAnyElement
@@ -60,6 +60,7 @@ public class CourseSeatCountInfo extends IdNamelessEntityInfo implements CourseS
             this.totalSeats = courseSeatCount.getTotalSeats();
             this.usedSeats = courseSeatCount.getUsedSeats();
             this.availableSeats = courseSeatCount.getAvailableSeats();
+            this.timestamp = courseSeatCount.getTimestamp();
 
         }
 
