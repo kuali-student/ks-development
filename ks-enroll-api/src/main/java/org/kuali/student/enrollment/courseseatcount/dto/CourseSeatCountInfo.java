@@ -28,12 +28,10 @@ import java.util.Date;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MessageInfo", propOrder = {"key", "typeKey", "stateKey","name","descr","courseSeatCountId",
+@XmlType(name = "MessageInfo", propOrder = {"id", "typeKey", "stateKey","name","descr",
         "activityOfferingId","totalSeats","usedSeats","availableSeats","timestamp","meta", "attributes", "_futureElements" })
 public class CourseSeatCountInfo extends IdNamelessEntityInfo implements CourseSeatCount {
 
-    @XmlAnyElement
-    private String courseSeatCountId;
     @XmlAnyElement
     private String activityOfferingId;
     @XmlAnyElement
@@ -67,13 +65,7 @@ public class CourseSeatCountInfo extends IdNamelessEntityInfo implements CourseS
     }
 
 
-    public String getCourseseatCountId() {
-        return courseSeatCountId;
-    }
 
-    public void setCourseseatCountId(String courseseatCountId) {
-        courseSeatCountId = courseseatCountId;
-    }
     @Override
     public String getActivityOfferingId() {
         return activityOfferingId;
@@ -115,11 +107,4 @@ public class CourseSeatCountInfo extends IdNamelessEntityInfo implements CourseS
         this.timestamp = timestamp;
     }
 
-    public List<Object> get_futureElements() {
-        return _futureElements;
-    }
-
-    public void set_futureElements(List<Object> _futureElements) {
-        this._futureElements = _futureElements;
-    }
 }
