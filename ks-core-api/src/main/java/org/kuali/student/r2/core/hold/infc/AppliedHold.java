@@ -51,7 +51,7 @@ public interface AppliedHold
 
 
     /**
-     * The date this hold was released, of null if not yet released.
+     * The date this hold was released, or null if not yet released.
      * @name Released Date
      * @deprecated Please use getExpirationDate() instead
      */

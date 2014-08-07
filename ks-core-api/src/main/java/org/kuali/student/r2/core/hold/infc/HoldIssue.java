@@ -31,7 +31,7 @@ public interface HoldIssue
     extends IdEntity {
 
     /**
-     * The organization related to this hold category.
+     * The organization related to this hold issue.
      * @name Organization Id
      * @required
      */
@@ -39,11 +39,13 @@ public interface HoldIssue
 
     /**
      * The flag that stores if the HoldIssue is a Term+Date based.
+     * @required
      */
     public Boolean getIsHoldIssueTermAndDateBased ();
 
     /**
      * The flag that stores if the HoldIssue is only Date-based.
+     * @required
      */
     public Boolean getIsHoldIssueDateBasedOnly ();
 
