@@ -66,4 +66,43 @@ public interface CourseOfferingCallbackService {
      */
     public StatusInfo deleteCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds,
                                             @WebParam(name = "contextInfo")ContextInfo contextInfo );
+
+    /**
+     * Callback for when ActivityOfferings are created.
+     *
+     *
+     * @param activityOfferingIds ids created.
+     * @param contextInfo information containing the principalId and
+     *                              locale information about the caller of
+     *                              service operation
+     * @return nothing
+     */
+    public StatusInfo newActivityOfferings(@WebParam(name = "activityOfferingIds") List<String> activityOfferingIds,
+                                         @WebParam(name = "contextInfo")ContextInfo contextInfo);
+
+    /**
+     * Callback for when ActivityOfferings are updated.
+     *
+     *
+     * @param activityOfferingIds ids updated.
+     * @param contextInfo information containing the principalId and
+     *                              locale information about the caller of
+     *                              service operation
+     * @return nothing
+     */
+    public StatusInfo updateActivityOfferings(@WebParam(name = "activityOfferingIds") List<String> activityOfferingIds,
+                                            @WebParam(name = "contextInfo")ContextInfo contextInfo);
+
+    /**
+     * Callback for when ActivityOfferings are deleted.
+     *
+     *
+     * @param activityOfferingIds ids deleted.
+     * @param contextInfo information containing the principalId and
+     *                              locale information about the caller of
+     *                              service operation
+     * @return nothing
+     */
+    public StatusInfo deleteActivityOfferings(@WebParam(name = "activityOfferingIds") List<String> activityOfferingIds,
+                                            @WebParam(name = "contextInfo")ContextInfo contextInfo );
 }

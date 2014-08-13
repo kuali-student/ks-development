@@ -33,6 +33,96 @@ import java.util.List;
 @WebService(name = "CourseOfferingSubscriptionService", targetNamespace = CourseOfferingSubscriptionNamespaceConstants.NAMESPACE)
 @SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public interface CourseOfferingSubscriptionService {
+
+    /**
+     * Subscribe a callback to listen for ActivityOfferings for any Activity.
+     *
+     * @param action action to listen for
+     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes.
+     * @param contextInfo information containing the principalId and locale information about the caller of the service operation
+     * @return callback registration id that can be used to explicitly desubscribe the listener.
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException a parameter is missing or null
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public String subscribeToActivityOfferings(
+            @WebParam(name = "action") SubscriptionActionEnum action,
+            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Subscribe a callback to listen for new ActivityOfferings for a given term.
+     *
+     * @param action action to listen for
+     * @param termId the identifier for the Term to be retrieved.
+     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param contextInfo information containing the principalId and locale information about the caller of the service operation
+     * @return callback registration id that can be used to explicitly desubscribe the listener.
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException a parameter is missing or null
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public String subscribeToActivityOfferingsByTerm(
+            @WebParam(name = "action") SubscriptionActionEnum action,
+            @WebParam(name = "termId") String termId,
+            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Subscribe a callback to listen for new ActivityOfferings for a given activity.
+     *
+     * @param action action to listen for
+     * @param activityId the identifier for the Activity to be retrieved.
+     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param contextInfo information containing the principalId and locale information about the caller of the service operation
+     * @return callback registration id that can be used to explicitly desubscribe the listener.
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException a parameter is missing or null
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public String subscribeToActivityOfferingsByActivity(
+            @WebParam(name = "action") SubscriptionActionEnum action,
+            @WebParam(name = "activityId") String activityId,
+            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Subscribe a callback to listen for ActivityOfferings by type.
+     *
+     * @param action action to listen for
+     * @param activityOfferingTypeKey the identifier for the ActivityOffering type to be retrieved.
+     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes.
+     * @param contextInfo information containing the principalId and locale information about the caller of the service operation
+     * @return callback registration id that can be used to explicitly desubscribe the listener.
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException a parameter is missing or null
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public String subscribeToActivityOfferingsByType(
+            @WebParam(name = "action") SubscriptionActionEnum action,
+            @WebParam(name = "activityOfferingTypeKey") String activityOfferingTypeKey,
+            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
     /**
      * Subscribe a callback to listen for new CourseOfferings for any course.
      *
