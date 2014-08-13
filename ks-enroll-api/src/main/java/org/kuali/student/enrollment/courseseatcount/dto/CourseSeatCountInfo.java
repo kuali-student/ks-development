@@ -14,15 +14,15 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MessageInfo", propOrder = {"id", "typeKey", "stateKey",
-        "activityOfferingId","totalSeats","usedSeats","availableSeats","timestamp","meta", "attributes", "_futureElements" })
+        "activityOfferingId","Seats","takenSeats","availableSeats","timestamp","meta", "attributes", "_futureElements" })
 public class CourseSeatCountInfo extends IdNamelessEntityInfo implements CourseSeatCount {
 
     @XmlAnyElement
     private String activityOfferingId;
     @XmlAnyElement
-    private Integer totalSeats;
+    private Integer Seats;
     @XmlAnyElement
-    private Integer usedSeats;
+    private Integer takenSeats;
     @XmlAnyElement
     private Integer availableSeats;
     @XmlAnyElement
@@ -40,8 +40,8 @@ public class CourseSeatCountInfo extends IdNamelessEntityInfo implements CourseS
         if (courseSeatCount != null){
 
             this.activityOfferingId = courseSeatCount.getActivityOfferingId();
-            this.totalSeats = courseSeatCount.getTotalSeats();
-            this.usedSeats = courseSeatCount.getUsedSeats();
+            this.Seats = courseSeatCount.getSeats();
+            this.takenSeats = courseSeatCount.getTakenSeats();
             this.availableSeats = courseSeatCount.getAvailableSeats();
             this.timestamp = courseSeatCount.getTimestamp();
 
@@ -60,20 +60,20 @@ public class CourseSeatCountInfo extends IdNamelessEntityInfo implements CourseS
         this.activityOfferingId = activityOfferingId;
     }
     @Override
-    public Integer getTotalSeats() {
-        return totalSeats;
+    public Integer getSeats() {
+        return Seats;
     }
 
-    public void setTotalSeats(Integer totalSeats) {
-        this.totalSeats = totalSeats;
+    public void setSeats(Integer Seats) {
+        this.Seats = Seats;
     }
     @Override
-    public Integer getUsedSeats() {
-        return usedSeats;
+    public Integer getTakenSeats() {
+        return takenSeats;
     }
 
-    public void setUsedSeats(Integer usedSeats) {
-        this.usedSeats = usedSeats;
+    public void setTakenSeats(Integer takenSeats) {
+        this.takenSeats = takenSeats;
     }
     @Override
     public Integer getAvailableSeats() {

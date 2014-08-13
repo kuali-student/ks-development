@@ -33,13 +33,13 @@ public interface CourseSeatCount extends IdNamelessEntity {
      * Total number of seats
      * @name Total Seats
      */
-    Integer getTotalSeats();
+    Integer getSeats();
 
     /**
      * Number of seats taken by registered students
      * @name Used Seats
      */
-    Integer getUsedSeats();
+    Integer getTakenSeats();
 
     /**
      * Number of unused seats.  In general, the sum of available and used
