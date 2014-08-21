@@ -63,7 +63,7 @@ public class GesServiceConstants
     // ------------------------
 
     public static final String GES_ROLLOVER_PRIORITY_LEVEL_COURSE = "200";
-    public static final String GES_ROLLOVER_PRIORITY_LEVEL_SUBJECT = "300";
+    public static final String GES_ROLLOVER_PRIORITY_LEVEL_SUBJECT_CODE = "300";
     public static final String GES_ROLLOVER_PRIORITY_LEVEL_DEPARTMENT = "400";
     public static final String GES_ROLLOVER_PRIORITY_LEVEL_FACULTY = "500";
     public static final String GES_ROLLOVER_PRIORITY_LEVEL_GENERAL = "600";
