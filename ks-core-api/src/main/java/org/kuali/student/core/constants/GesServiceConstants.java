@@ -26,16 +26,16 @@ public class GesServiceConstants
 
     // Value Types
     // ----------------
-    public static final String GES_VALUE_TYPE_KEY = "kuali.ges.value.type.value";
+    public static final String GES_VALUE_TYPE_KEY = "kuali.ges.value.type";
 
     // Parameter Types
     // -------------------
-    public static final String GES_PARAMETER_TYPE_KEY = "kuali.ges.parameter.type.parameter";
+    public static final String GES_PARAMETER_TYPE_KEY = "kuali.ges.parameter.type";
     public static final String GES_PARAMETER_TYPE_COURSE_KEY = "kuali.ges.parameter.type.course";
 
     // Parameter Group Types
     // -------------------------
-    public static final String GES_PARAMETER_GROUP_TYPE_KEY = "kuali.ges.parametergroup.type.parametergroup";
+    public static final String GES_PARAMETER_GROUP_TYPE_KEY = "kuali.ges.parametergroup.type";
 
     // Value States
     // -----------------
