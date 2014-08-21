@@ -15,9 +15,11 @@
 package org.kuali.student.core.ges.service;
 
 import org.kuali.rice.core.api.criteria.QueryByCriteria;
+import org.kuali.student.core.ges.dto.ParameterGroupInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
 import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
 import org.kuali.student.r2.common.exceptions.DoesNotExistException;
 import org.kuali.student.r2.common.exceptions.InvalidParameterException;
@@ -47,6 +49,11 @@ import java.util.List;
 @WebService(name = "GesService", serviceName = "GesService", portName = "GesService", targetNamespace = GesServiceNamespace.NAMESPACE)
 @SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public interface GesService {
+
+    //////////////////////////
+    // Parameter
+    //////////////////////////
+
 
     /**
      * Retrieves a single Parameter by Parameter Key.
@@ -297,6 +304,9 @@ public interface GesService {
             OperationFailedException,
             PermissionDeniedException;
 
+    //////////////////////////
+    // Value
+    //////////////////////////
 
     /**
      * Retrieves a single Value by Value Id.
@@ -692,4 +702,329 @@ public interface GesService {
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
+
+    //////////////////////////
+    // ParameterGroup
+    //////////////////////////
+
+    /**
+     * Retrieves a ParameterGroup.
+     *
+     * @param parameterGroupId a unique Id of a parameterGroup
+     * @param contextInfo Context information containing the principalId and
+     * locale information about the caller of service operation
+     * @return a ParameterGroup
+     * @throws DoesNotExistException parameterGroupId not found
+     * @throws InvalidParameterException invalid parameterGroupId or
+     * contextInfo
+     * @throws MissingParameterException missing parameterGroupId or
+     * contextInfo
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public ParameterGroupInfo getParameterGroup(@WebParam(name = "parameterGroupId") String parameterGroupId,
+                                                @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Retrieves a list of ParameterGroups corresponding to the given list of
+     * ParameterGroup Ids.
+     *
+     * @param parameterGroupIds list of ParameterGroups to be retrieved
+     * @param contextInfo Context information containing the principalId and
+     * locale information about the caller of service operation
+     * @return a list of ParameterGroup Ids of the given type
+     * @throws DoesNotExistException an parameterGroupId in list not found
+     * @throws InvalidParameterException invalid parameterGroupId or
+     * contextInfo
+     * @throws MissingParameterException missing parameterGroupId or
+     * contextInfo
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public List<ParameterGroupInfo> getParameterGroupsByIds(@WebParam(name = "parameterGroupIds") List<String> parameterGroupIds,
+                                                            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Retrieves a list of ParameterGroup Ids of the specified type.
+     *
+     * @param parameterGroupTypeKey a ParameterGroup type to be retrieved
+     * @param contextInfo Context information containing the principalId and
+     * locale information about the caller of service operation
+     * @return a list of ParameterGroup Ids
+     * @throws InvalidParameterException invalid parameterGroupTypeKey or contextInfo
+     * @throws MissingParameterException missing parameterGroupTypeKey or contextInfo
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public List<String> getParameterGroupIdsByType(@WebParam(name = "parameterGroupTypeKey") String parameterGroupTypeKey,
+                                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Searches for ParameterGroups based on the criteria and returns
+     * a list of ParameterGroup identifiers which match the search
+     * criteria.
+     *
+     * @param criteria    the search criteria
+     * @param contextInfo information containing the principalId and
+     *                    locale information about the caller of the service operation
+     * @return a list of ParameterGroup Ids matching the criteria
+     * @throws InvalidParameterException criteria or contextInfo is
+     *                                   not valid
+     * @throws MissingParameterException criteria or contextInfo is
+     *                                   missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public List<String> searchForParameterGroupIds(@WebParam(name = "criteria") QueryByCriteria criteria,
+                                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Searches for ParameterGroups based on the criteria and returns
+     * a list of ParameterGroups which match the search criteria.
+     *
+     * @param criteria    the search criteria
+     * @param contextInfo information containing the principalId and
+     *                    locale information about the caller of the service operation
+     * @return a list of ParameterGroups matching the criteria
+     * @throws InvalidParameterException criteria or contextInfo is
+     *                                   not valid
+     * @throws MissingParameterException criteria or contextInfo is
+     *                                   missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public List<ParameterGroupInfo> searchForParameterGroups(@WebParam(name = "criteria") QueryByCriteria criteria,
+                                                             @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Validates a ParameterGroup. Depending on the value of
+     * validationType, this validation could be limited to tests on
+     * just the current ParameterGroup and its directly contained
+     * sub-objects or expanded to perform all tests related to this
+     * ParameterGroup. If an identifier is present for the
+     * ParameterGroup (and/or one of its contained sub-objects) and a
+     * record is found for that identifier, the validation checks if
+     * the ParameterGroup can be updated to the new values. If an
+     * identifier is not present or a record does not exist, the
+     * validation checks if the object with the given data can be
+     * created.
+     *
+     * @param validationTypeKey         the identifier for the validation Type
+     * @param valueTypeKey              the identifier for the value Type
+     * @param parameterGroupInfo        the ParameterGroup information to be validated
+     * @param contextInfo               information containing the principalId and
+     *                                  locale information about the caller of service operation
+     * @return                          a list of validation results or an empty list if validation succeeded
+     * @throws DoesNotExistException    validationTypeKey, parameterKey, or valueTypeKey is not found
+     * @throws InvalidParameterException parameterGroupInfo or contextInfo is not valid
+     * @throws MissingParameterException validationTypeKey, parameterKey, valueTypeKey,
+     *                                   parameterGroupInfo, or contextInfo is missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public List<ValidationResultInfo> validateParameterGroup (@WebParam(name = "validationTypeKey") String validationTypeKey,
+                                                              @WebParam(name = "valueTypeKey") String valueTypeKey,
+                                                              @WebParam(name = "parameterGroupInfo") ParameterGroupInfo parameterGroupInfo,
+                                                              @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Creates a new ParameterGroup. The ParameterGroup Id, ParameterGroup Type, and Meta information may
+     * not be set in the supplied data.
+     *
+     * @param parameterGroupTypeKey the identifier for the Type of the new ParameterGroup
+     * @param parameterGroupInfo    the data with which to create the ParameterGroup
+     * @param contextInfo  information containing the principalId and
+     *                     locale information about the caller of service operation
+     * @return the new ParameterGroup
+     * @throws DoesNotExistException     parameterGroupTypeKey does not exist or is not supported
+     * @throws InvalidParameterException parameterGroupInfo or contextInfo is not valid
+     * @throws MissingParameterException parameterGroupTypeKey, parameterGroupInfo or contextInfo is missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     * @throws ReadOnlyException         an attempt at supplying information
+     *                                   designated as read-only
+     * @throws DataValidationErrorException supplied data is invalid
+     */
+    public ParameterGroupInfo createParameterGroup(@WebParam(name = "parameterGroupTypeKey") String parameterGroupTypeKey,
+                                                   @WebParam(name = "parameterGroupInfo") ParameterGroupInfo parameterGroupInfo,
+                                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws DoesNotExistException,
+            DataValidationErrorException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException;
+
+    /**
+     * Updates an existing ParameterGroup. The ParameterGroup Id,
+     * Type, and Meta information may not be changed.
+     *
+     * @param parameterGroupId     the identifier for the ParameterGroup to be updated
+     * @param parameterGroupInfo   the new data for the ParameterGroup
+     * @param contextInfo information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return the updated ParameterGroup
+     * @throws DataValidationErrorException supplied data is invalid
+     * @throws DoesNotExistException        parameterGroupId not found
+     * @throws InvalidParameterException    parameterGroupInfo or
+     *                                      contextInfo is not valid
+     * @throws MissingParameterException    parameterGroupId, parameterGroupInfo, or contextInfo is missing or null
+     * @throws OperationFailedException     unable to complete request
+     * @throws PermissionDeniedException    an authorization failure occurred
+     * @throws ReadOnlyException            an attempt at changing information
+     *                                      designated as read-only
+     * @throws VersionMismatchException     optimistic locking failure or
+     *                                      the action was attempted on an out of date version
+     */
+    public ParameterGroupInfo updateParameterGroup(@WebParam(name = "parameterGroupId") String parameterGroupId,
+                                                   @WebParam(name = "parameterGroupInfo") ParameterGroupInfo parameterGroupInfo,
+                                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws DataValidationErrorException,
+            DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException,
+            VersionMismatchException;
+
+    /**
+     * Deletes an existing ParameterGroup.
+     *
+     * @param parameterGroupId     the identifier for the ParameterGroup to be deleted
+     * @param contextInfo information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return the status of the delete operation. This must always be
+     *         true.
+     * @throws DoesNotExistException     parameterGroupId not found
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException parameterGroupId or contextInfo is missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public StatusInfo deleteParameterGroup (@WebParam(name = "parameterGroupId") String parameterGroupId,
+                                            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Retrieves a list of ParameterGroups in which the given Parameter belongs.
+     *
+     * @param parameterKey a Parameter key
+     * @param contextInfo Context information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return a list of ParameterGroups
+     * @throws InvalidParameterException invalid parameterKey or contextInfo
+     * @throws MissingParameterException missing parameterKey or contextInfo
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public List<ParameterGroupInfo> getParameterGroupsForParameter(@WebParam(name = "parameterKey") String parameterKey,
+                                                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Retrieves a list of Parameters which belong to the given ParameterGroup.
+     *
+     * @param parameterGroupId a ParameterGroup Id
+     * @param contextInfo Context information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return a list of Parameters
+     * @throws InvalidParameterException invalid parameterGroupId or contextInfo
+     * @throws MissingParameterException missing parameterGroupId or contextInfo
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public List<ParameterInfo> getParametersForParameterGroup(@WebParam(name = "parameterGroupId") String parameterGroupId,
+                                                              @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Adds a Parameter to a ParameterGroup.
+     *
+     * @param parameterKey a unique identifier for a Parameter
+     * @param parameterGroupId a unique identifier for a ParameterGroup
+     * @param contextInfo Context information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return status
+     * @throws AlreadyExistsException parameterKey already related to parameterGroupId
+     * @throws DoesNotExistException parameterKey or parameterGroupId not found
+     * @throws InvalidParameterException invalid parameterKey, parameterGroupId, or contextInfo
+     * @throws MissingParameterException missing parameterKey, parameterGroupId, or contextInfo
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public StatusInfo addParameterToParameterGroup(@WebParam(name = "parameterKey") String parameterKey,
+                                                   @WebParam(name = "parameterGroupId") String parameterGroupId,
+                                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws AlreadyExistsException,
+            DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Removes a Parameter from a ParameterGroup.
+     *
+     * @param parameterKey a unique identifier for a Parameter
+     * @param parameterGroupId a unique identifier for a ParameterGroup
+     * @param contextInfo Context information containing the principalId and
+     * locale information about the caller of service operation
+     * @return status
+     * @throws DoesNotExistException parameterKey or parameterGroupId not found or unrelated
+     * @throws InvalidParameterException invalid parameterKey, parameterGroupId, or contextInfo
+     * @throws MissingParameterException missing parameterKey, parameterGroupId, or contextInfo
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public StatusInfo removeParameterFromParameterGroup(@WebParam(name = "parameterKey") String parameterKey,
+                                                        @WebParam(name = "parameterGroupId") String parameterGroupId,
+                                                        @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+
+
+
 }

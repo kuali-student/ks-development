@@ -17,9 +17,11 @@ package org.kuali.student.core.ges.service;
 
 
 import org.kuali.rice.core.api.criteria.QueryByCriteria;
+import org.kuali.student.core.ges.dto.ParameterGroupInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
 import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
 import org.kuali.student.r2.common.exceptions.DoesNotExistException;
 import org.kuali.student.r2.common.exceptions.InvalidParameterException;
@@ -32,6 +34,7 @@ import org.kuali.student.core.ges.dto.GesCriteriaInfo;
 import org.kuali.student.core.ges.dto.ParameterInfo;
 import org.kuali.student.core.ges.dto.ValueInfo;
 
+import javax.jws.WebParam;
 import java.util.Date;
 import java.util.List;
 
@@ -170,4 +173,68 @@ public class GesServiceDecorator implements GesService {
         return getNextDecorator().evaluateValueOnDate(parameterKey, criteria, onDate, contextInfo);
     }
 
+    @Override
+    public ParameterGroupInfo getParameterGroup(String parameterGroupId, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getParameterGroup(parameterGroupId, contextInfo);
+    }
+
+    @Override
+    public List<ParameterGroupInfo> getParameterGroupsByIds(List<String> parameterGroupIds, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getParameterGroupsByIds(parameterGroupIds, contextInfo);
+    }
+
+    @Override
+    public List<String> getParameterGroupIdsByType(String parameterGroupTypeKey, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getParameterGroupIdsByType(parameterGroupTypeKey, contextInfo);
+    }
+
+    @Override
+    public List<String> searchForParameterGroupIds(QueryByCriteria criteria, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().searchForParameterGroupIds(criteria, contextInfo);
+    }
+
+    @Override
+    public List<ParameterGroupInfo> searchForParameterGroups(QueryByCriteria criteria, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().searchForParameterGroups(criteria, contextInfo);
+    }
+
+    @Override
+    public List<ValidationResultInfo> validateParameterGroup(String validationTypeKey, String valueTypeKey, ParameterGroupInfo parameterGroupInfo, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().validateParameterGroup(validationTypeKey, valueTypeKey, parameterGroupInfo, contextInfo);
+    }
+
+    @Override
+    public ParameterGroupInfo createParameterGroup(String parameterGroupTypeKey, ParameterGroupInfo parameterGroupInfo, ContextInfo contextInfo) throws DoesNotExistException, DataValidationErrorException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
+        return getNextDecorator().createParameterGroup(parameterGroupTypeKey, parameterGroupInfo, contextInfo);
+    }
+
+    @Override
+    public ParameterGroupInfo updateParameterGroup(String parameterGroupId, ParameterGroupInfo parameterGroupInfo, ContextInfo contextInfo) throws DataValidationErrorException, DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException, VersionMismatchException {
+        return getNextDecorator().updateParameterGroup(parameterGroupId, parameterGroupInfo, contextInfo);
+    }
+
+    @Override
+    public StatusInfo deleteParameterGroup(String parameterGroupId, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().deleteParameterGroup(parameterGroupId, contextInfo);
+    }
+
+    @Override
+    public List<ParameterGroupInfo> getParameterGroupsForParameter(String parameterKey, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getParameterGroupsForParameter(parameterKey, contextInfo);
+    }
+
+    @Override
+    public List<ParameterInfo> getParametersForParameterGroup(String parameterGroupId, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getParametersForParameterGroup(parameterGroupId, contextInfo);
+    }
+
+    @Override
+    public StatusInfo addParameterToParameterGroup(String parameterKey, String parameterGroupId, ContextInfo contextInfo) throws AlreadyExistsException, DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().addParameterToParameterGroup(parameterKey, parameterGroupId, contextInfo);
+    }
+
+    @Override
+    public StatusInfo removeParameterFromParameterGroup(String parameterKey, String parameterGroupId, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().removeParameterFromParameterGroup(parameterKey, parameterGroupId, contextInfo);
+    }
 }
