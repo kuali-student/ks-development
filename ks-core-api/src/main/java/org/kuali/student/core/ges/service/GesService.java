@@ -599,8 +599,8 @@ public interface GesService {
      * @throws PermissionDeniedException an authorization failure occurred
      */
     public List<ValueInfo> evaluateValues(@WebParam(name = "parameterKey") String parameterKey,
-                                                              @WebParam(name = "criteria") GesCriteriaInfo criteria,
-                                                              @WebParam(name = "contextInfo") ContextInfo contextInfo)
+                                          @WebParam(name = "criteria") GesCriteriaInfo criteria,
+                                          @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -699,6 +699,65 @@ public interface GesService {
                                                 @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             DoesNotExistException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Retrieves a list of values associated with the list of particular parameters
+     * that are applicable based on the evaluation of the given criteria.
+     * Empty or null fields within the criteria are treated as a wild card and will not restrict values that are returned.
+     * Empty or null attributes on the value are treated as a wild card and will not restrict values that are returned.
+     * The relevant values must also have rules that are either null or evaluate to true.
+     *
+     * @param parameterKeys the keys for the parameters associated with the values that will be returned.
+     * @param criteria    the criteria that restricts the values returned by this method.
+     * @param contextInfo information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return  A List of applicable values for the parameters. The values returned will be sorted based on parameter key
+     *          and then priority. Values with duplicate priorities (within the same parameterKey) will be returned in an
+     *          unspecified order.
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException parameterKeys, personId, or
+     *                                   contextInfo is missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public List<ValueInfo> evaluateValuesForParameters (@WebParam(name = "parameterKeys") List<String> parameterKeys,
+                                                        @WebParam(name = "criteria") GesCriteriaInfo criteria,
+                                                        @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Retrieves a list of values associated with the list of particular parameters
+     * that are applicable based on the evaluation of the given criteria, and date.
+     * Empty or null fields within the criteria are treated as a wild card and will not restrict values that are returned.
+     * Empty or null attributes on the value are treated as a wild card and will not restrict values that are returned.
+     * The relevant values must also have rules that are either null or evaluate to true.
+     * The date parameter is used as the date for the evaluation.
+     *
+     * @param parameterKeys the keys for the parameters associated with the values that will be returned.
+     * @param criteria    the criteria that restricts the values returned by this method.
+     * @param onDate the date that will be used for the evaluation.
+     * @param contextInfo information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return  A List of applicable values for the parameters. The values returned will be sorted based on parameter key
+     *          and then priority. Values with duplicate priorities (within the same parameter key) will be returned in an
+     *          unspecified order.
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException parameterKeys, personId, or
+     *                                   contextInfo is missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public List<ValueInfo> evaluateValuesForParametersOnDate (@WebParam(name = "parameterKeys") List<String> parameterKeys,
+                                                              @WebParam(name = "criteria") GesCriteriaInfo criteria,
+                                                              @WebParam(name = "onDate") Date onDate,
+                                                              @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;

@@ -174,6 +174,16 @@ public class GesServiceDecorator implements GesService {
     }
 
     @Override
+    public List<ValueInfo> evaluateValuesForParameters(List<String> parameterKeys, GesCriteriaInfo criteria, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().evaluateValuesForParameters(parameterKeys, criteria, contextInfo);
+    }
+
+    @Override
+    public List<ValueInfo> evaluateValuesForParametersOnDate(List<String> parameterKeys, GesCriteriaInfo criteria, Date onDate, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().evaluateValuesForParametersOnDate(parameterKeys, criteria, onDate, contextInfo);
+    }
+
+    @Override
     public ParameterGroupInfo getParameterGroup(String parameterGroupId, ContextInfo contextInfo) throws DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
         return getNextDecorator().getParameterGroup(parameterGroupId, contextInfo);
     }

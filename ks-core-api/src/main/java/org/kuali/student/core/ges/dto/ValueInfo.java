@@ -36,7 +36,7 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ValueInfo", propOrder = {"id", "typeKey", "stateKey", "effectiveDate", "expirationDate",
-        "parameterKey","priority","atpTypeKeys","ruleId","orgId",
+        "parameterKey","priority","atpId", "atpTypeKey","ruleId","orgId",
         "populationId",
         "cluId","socId","subjectCode",
         "stringValue","numericValue","dateValue","booleanValue",
@@ -57,7 +57,10 @@ public class ValueInfo extends IdNamelessEntityInfo implements Value, HasEffecti
     @XmlElement
     private Integer priority;
     @XmlElement
-    private List<String> atpTypeKeys;
+    private String atpId;
+    @XmlElement
+    private String atpTypeKey;
+    // private List<String> atpTypeKeys;
     @XmlElement
     private String ruleId;
     @XmlElement
@@ -117,9 +120,13 @@ public class ValueInfo extends IdNamelessEntityInfo implements Value, HasEffecti
         if(value != null) {
             parameterKey = value.getParameterKey();
             priority = value.getPriority();
+            atpId = value.getAtpId();
+            atpTypeKey = value.getAtpTypeKey();
+            /*
             if (value.getAtpTypeKeys().size() > 0){
                 atpTypeKeys = new ArrayList<String>(value.getAtpTypeKeys());
             }
+            */
             ruleId = value.getRuleId();
             orgId = value.getOrgId();
 
@@ -193,6 +200,15 @@ public class ValueInfo extends IdNamelessEntityInfo implements Value, HasEffecti
     }
 
     @Override
+    public String getAtpId() {
+        return atpId;
+    }
+
+    public void setAtpId(String atpId) {
+        this.atpId = atpId;
+    }
+
+    /*
     public List<String> getAtpTypeKeys() {
         if (atpTypeKeys == null){
             atpTypeKeys = new ArrayList<String>();
@@ -203,7 +219,16 @@ public class ValueInfo extends IdNamelessEntityInfo implements Value, HasEffecti
     public void setAtpTypeKeys(List<String> atpTypeKey) {
         this.atpTypeKeys = atpTypeKey;
     }
+    */
 
+    @Override
+    public String getAtpTypeKey() {
+        return atpTypeKey;
+    }
+
+    public void setAtpTypeKey(String atpTypeKey) {
+        this.atpTypeKey = atpTypeKey;
+    }
 
     @Override
     public String getRuleId() {
