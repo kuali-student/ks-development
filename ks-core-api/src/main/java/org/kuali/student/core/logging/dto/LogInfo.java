@@ -14,7 +14,6 @@
  */
 package org.kuali.student.core.logging.dto;
 
-import org.kuali.student.r2.common.dto.IdEntityInfo;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,20 +21,25 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
 import org.kuali.student.core.logging.infc.Log;
+import org.kuali.student.r2.common.dto.KeyEntityInfo;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LogInfo", propOrder = {"id",
+@XmlType(name = "LogInfo", propOrder = {"key",
     "typeKey",
     "stateKey",
+    "levelTypeKey",
     "name",
     "descr",
     "meta",
     "attributes", "_futureElements"})
-public class LogInfo extends IdEntityInfo implements Log, Serializable {
+public class LogInfo extends KeyEntityInfo implements Log, Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @XmlElement
+    private String levelTypeKey;
     @XmlAnyElement
     private List<Object> _futureElements;
 
@@ -45,5 +49,22 @@ public class LogInfo extends IdEntityInfo implements Log, Serializable {
 
     public LogInfo(Log input) {
         super(input);
+        this.setLevelTypeKey(input.getLevelTypeKey());
     }
+
+    @Override
+    public String getLevelTypeKey() {
+        return levelTypeKey;
+    }
+
+    public void setLevelTypeKey(String levelTypeKey) {
+        this.levelTypeKey = levelTypeKey;
+    }
+
+    @Override
+    public String toString() {
+        return "LogInfo{" + super.toString() + ", levelTypeKey=" + levelTypeKey + '}';
+    }
+    
+    
 }

@@ -15,12 +15,19 @@
 
 package org.kuali.student.core.logging.infc;
 
-import org.kuali.student.r2.common.infc.IdEntity;
+import org.kuali.student.r2.common.infc.KeyEntity;
 
 /**
  * A handle to a log
  */
-public interface Log extends IdEntity {
+public interface Log extends KeyEntity {
     
+    /**
+     * The minimum level of log entries for this log that will actually be logged
+     *
+     * @name Level Type Key
+     */
+    public String getLevelTypeKey();
+
 
 }

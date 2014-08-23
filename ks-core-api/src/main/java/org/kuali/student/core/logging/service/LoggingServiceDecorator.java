@@ -7,6 +7,7 @@ import org.kuali.student.core.logging.dto.LogInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
 import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
 import org.kuali.student.r2.common.exceptions.DoesNotExistException;
 import org.kuali.student.r2.common.exceptions.InvalidParameterException;
@@ -32,38 +33,38 @@ public class LoggingServiceDecorator implements LoggingService {
     }
 
     @Override
-    public LogInfo getLog(String logId, ContextInfo contextInfo) throws DoesNotExistException,
+    public LogInfo getLog(String logKey, ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
-        return getNextDecorator().getLog(logId, contextInfo);
+        return getNextDecorator().getLog(logKey, contextInfo);
     }
 
     @Override
-    public List<LogInfo> getLogsByIds(List<String> logIds, ContextInfo contextInfo) throws DoesNotExistException,
+    public List<LogInfo> getLogsByKeys(List<String> logKeys, ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
-        return getNextDecorator().getLogsByIds(logIds, contextInfo);
+        return getNextDecorator().getLogsByKeys(logKeys, contextInfo);
     }
 
     @Override
-    public List<String> getLogIdsByType(String logTypeKey, ContextInfo contextInfo) throws DoesNotExistException,
+    public List<String> getLogKeysByType(String logTypeKey, ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
-        return getNextDecorator().getLogIdsByType(logTypeKey, contextInfo);
+        return getNextDecorator().getLogKeysByType(logTypeKey, contextInfo);
     }
 
     @Override
-    public List<String> searchForLogIds(QueryByCriteria criteria, ContextInfo contextInfo) throws InvalidParameterException,
+    public List<String> searchForLogKeys(QueryByCriteria criteria, ContextInfo contextInfo) throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
-        return getNextDecorator().searchForLogIds(criteria, contextInfo);
+        return getNextDecorator().searchForLogKeys(criteria, contextInfo);
     }
 
     @Override
@@ -85,18 +86,36 @@ public class LoggingServiceDecorator implements LoggingService {
     }
 
     @Override
-    public LogInfo createLog(String logTypeKey, LogInfo logInfo, ContextInfo contextInfo) throws DataValidationErrorException,
+    public LogInfo createLog(String key, 
+            String logTypeKey, 
+            LogInfo logInfo, 
+            ContextInfo contextInfo) 
+            throws
+            AlreadyExistsException,
+            DataValidationErrorException,
             DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException,
             ReadOnlyException {
-        return getNextDecorator().createLog(logTypeKey, logInfo, contextInfo);
+        return getNextDecorator().createLog(key, logTypeKey, logInfo, contextInfo);
     }
 
     @Override
-    public LogInfo updateLog(String logId, LogInfo logInfo, ContextInfo contextInfo) throws DataValidationErrorException,
+    public LogInfo findCreateLog(String logKey, String logTypeKey, ContextInfo contextInfo)
+            throws DataValidationErrorException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException {
+        return  getNextDecorator().findCreateLog(logKey, logTypeKey, contextInfo);
+    }
+
+
+    @Override
+    public LogInfo updateLog(String logKey, LogInfo logInfo, ContextInfo contextInfo) throws DataValidationErrorException,
             DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -104,16 +123,16 @@ public class LoggingServiceDecorator implements LoggingService {
             PermissionDeniedException,
             ReadOnlyException,
             VersionMismatchException {
-        return getNextDecorator().updateLog(logId, logInfo, contextInfo);
+        return getNextDecorator().updateLog(logKey, logInfo, contextInfo);
     }
 
     @Override
-    public StatusInfo deleteLog(String logId, ContextInfo contextInfo) throws DoesNotExistException,
+    public StatusInfo deleteLog(String logKey, ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
-        return getNextDecorator().deleteLog(logId, contextInfo);
+        return getNextDecorator().deleteLog(logKey, contextInfo);
     }
 
     @Override
@@ -161,17 +180,17 @@ public class LoggingServiceDecorator implements LoggingService {
     }
 
     @Override
-    public List<ValidationResultInfo> validateLogEntry(String validationTypeKey, String logEntryTypeKey, String logId,
+    public List<ValidationResultInfo> validateLogEntry(String validationTypeKey, String logEntryTypeKey, String logKey,
             LogEntryInfo logEntryInfo, ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
-        return getNextDecorator().validateLogEntry(validationTypeKey, logEntryTypeKey, logId, logEntryInfo, contextInfo);
+        return getNextDecorator().validateLogEntry(validationTypeKey, logEntryTypeKey, logKey, logEntryInfo, contextInfo);
     }
 
     @Override
-    public LogEntryInfo createLogEntry(String logEntryTypeKey, String logId, LogEntryInfo logEntryInfo, ContextInfo contextInfo)
+    public LogEntryInfo createLogEntry(String logKey, String logEntryTypeKey, LogEntryInfo logEntryInfo, ContextInfo contextInfo)
             throws DataValidationErrorException,
             DoesNotExistException,
             InvalidParameterException,
@@ -179,9 +198,22 @@ public class LoggingServiceDecorator implements LoggingService {
             OperationFailedException,
             PermissionDeniedException,
             ReadOnlyException {
-        return getNextDecorator().createLogEntry(logEntryTypeKey, logId, logEntryInfo, contextInfo);
+        return getNextDecorator().createLogEntry(logKey, logEntryTypeKey, logEntryInfo, contextInfo);
     }
 
+    @Override
+    public StatusInfo logEntry(String logKey, String logEntryTypeKey,
+            String levelTypeKey, String entry, ContextInfo contextInfo)
+            throws
+            DataValidationErrorException,
+            DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException {
+        return getNextDecorator().logEntry(logKey, logEntryTypeKey, levelTypeKey, entry, contextInfo);
+    }
     @Override
     public LogEntryInfo updateLogEntry(String logEntryId, LogEntryInfo logEntryInfo, ContextInfo contextInfo) throws
             DataValidationErrorException,
@@ -205,12 +237,12 @@ public class LoggingServiceDecorator implements LoggingService {
     }
 
     @Override
-    public List<LogEntryInfo> getLogEntriesByLog(String logId, ContextInfo contextInfo) throws DoesNotExistException,
+    public List<LogEntryInfo> getLogEntriesByLog(String logKey, ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
-        return getNextDecorator().getLogEntriesByLog(logId, contextInfo);
+        return getNextDecorator().getLogEntriesByLog(logKey, contextInfo);
     }
 
 }

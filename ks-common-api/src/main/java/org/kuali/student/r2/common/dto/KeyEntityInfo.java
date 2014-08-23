@@ -65,4 +65,9 @@ public abstract class KeyEntityInfo
     public void setKey(String key) {
         this.key = key;
     }
+
+    @Override
+    public String toString() {
+        return  "key=" + key + ", " + super.toString();
+    }
 }

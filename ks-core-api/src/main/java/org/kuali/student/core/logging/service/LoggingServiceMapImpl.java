@@ -29,6 +29,7 @@ import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.MetaInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
 import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
 import org.kuali.student.r2.common.exceptions.DoesNotExistException;
 import org.kuali.student.r2.common.exceptions.InvalidParameterException;
@@ -39,7 +40,7 @@ import org.kuali.student.r2.common.exceptions.ReadOnlyException;
 import org.kuali.student.r2.common.exceptions.VersionMismatchException;
 
 public class LoggingServiceMapImpl implements MockService, LoggingService {
-     // cache variable 
+    // cache variable 
     // The LinkedHashMap is just so the values come back in a predictable order
 
     private Map<String, LogInfo> logMap = new LinkedHashMap<String, LogInfo>();
@@ -52,21 +53,21 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
     }
 
     @Override
-    public LogInfo getLog(String logId, ContextInfo contextInfo)
+    public LogInfo getLog(String logKey, ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
         // GET_BY_ID
-        if (!this.logMap.containsKey(logId)) {
-            throw new DoesNotExistException(logId);
+        if (!this.logMap.containsKey(logKey)) {
+            throw new DoesNotExistException(logKey);
         }
-        return new LogInfo(this.logMap.get(logId));
+        return new LogInfo(this.logMap.get(logKey));
     }
 
     @Override
-    public List<LogInfo> getLogsByIds(List<String> logIds, ContextInfo contextInfo)
+    public List<LogInfo> getLogsByKeys(List<String> logKeys, ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -74,14 +75,14 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
             PermissionDeniedException {
         // GET_BY_IDS
         List<LogInfo> list = new ArrayList<LogInfo>();
-        for (String id : logIds) {
+        for (String id : logKeys) {
             list.add(this.getLog(id, contextInfo));
         }
         return list;
     }
 
     @Override
-    public List<String> getLogIdsByType(String logTypeKey, ContextInfo contextInfo)
+    public List<String> getLogKeysByType(String logTypeKey, ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -91,20 +92,20 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
         List<String> list = new ArrayList<String>();
         for (LogInfo info : logMap.values()) {
             if (logTypeKey.equals(info.getTypeKey())) {
-                list.add(info.getId());
+                list.add(info.getKey());
             }
         }
         return list;
     }
 
     @Override
-    public List<String> searchForLogIds(QueryByCriteria criteria, ContextInfo contextInfo)
+    public List<String> searchForLogKeys(QueryByCriteria criteria, ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
         // UNKNOWN
-        throw new OperationFailedException("searchForLogIds has not been implemented");
+        throw new OperationFailedException("searchForLogKeys has not been implemented");
     }
 
     @Override
@@ -130,8 +131,10 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
     }
 
     @Override
-    public LogInfo createLog(String logTypeKey, LogInfo logInfo, ContextInfo contextInfo)
-            throws DataValidationErrorException,
+    public LogInfo createLog(String key, String logTypeKey, LogInfo logInfo, ContextInfo contextInfo)
+            throws
+            AlreadyExistsException,
+            DataValidationErrorException,
             DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -139,20 +142,56 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
             PermissionDeniedException,
             ReadOnlyException {
         // CREATE
-        if (!logTypeKey.equals(logInfo.getTypeKey())) {
-            throw new InvalidParameterException("The type parameter does not match the type on the info object");
+        logInfo.setKey(key);
+        logInfo.setTypeKey(logTypeKey);
+        try {
+            LogInfo existing = this.getLog(logTypeKey, contextInfo);
+            throw new AlreadyExistsException(logInfo.getKey());
+        } catch (DoesNotExistException ex) {
+            // ok expected
         }
         LogInfo copy = new LogInfo(logInfo);
-        if (copy.getId() == null) {
-            copy.setId(UUIDHelper.genStringUUID());
-        }
         copy.setMeta(newMeta(contextInfo));
-        logMap.put(copy.getId(), copy);
+        logMap.put(copy.getKey(), copy);
         return new LogInfo(copy);
     }
 
     @Override
-    public LogInfo updateLog(String logId, LogInfo logInfo, ContextInfo contextInfo)
+    public LogInfo findCreateLog(String logKey, String logTypeKey, ContextInfo contextInfo) throws DataValidationErrorException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException {
+        try {
+            LogInfo log = this.getLog(logKey, contextInfo);
+            if (!log.getTypeKey().equals(logTypeKey)) {
+                throw new InvalidParameterException("The type of the existing log does not have the specified type");
+            }
+            return log;
+        } catch (DoesNotExistException ex) {
+            // ok create it
+        }
+        LogInfo log = new LogInfo();
+        log.setKey(logKey);
+        log.setTypeKey(logTypeKey);
+        log.setStateKey(LoggingServiceTypeStateConstants.OPEN_LOG_STATE);
+        log.setName(logKey);
+        try {
+            try {
+                log = this.createLog(logKey, logTypeKey, log, contextInfo);
+            } catch (AlreadyExistsException ex) {
+                // someone created it after we checked but before we could create it!
+                return this.findCreateLog(logKey, logTypeKey, contextInfo);
+            }
+        } catch (DoesNotExistException ex) {
+            throw new OperationFailedException("Unexpected", ex);
+        }
+        return log;
+    }
+
+    @Override
+    public LogInfo updateLog(String logKey, LogInfo logInfo, ContextInfo contextInfo)
             throws DataValidationErrorException,
             DoesNotExistException,
             InvalidParameterException,
@@ -162,29 +201,29 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
             ReadOnlyException,
             VersionMismatchException {
         // UPDATE
-        if (!logId.equals(logInfo.getId())) {
+        if (!logKey.equals(logInfo.getKey())) {
             throw new InvalidParameterException("The id parameter does not match the id on the info object");
         }
         LogInfo copy = new LogInfo(logInfo);
-        LogInfo old = this.getLog(logInfo.getId(), contextInfo);
+        LogInfo old = this.getLog(logInfo.getKey(), contextInfo);
         if (!old.getMeta().getVersionInd().equals(copy.getMeta().getVersionInd())) {
             throw new VersionMismatchException(old.getMeta().getVersionInd());
         }
         copy.setMeta(updateMeta(copy.getMeta(), contextInfo));
-        this.logMap.put(logInfo.getId(), copy);
+        this.logMap.put(logInfo.getKey(), copy);
         return new LogInfo(copy);
     }
 
     @Override
-    public StatusInfo deleteLog(String logId, ContextInfo contextInfo)
+    public StatusInfo deleteLog(String logKey, ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException {
         // DELETE
-        if (this.logMap.remove(logId) == null) {
-            throw new OperationFailedException(logId);
+        if (this.logMap.remove(logKey) == null) {
+            throw new OperationFailedException(logKey);
         }
         return newStatus();
     }
@@ -256,7 +295,7 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
     }
 
     @Override
-    public List<ValidationResultInfo> validateLogEntry(String validationTypeKey, String logEntryTypeKey, String logId,
+    public List<ValidationResultInfo> validateLogEntry(String validationTypeKey, String logEntryTypeKey, String logKey,
             LogEntryInfo logEntryInfo, ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
@@ -268,7 +307,7 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
     }
 
     @Override
-    public LogEntryInfo createLogEntry(String logEntryTypeKey, String logId, LogEntryInfo logEntryInfo, ContextInfo contextInfo)
+    public LogEntryInfo createLogEntry(String logKey, String logEntryTypeKey, LogEntryInfo logEntryInfo, ContextInfo contextInfo)
             throws DataValidationErrorException,
             DoesNotExistException,
             InvalidParameterException,
@@ -276,18 +315,49 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
             OperationFailedException,
             PermissionDeniedException,
             ReadOnlyException {
+        LogInfo log = this.getLog(logKey, contextInfo);
         // CREATE
-        if (!logEntryTypeKey.equals(logEntryInfo.getTypeKey())) {
-            throw new InvalidParameterException("The type parameter does not match the type on the info object");
-        }
-        // TODO: check the rest of the readonly fields that are specified on the create to make sure they match the info object
         LogEntryInfo copy = new LogEntryInfo(logEntryInfo);
+        copy.setLogKey(logKey);
+        copy.setTypeKey(logEntryTypeKey);
         if (copy.getId() == null) {
             copy.setId(UUIDHelper.genStringUUID());
+        }
+        if (copy.getPrincipalId() == null) {
+            copy.setPrincipalId(contextInfo.getPrincipalId());
+        }
+        if (copy.getTimeStamp() == null) {
+            copy.setTimeStamp(contextInfo.getCurrentDate());
+        }
+        if (copy.getTimeStamp() == null) {
+            copy.setTimeStamp(new Date());
         }
         copy.setMeta(newMeta(contextInfo));
         logEntryMap.put(copy.getId(), copy);
         return new LogEntryInfo(copy);
+    }
+
+    @Override
+    public StatusInfo logEntry(String logKey,
+            String logEntryTypeKey,
+            String levelTypeKey,
+            String logEntry,
+            ContextInfo contextInfo) throws
+            DataValidationErrorException,
+            DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException {
+        LogEntryInfo info = new LogEntryInfo();
+        info.setLogKey(logKey);
+        info.setTypeKey(logEntryTypeKey);
+        info.setLevelTypeKey(levelTypeKey);
+        info.setStateKey(LoggingServiceTypeStateConstants.WRITTEN_LOG_ENRY_STATE);
+        info.setEntry(logEntry);
+        LogEntryInfo created = this.createLogEntry(logKey, logEntryTypeKey, info, contextInfo);
+        return newStatus();
     }
 
     @Override
@@ -329,7 +399,7 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
     }
 
     @Override
-    public List<LogEntryInfo> getLogEntriesByLog(String logId, ContextInfo contextInfo)
+    public List<LogEntryInfo> getLogEntriesByLog(String logKey, ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -338,13 +408,12 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
         // GET_INFOS_BY_OTHER
         List<LogEntryInfo> list = new ArrayList<LogEntryInfo>();
         for (LogEntryInfo info : logEntryMap.values()) {
-            if (logId.equals(info.getLogId())) {
+            if (logKey.equals(info.getLogKey())) {
                 list.add(new LogEntryInfo(info));
             }
         }
         return list;
     }
-
 
     private StatusInfo newStatus() {
         StatusInfo status = new StatusInfo();
@@ -355,9 +424,15 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
     private MetaInfo newMeta(ContextInfo context) {
         MetaInfo meta = new MetaInfo();
         meta.setCreateId(context.getPrincipalId());
-        meta.setCreateTime(new Date());
+        meta.setCreateTime(context.getCurrentDate());
+        if (meta.getCreateTime() == null) {
+            meta.setCreateTime(new Date());
+        }
         meta.setUpdateId(context.getPrincipalId());
         meta.setUpdateTime(meta.getCreateTime());
+        if (meta.getUpdateTime() == null) {
+            meta.setUpdateTime(new Date());
+        }
         meta.setVersionInd("0");
         return meta;
     }
@@ -365,7 +440,10 @@ public class LoggingServiceMapImpl implements MockService, LoggingService {
     private MetaInfo updateMeta(MetaInfo old, ContextInfo context) {
         MetaInfo meta = new MetaInfo(old);
         meta.setUpdateId(context.getPrincipalId());
-        meta.setUpdateTime(new Date());
+        meta.setUpdateTime(context.getCurrentDate());
+        if (meta.getUpdateTime() == null) {
+            meta.setUpdateTime(new Date());
+        }
         meta.setVersionInd((Integer.parseInt(meta.getVersionInd()) + 1) + "");
         return meta;
     }

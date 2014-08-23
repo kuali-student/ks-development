@@ -33,6 +33,7 @@ import javax.jws.soap.SOAPBinding;
 import java.util.List;
 import javax.jws.WebParam;
 import org.kuali.student.core.logging.dto.LogEntryInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
 
 /**
  * Log Service provides access to people.
@@ -44,17 +45,17 @@ public interface LoggingService {
     /**
      * Retrieves a Log by a Log ID
      *
-     * @param logId the Log ID
+     * @param logKey the Log ID
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return the Log
-     * @throws DoesNotExistException logId not found
-     * @throws InvalidParameterException invalid logId or contextInfo
-     * @throws MissingParameterException logId or contextInfo is missing or null
+     * @throws DoesNotExistException logKey not found
+     * @throws InvalidParameterException invalid logKey or contextInfo
+     * @throws MissingParameterException logKey or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public LogInfo getLog(@WebParam(name = "logId") String logId,
+    public LogInfo getLog(@WebParam(name = "logKey") String logKey,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -64,17 +65,17 @@ public interface LoggingService {
     /**
      * Retrieves a list of logs by a list of Log IDs
      *
-     * @param logIds a list of Log IDs
+     * @param logKeys a list of Log IDs
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return a List of People
-     * @throws DoesNotExistException logId not found
-     * @throws InvalidParameterException invalid logId or contextInfo
-     * @throws MissingParameterException logId or contextInfo is missing or null
+     * @throws DoesNotExistException logKey not found
+     * @throws InvalidParameterException invalid logKey or contextInfo
+     * @throws MissingParameterException logKey or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public List<LogInfo> getLogsByIds(@WebParam(name = "logIds") List<String> logIds,
+    public List<LogInfo> getLogsByKeys(@WebParam(name = "logKeys") List<String> logKeys,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -88,13 +89,13 @@ public interface LoggingService {
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return a List of Log IDs
-     * @throws DoesNotExistException logId not found
-     * @throws InvalidParameterException invalid logId or contextInfo
-     * @throws MissingParameterException logId or contextInfo is missing or null
+     * @throws DoesNotExistException logKey not found
+     * @throws InvalidParameterException invalid logKey or contextInfo
+     * @throws MissingParameterException logKey or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public List<String> getLogIdsByType(@WebParam(name = "logTypeKey") String logTypeKey,
+    public List<String> getLogKeysByType(@WebParam(name = "logTypeKey") String logTypeKey,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -109,11 +110,11 @@ public interface LoggingService {
      * operation
      * @return a List of Log IDs
      * @throws InvalidParameterException invalid criteria or contextInfo
-     * @throws MissingParameterException logId or contextInfo is missing or null
+     * @throws MissingParameterException logKey or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public List<String> searchForLogIds(@WebParam(name = "criteria") QueryByCriteria criteria,
+    public List<String> searchForLogKeys(@WebParam(name = "criteria") QueryByCriteria criteria,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
             InvalidParameterException,
             MissingParameterException,
@@ -127,22 +128,22 @@ public interface LoggingService {
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return a List of People
-     * @throws InvalidParameterException invalid logId or contextInfo
-     * @throws MissingParameterException logId or contextInfo is missing or null
+     * @throws InvalidParameterException invalid logKey or contextInfo
+     * @throws MissingParameterException logKey or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
     public List<LogInfo> searchForLogs(@WebParam(name = "criteria") QueryByCriteria criteria,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo) throws 
+            @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
 
     /**
-     * Validates a Log. If an entry is present for the Log and a record is found for that entry, the validation
-     * checks if the Log can be updated to the new values. If an entry is not present or a record does not exist, the
-     * validation checks if the log with the given data can be created.
+     * Validates a Log. If an entry is present for the Log and a record is found for that entry, the validation checks if the Log
+     * can be updated to the new values. If an entry is not present or a record does not exist, the validation checks if the log
+     * with the given data can be created.
      *
      * @param validationTypeKey the entry for the validation Type
      * @param logTypeKey the entry for the log type key to be validated
@@ -169,6 +170,7 @@ public interface LoggingService {
     /**
      * Creates a new Log. The Log Id, Type, and Meta information may not be set in the supplied data.
      *
+     * @param key to the new log
      * @param logTypeKey the entry for the log type to be validated
      * @param logInfo the log to be validated
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
@@ -182,9 +184,11 @@ public interface LoggingService {
      * @throws PermissionDeniedException an authorization failure occurred
      * @throws ReadOnlyException an attempt at supplying information designated as read only
      */
-    public LogInfo createLog(@WebParam(name = "logTypeKey") String logTypeKey,
+    public LogInfo createLog(@WebParam(name = "key") String key,
+            @WebParam(name = "logTypeKey") String logTypeKey,
             @WebParam(name = "logInfo") LogInfo logInfo,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
+            AlreadyExistsException,
             DataValidationErrorException,
             DoesNotExistException,
             InvalidParameterException,
@@ -194,24 +198,53 @@ public interface LoggingService {
             ReadOnlyException;
 
     /**
+     * Finds/creates a log with the specified key and type.
+     * 
+     * If created the name is set to the specified key.
+     *
+     * @param logKey key to the log
+     * @param logTypeKey type of log
+     * @param contextInfo Context information containing the principalId and locale information about the caller of service
+     * operation
+     * @return the new or existing Log
+     * @throws DataValidationErrorException supplied data is invalid
+     * @throws DoesNotExistException logTypeKey does not exist or is not supported
+     * @throws InvalidParameterException logInfo or contextInfo is not valid
+     * @throws MissingParameterException logTypeKey, logInfo, or contextInfo is missing or null
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     * @throws ReadOnlyException an attempt at supplying information designated as read only
+     */
+    public LogInfo findCreateLog(
+            @WebParam(name = "Key") String logKey,
+            @WebParam(name = "logTypeKey") String logTypeKey,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
+            DataValidationErrorException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException;
+
+    /**
      * Updates an existing Log. The Log Id, Type, and Meta information may not be changed.
      *
-     * @param logId the entry for the Log to be updated
+     * @param logKey the entry for the Log to be updated
      * @param logInfo the log to be validated
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return the updated Log
      * @throws DataValidationErrorException supplied data is invalid
-     * @throws DoesNotExistException logId is not found
-     * @throws InvalidParameterException logId, logInfo or contextInfo is not valid
-     * @throws MissingParameterException logId, logInfo, or contextInfo is missing or null
+     * @throws DoesNotExistException logKey is not found
+     * @throws InvalidParameterException logKey, logInfo or contextInfo is not valid
+     * @throws MissingParameterException logKey, logInfo, or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      * @throws ReadOnlyException an attempt at supplying information designated as read only
      * @throws VersionMismatchException if someone else has updated this log record since you fetched the version you are
      * updating.
      */
-    public LogInfo updateLog(@WebParam(name = "logId") String logId,
+    public LogInfo updateLog(@WebParam(name = "logKey") String logKey,
             @WebParam(name = "logInfo") LogInfo logInfo,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
             DataValidationErrorException,
@@ -226,7 +259,7 @@ public interface LoggingService {
     /**
      * Deletes an existing Log and all it's related parts
      *
-     * @param logId the entry for the log to be deleted
+     * @param logKey the entry for the log to be deleted
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return the status of the delete operation. This must always be true.
@@ -236,15 +269,13 @@ public interface LoggingService {
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public StatusInfo deleteLog(@WebParam(name = "logId") String logId,
+    public StatusInfo deleteLog(@WebParam(name = "logKey") String logKey,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
             DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
-
-   
 
     ////
     //// log entries
@@ -311,8 +342,7 @@ public interface LoggingService {
             PermissionDeniedException;
 
     /**
-     * Searches for Log Entry Ids based on the criteria and returns a list of Log Entry entries which match
-     * the search criteria.
+     * Searches for Log Entry Ids based on the criteria and returns a list of Log Entry entries which match the search criteria.
      *
      * @param criteria the search criteria
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
@@ -350,27 +380,26 @@ public interface LoggingService {
             PermissionDeniedException;
 
     /**
-     * Validates a LogEntry. If an entry is present for the Log Entry and a record is found for that
-     * entry, the validation checks if the LogEntry can be updated to the new values. If an entry is not present
-     * or a record does not exist, the validation checks if the log with the given data can be created.
+     * Validates a LogEntry. If an entry is present for the Log Entry and a record is found for that entry, the validation checks
+     * if the LogEntry can be updated to the new values. If an entry is not present or a record does not exist, the validation
+     * checks if the log with the given data can be created.
      *
      * @param validationTypeKey the entry for the validation Type
      * @param logEntryTypeKey the entry for the log entry type to be validated
-     * @param logId id of log for whom this entry is being applied
+     * @param logKey id of log for whom this entry is being applied
      * @param logEntryInfo the log to be validated
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return a list of validation results or an empty list if validation succeeded
      * @throws DoesNotExistException validationTypeKey or logEntryTypeKey is not found
      * @throws InvalidParameterException logEntryInfo or contextInfo is not valid
-     * @throws MissingParameterException validationTypeKey, logEntryTypeKey, logEntryInfo, or contextInfo is
-     * missing or null
+     * @throws MissingParameterException validationTypeKey, logEntryTypeKey, logEntryInfo, or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
     public List<ValidationResultInfo> validateLogEntry(@WebParam(name = "validationTypeKey") String validationTypeKey,
             @WebParam(name = "logEntryTypeKey") String logEntryTypeKey,
-            @WebParam(name = "logId") String logId,
+            @WebParam(name = "logKey") String logKey,
             @WebParam(name = "logEntryInfo") LogEntryInfo logEntryInfo,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
             DoesNotExistException,
@@ -383,8 +412,8 @@ public interface LoggingService {
      * Creates a new Log Entry. The Log Entry Id, Type, and Meta information may not be set in the supplied data.
      *
      * @param logEntryTypeKey the entry for the log entry Type to assign to this entry object
-     * @param logId id of the log to whom this entry is attached
-     * @param logEntryInfo the log to be validated
+     * @param logKey id of the log to whom this entry is attached
+     * @param logEntryInfo the log to be created
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return the new LogEntry
@@ -396,9 +425,42 @@ public interface LoggingService {
      * @throws PermissionDeniedException an authorization failure occurred
      * @throws ReadOnlyException an attempt at supplying information designated as read only
      */
-    public LogEntryInfo createLogEntry(@WebParam(name = "logEntryTypeKey") String logEntryTypeKey,
-            @WebParam(name = "logId") String logId,
+    public LogEntryInfo createLogEntry(
+            @WebParam(name = "logKey") String logKey,
+            @WebParam(name = "logEntryTypeKey") String logEntryTypeKey,
             @WebParam(name = "logEntryInfo") LogEntryInfo logEntryInfo,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
+            DataValidationErrorException,
+            DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException;
+
+    /**
+     * Convenience method to log a new entry quickly.
+     *
+     * @param logKey of the log to whom this entry is attached
+     * @param logEntryTypeKey the entry for the log entry Type to assign to this entry object
+     * @param logLevelTypeKey log level type key
+     * @param entry the entry to be logged
+     * @param contextInfo Context information containing the principalId and locale information about the caller of service
+     * operation
+     * @return status info
+     * @throws DataValidationErrorException supplied data is invalid
+     * @throws DoesNotExistException logEntryType does not exist or is not supported
+     * @throws InvalidParameterException logInfo or contextInfo is not valid
+     * @throws MissingParameterException logEntryType, logEntryInfo, or contextInfo is missing or null
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     * @throws ReadOnlyException an attempt at supplying information designated as read only
+     */
+    public StatusInfo logEntry(
+            @WebParam(name = "logKey") String logKey,
+            @WebParam(name = "logEntryTypeKey") String logEntryTypeKey,
+            @WebParam(name = "levelTypeKey") String logLevelTypeKey,
+            @WebParam(name = "entry") String entry,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
             DataValidationErrorException,
             DoesNotExistException,
@@ -417,9 +479,9 @@ public interface LoggingService {
      * operation
      * @return the updated LogEntry
      * @throws DataValidationErrorException supplied data is invalid
-     * @throws DoesNotExistException logId is not found
-     * @throws InvalidParameterException logId, logEntryInfo or contextInfo is not valid
-     * @throws MissingParameterException logId, logEntryInfo, or contextInfo is missing or null
+     * @throws DoesNotExistException logKey is not found
+     * @throws InvalidParameterException logKey, logEntryInfo or contextInfo is not valid
+     * @throws MissingParameterException logKey, logEntryInfo, or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      * @throws ReadOnlyException an attempt at supplying information designated as read only
@@ -462,23 +524,23 @@ public interface LoggingService {
     /**
      * Get log entries for a log
      *
-     * @param logId the entry for the log
+     * @param logKey the entry for the log
      * @param contextInfo Context information containing the principalId and locale information about the caller of service
      * operation
      * @return list of entries for that log
-     * @throws DoesNotExistException logId is not found
-     * @throws InvalidParameterException logId or contextInfo is not valid
-     * @throws MissingParameterException logId or contextInfo is missing or null
+     * @throws DoesNotExistException logKey is not found
+     * @throws InvalidParameterException logKey or contextInfo is not valid
+     * @throws MissingParameterException logKey or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public List<LogEntryInfo> getLogEntriesByLog(@WebParam(name = "logId") String logId,
+    public List<LogEntryInfo> getLogEntriesByLog(@WebParam(name = "logKey") String logKey,
             @WebParam(name = "contextInfo") ContextInfo contextInfo) throws
             DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
-
-
+    
+    
 }

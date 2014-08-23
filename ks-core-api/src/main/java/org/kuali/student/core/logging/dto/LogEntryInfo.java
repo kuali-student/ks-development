@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import org.kuali.student.core.logging.infc.LogEntry;
@@ -28,19 +29,26 @@ import org.kuali.student.r2.common.dto.IdNamelessEntityInfo;
 @XmlType(name = "LogEntryInfo", propOrder = {"id",
     "typeKey",
     "stateKey",
-    "logId",
+    "logKey",
     "levelTypeKey",
+    "principalId",
+    "timeStamp",
     "entry",
     "meta",
-    "attributes", "_futureElements"})
+    "attributes",
+    "_futureElements"})
 public class LogEntryInfo extends IdNamelessEntityInfo implements LogEntry, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @XmlElement
-    private String logId;
+    private String logKey;
     @XmlElement
     private String levelTypeKey;
+    @XmlElement
+    private String principalId;
+    @XmlElement
+    private Date timeStamp;
     @XmlElement
     private String entry;
 
@@ -50,20 +58,24 @@ public class LogEntryInfo extends IdNamelessEntityInfo implements LogEntry, Seri
     public LogEntryInfo() {
     }
 
-    public LogEntryInfo(LogEntry infc) {
-        super(infc);
-        this.setLogId(infc.getLogId());
-        this.setLevelTypeKey(infc.getLevelTypeKey());
-        this.setEntry(infc.getEntry());
+    public LogEntryInfo(LogEntry orig) {
+        super(orig);
+        this.setLogKey(orig.getLogKey());
+        this.setLevelTypeKey(orig.getLevelTypeKey());
+        this.setPrincipalId(orig.getPrincipalId());
+        if (orig.getTimeStamp() != null) {
+            this.setTimeStamp(new Date(orig.getTimeStamp().getTime()));
+        }
+        this.setEntry(orig.getEntry());
     }
 
     @Override
-    public String getLogId() {
-        return logId;
+    public String getLogKey() {
+        return logKey;
     }
 
-    public void setLogId(String logId) {
-        this.logId = logId;
+    public void setLogKey(String logKey) {
+        this.logKey = logKey;
     }
 
     @Override
@@ -85,8 +97,31 @@ public class LogEntryInfo extends IdNamelessEntityInfo implements LogEntry, Seri
     }
 
     @Override
+    public String getPrincipalId() {
+        return principalId;
+    }
+
+    public void setPrincipalId(String principalId) {
+        this.principalId = principalId;
+    }
+
+    @Override
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    @Override
     public String toString() {
-        return "LogEntryInfo{" + super.toString() + ", logId=" + logId + ", levelTypeKey=" + levelTypeKey + ", entry=" + entry + '}';
+        return "LogEntryInfo{" + super.toString()
+                + ", logKey=" + logKey
+                + ", levelTypeKey=" + levelTypeKey
+                + ", principalId=" + principalId
+                + ", timeStamp=" + timeStamp
+                + ", entry=" + entry + '}';
     }
 
 }

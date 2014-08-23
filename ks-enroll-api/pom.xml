@@ -187,7 +187,7 @@
                                 <sourceDir>${project.basedir}/../ks-core-api/src/main/java</sourceDir>
                                 <sourceDir>${project.basedir}/../ks-common-api/src/main/java</sourceDir>
                                 <sourceDir>${project.basedir}/../ks-lum-api/src/main/java</sourceDir>
-                                <sourceDir>${project.basedir}/../ks-ap-api/src/main/java</sourceDir>
+<!--                                <sourceDir>${project.basedir}/../ks-ap-api/src/main/java</sourceDir>-->
                             </sourceDirs>
                         </configuration>
                     </execution>
