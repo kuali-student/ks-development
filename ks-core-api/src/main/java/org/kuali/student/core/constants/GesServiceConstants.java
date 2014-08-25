@@ -51,6 +51,10 @@ public class GesServiceConstants
     // -------------------------
     public static final String GES_PARAMETER_GROUP_ACTIVE_STATE_KEY = "kuali.ges.parametergroup.state.active";
 
+    // Parameter Group Keys
+    // -------------------------
+    public static final String GES_PARAMETER_GROUP_KEY_ROLLOVER = "kuali.student.ges.parametergroup.key.rollover";
+
     /**
      * known parameters
      */

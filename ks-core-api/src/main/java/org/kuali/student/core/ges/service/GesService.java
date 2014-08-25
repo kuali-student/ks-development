@@ -590,8 +590,8 @@ public interface GesService {
      * @param criteria    the criteria that restricts the values returned by this method.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return A List of applicable values. The values returned will be sorted based on priority.
-     *         Values with duplicate priorities will be returned in an unspecified order.
+     * @return A List of applicable values. The values returned will be sorted based on priority, atp id and atp type.
+     *         Values with duplicate priorities, atp id and atp type will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterKey, personId, or
      *                                   contextInfo is missing or null
@@ -622,8 +622,8 @@ public interface GesService {
      * @param onDate the date that will be used for the evaluation.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return A List of applicable values. The values returned will be sorted based on priority.
-     *         Values with duplicate priorities will be returned in an unspecified order.
+     * @return A List of applicable values. The values returned will be sorted based on priority, atp id and atp type.
+     *         Values with duplicate priorities, atp id and atp type will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterKey, personId, or
      *                                   contextInfo is missing or null
@@ -660,8 +660,8 @@ public interface GesService {
      * @throws PermissionDeniedException an authorization failure occurred
      */
     public ValueInfo evaluateValue(@WebParam(name = "parameterKey") String parameterKey,
-                                          @WebParam(name = "criteria") GesCriteriaInfo criteria,
-                                          @WebParam(name = "contextInfo") ContextInfo contextInfo)
+                                   @WebParam(name = "criteria") GesCriteriaInfo criteria,
+                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             DoesNotExistException,
             MissingParameterException,
@@ -678,8 +678,6 @@ public interface GesService {
      *
      * The date parameter is used as the date for the evaluation.
      *
-     *
-     *
      * @param parameterKey the key for the parameter associated with the values that will be returned.
      * @param criteria    the criteria that restricts the values returned by this method.
      * @param onDate the date that will be used for the evaluation.
@@ -694,9 +692,9 @@ public interface GesService {
      * @throws PermissionDeniedException an authorization failure occurred
      */
     public ValueInfo evaluateValueOnDate(@WebParam(name = "parameterKey") String parameterKey,
-                                                @WebParam(name = "criteria") GesCriteriaInfo criteria,
-                                                @WebParam(name = "onDate") Date onDate,
-                                                @WebParam(name = "contextInfo") ContextInfo contextInfo)
+                                         @WebParam(name = "criteria") GesCriteriaInfo criteria,
+                                         @WebParam(name = "onDate") Date onDate,
+                                         @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             DoesNotExistException,
             MissingParameterException,
@@ -714,9 +712,9 @@ public interface GesService {
      * @param criteria    the criteria that restricts the values returned by this method.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return  A List of applicable values for the parameters. The values returned will be sorted based on parameter key
-     *          and then priority. Values with duplicate priorities (within the same parameterKey) will be returned in an
-     *          unspecified order.
+     * @return  A List of applicable values for the parameters. The values returned will be sorted based
+     *          on parameter key and then priority, atp id and atp type. Values with duplicate parameterKey,
+     *          priorities, atp id and atp type will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterKeys, personId, or
      *                                   contextInfo is missing or null
@@ -744,9 +742,9 @@ public interface GesService {
      * @param onDate the date that will be used for the evaluation.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return  A List of applicable values for the parameters. The values returned will be sorted based on parameter key
-     *          and then priority. Values with duplicate priorities (within the same parameter key) will be returned in an
-     *          unspecified order.
+     * @return  A List of applicable values for the parameters. The values returned will be sorted based
+     *          on parameter key and then priority, atp id and atp type. Values with duplicate parameterKey,
+     *          priorities, atp id and atp type will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterKeys, personId, or
      *                                   contextInfo is missing or null
@@ -762,6 +760,67 @@ public interface GesService {
             OperationFailedException,
             PermissionDeniedException;
 
+    /**
+     * Retrieves a list of values associated with the list of particular parameters in
+     * the given parameter group that are applicable based on the evaluation of the given criteria.
+     * Empty or null fields within the criteria are treated as a wild card and will not restrict values that are returned.
+     * Empty or null attributes on the value are treated as a wild card and will not restrict values that are returned.
+     * The relevant values must also have rules that are either null or evaluate to true.
+     *
+     * @param parameterGroupKey the keys for the ParameterGroup that consists of the Parameters associated with
+     *                          the values that will be returned.
+     * @param criteria          the criteria that restricts the values returned by this method.
+     * @param contextInfo information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return  A List of applicable values for the parameters. The values returned will be sorted based
+     *          on parameter key and then priority, atp id and atp type. Values with duplicate parameterKey,
+     *          priorities, atp id and atp type will be returned in an unspecified order.
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException parameterGroupKey, personId, or
+     *                                   contextInfo is missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public List<ValueInfo> evaluateValuesForParameterGroup (@WebParam(name = "parameterGroupKey") String parameterGroupKey,
+                                                            @WebParam(name = "criteria") GesCriteriaInfo criteria,
+                                                            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+
+    /**
+     * Retrieves a list of values associated with the list of particular parameters in
+     * the given parameter group that are applicable based on the evaluation of the given criteria, and date.
+     * Empty or null fields within the criteria are treated as a wild card and will not restrict values that are returned.
+     * Empty or null attributes on the value are treated as a wild card and will not restrict values that are returned.
+     * The relevant values must also have rules that are either null or evaluate to true.
+     *
+     * @param parameterGroupKey the keys for the ParameterGroup that consists of the Parameters associated with
+     *                          the values that will be returned.
+     * @param criteria          the criteria that restricts the values returned by this method.
+     * @param onDate the date that will be used for the evaluation.
+     * @param contextInfo information containing the principalId and
+     *                    locale information about the caller of service operation
+     * @return  A List of applicable values for the parameters. The values returned will be sorted based
+     *          on parameter key and then priority, atp id and atp type. Values with duplicate parameterKey,
+     *          priorities, atp id and atp type will be returned in an unspecified order.
+     * @throws InvalidParameterException contextInfo is not valid
+     * @throws MissingParameterException parameterGroupKey, personId, or
+     *                                   contextInfo is missing or null
+     * @throws OperationFailedException  unable to complete request
+     * @throws PermissionDeniedException an authorization failure occurred
+     */
+    public List<ValueInfo> evaluateValuesForParameterGroupOnDate (@WebParam(name = "parameterGroupKey") String parameterGroupKey,
+                                                                  @WebParam(name = "criteria") GesCriteriaInfo criteria,
+                                                                  @WebParam(name = "onDate") Date onDate,
+                                                                  @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
     //////////////////////////
     // ParameterGroup
     //////////////////////////
@@ -769,19 +828,19 @@ public interface GesService {
     /**
      * Retrieves a ParameterGroup.
      *
-     * @param parameterGroupId a unique Id of a parameterGroup
+     * @param parameterGroupKey a unique Key of a parameterGroup
      * @param contextInfo Context information containing the principalId and
      * locale information about the caller of service operation
      * @return a ParameterGroup
-     * @throws DoesNotExistException parameterGroupId not found
-     * @throws InvalidParameterException invalid parameterGroupId or
+     * @throws DoesNotExistException parameterGroupKey not found
+     * @throws InvalidParameterException invalid parameterGroupKey or
      * contextInfo
-     * @throws MissingParameterException missing parameterGroupId or
+     * @throws MissingParameterException missing parameterGroupKey or
      * contextInfo
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException authorization failure
      */
-    public ParameterGroupInfo getParameterGroup(@WebParam(name = "parameterGroupId") String parameterGroupId,
+    public ParameterGroupInfo getParameterGroup(@WebParam(name = "parameterGroupKey") String parameterGroupKey,
                                                 @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
@@ -791,22 +850,22 @@ public interface GesService {
 
     /**
      * Retrieves a list of ParameterGroups corresponding to the given list of
-     * ParameterGroup Ids.
+     * ParameterGroup Keys.
      *
-     * @param parameterGroupIds list of ParameterGroups to be retrieved
+     * @param parameterGroupKeys list of ParameterGroups to be retrieved
      * @param contextInfo Context information containing the principalId and
      * locale information about the caller of service operation
-     * @return a list of ParameterGroup Ids of the given type
-     * @throws DoesNotExistException an parameterGroupId in list not found
-     * @throws InvalidParameterException invalid parameterGroupId or
+     * @return a list of ParameterGroup Keys of the given type
+     * @throws DoesNotExistException an parameterGroupKey in list not found
+     * @throws InvalidParameterException invalid parameterGroupKey or
      * contextInfo
-     * @throws MissingParameterException missing parameterGroupId or
+     * @throws MissingParameterException missing parameterGroupKey or
      * contextInfo
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException authorization failure
      */
-    public List<ParameterGroupInfo> getParameterGroupsByIds(@WebParam(name = "parameterGroupIds") List<String> parameterGroupIds,
-                                                            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    public List<ParameterGroupInfo> getParameterGroupsByKeys(@WebParam(name = "parameterGroupKeys") List<String> parameterGroupKeys,
+                                                             @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,
@@ -814,19 +873,19 @@ public interface GesService {
             PermissionDeniedException;
 
     /**
-     * Retrieves a list of ParameterGroup Ids of the specified type.
+     * Retrieves a list of ParameterGroup Keys of the specified type.
      *
      * @param parameterGroupTypeKey a ParameterGroup type to be retrieved
      * @param contextInfo Context information containing the principalId and
      * locale information about the caller of service operation
-     * @return a list of ParameterGroup Ids
+     * @return a list of ParameterGroup Keys
      * @throws InvalidParameterException invalid parameterGroupTypeKey or contextInfo
      * @throws MissingParameterException missing parameterGroupTypeKey or contextInfo
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException authorization failure
      */
-    public List<String> getParameterGroupIdsByType(@WebParam(name = "parameterGroupTypeKey") String parameterGroupTypeKey,
-                                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    public List<String> getParameterGroupKeysByType(@WebParam(name = "parameterGroupTypeKey") String parameterGroupTypeKey,
+                                                    @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -834,13 +893,13 @@ public interface GesService {
 
     /**
      * Searches for ParameterGroups based on the criteria and returns
-     * a list of ParameterGroup identifiers which match the search
+     * a list of ParameterGroup keys which match the search
      * criteria.
      *
      * @param criteria    the search criteria
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of the service operation
-     * @return a list of ParameterGroup Ids matching the criteria
+     * @return a list of ParameterGroup Keys matching the criteria
      * @throws InvalidParameterException criteria or contextInfo is
      *                                   not valid
      * @throws MissingParameterException criteria or contextInfo is
@@ -848,8 +907,8 @@ public interface GesService {
      * @throws OperationFailedException  unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public List<String> searchForParameterGroupIds(@WebParam(name = "criteria") QueryByCriteria criteria,
-                                                   @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    public List<String> searchForParameterGroupKeys(@WebParam(name = "criteria") QueryByCriteria criteria,
+                                                    @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -914,7 +973,7 @@ public interface GesService {
             PermissionDeniedException;
 
     /**
-     * Creates a new ParameterGroup. The ParameterGroup Id, ParameterGroup Type, and Meta information may
+     * Creates a new ParameterGroup. The ParameterGroup Key, ParameterGroup Type, and Meta information may
      * not be set in the supplied data.
      *
      * @param parameterGroupTypeKey the identifier for the Type of the new ParameterGroup
@@ -943,19 +1002,19 @@ public interface GesService {
             ReadOnlyException;
 
     /**
-     * Updates an existing ParameterGroup. The ParameterGroup Id,
+     * Updates an existing ParameterGroup. The ParameterGroup Key,
      * Type, and Meta information may not be changed.
      *
-     * @param parameterGroupId     the identifier for the ParameterGroup to be updated
+     * @param parameterGroupKey    the identifier for the ParameterGroup to be updated
      * @param parameterGroupInfo   the new data for the ParameterGroup
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
      * @return the updated ParameterGroup
      * @throws DataValidationErrorException supplied data is invalid
-     * @throws DoesNotExistException        parameterGroupId not found
+     * @throws DoesNotExistException        parameterGroupKey not found
      * @throws InvalidParameterException    parameterGroupInfo or
      *                                      contextInfo is not valid
-     * @throws MissingParameterException    parameterGroupId, parameterGroupInfo, or contextInfo is missing or null
+     * @throws MissingParameterException    parameterGroupKey, parameterGroupInfo, or contextInfo is missing or null
      * @throws OperationFailedException     unable to complete request
      * @throws PermissionDeniedException    an authorization failure occurred
      * @throws ReadOnlyException            an attempt at changing information
@@ -963,7 +1022,7 @@ public interface GesService {
      * @throws VersionMismatchException     optimistic locking failure or
      *                                      the action was attempted on an out of date version
      */
-    public ParameterGroupInfo updateParameterGroup(@WebParam(name = "parameterGroupId") String parameterGroupId,
+    public ParameterGroupInfo updateParameterGroup(@WebParam(name = "parameterGroupKey") String parameterGroupKey,
                                                    @WebParam(name = "parameterGroupInfo") ParameterGroupInfo parameterGroupInfo,
                                                    @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws DataValidationErrorException,
@@ -978,18 +1037,18 @@ public interface GesService {
     /**
      * Deletes an existing ParameterGroup.
      *
-     * @param parameterGroupId     the identifier for the ParameterGroup to be deleted
+     * @param parameterGroupKey     the identifier for the ParameterGroup to be deleted
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
      * @return the status of the delete operation. This must always be
      *         true.
-     * @throws DoesNotExistException     parameterGroupId not found
+     * @throws DoesNotExistException     parameterGroupKey not found
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException parameterGroupId or contextInfo is missing or null
+     * @throws MissingParameterException parameterGroupKey or contextInfo is missing or null
      * @throws OperationFailedException  unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public StatusInfo deleteParameterGroup (@WebParam(name = "parameterGroupId") String parameterGroupId,
+    public StatusInfo deleteParameterGroup (@WebParam(name = "parameterGroupKey") String parameterGroupKey,
                                             @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,
@@ -1019,16 +1078,16 @@ public interface GesService {
     /**
      * Retrieves a list of Parameters which belong to the given ParameterGroup.
      *
-     * @param parameterGroupId a ParameterGroup Id
+     * @param parameterGroupKey a ParameterGroup Key
      * @param contextInfo Context information containing the principalId and
      *                    locale information about the caller of service operation
      * @return a list of Parameters
-     * @throws InvalidParameterException invalid parameterGroupId or contextInfo
-     * @throws MissingParameterException missing parameterGroupId or contextInfo
+     * @throws InvalidParameterException invalid parameterGroupKey or contextInfo
+     * @throws MissingParameterException missing parameterGroupKey or contextInfo
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException authorization failure
      */
-    public List<ParameterInfo> getParametersForParameterGroup(@WebParam(name = "parameterGroupId") String parameterGroupId,
+    public List<ParameterInfo> getParametersForParameterGroup(@WebParam(name = "parameterGroupKey") String parameterGroupKey,
                                                               @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
@@ -1039,19 +1098,19 @@ public interface GesService {
      * Adds a Parameter to a ParameterGroup.
      *
      * @param parameterKey a unique identifier for a Parameter
-     * @param parameterGroupId a unique identifier for a ParameterGroup
+     * @param parameterGroupKey a unique key for a ParameterGroup
      * @param contextInfo Context information containing the principalId and
      *                    locale information about the caller of service operation
      * @return status
-     * @throws AlreadyExistsException parameterKey already related to parameterGroupId
-     * @throws DoesNotExistException parameterKey or parameterGroupId not found
-     * @throws InvalidParameterException invalid parameterKey, parameterGroupId, or contextInfo
-     * @throws MissingParameterException missing parameterKey, parameterGroupId, or contextInfo
+     * @throws AlreadyExistsException parameterKey already related to parameterGroupKey
+     * @throws DoesNotExistException parameterKey or parameterGroupKey not found
+     * @throws InvalidParameterException invalid parameterKey, parameterGroupKey, or contextInfo
+     * @throws MissingParameterException missing parameterKey, parameterGroupKey, or contextInfo
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException authorization failure
      */
     public StatusInfo addParameterToParameterGroup(@WebParam(name = "parameterKey") String parameterKey,
-                                                   @WebParam(name = "parameterGroupId") String parameterGroupId,
+                                                   @WebParam(name = "parameterGroupKey") String parameterGroupKey,
                                                    @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws AlreadyExistsException,
             DoesNotExistException,
@@ -1064,18 +1123,18 @@ public interface GesService {
      * Removes a Parameter from a ParameterGroup.
      *
      * @param parameterKey a unique identifier for a Parameter
-     * @param parameterGroupId a unique identifier for a ParameterGroup
+     * @param parameterGroupKey a unique identifier for a ParameterGroup
      * @param contextInfo Context information containing the principalId and
      * locale information about the caller of service operation
      * @return status
-     * @throws DoesNotExistException parameterKey or parameterGroupId not found or unrelated
-     * @throws InvalidParameterException invalid parameterKey, parameterGroupId, or contextInfo
-     * @throws MissingParameterException missing parameterKey, parameterGroupId, or contextInfo
+     * @throws DoesNotExistException parameterKey or parameterGroupKey not found or unrelated
+     * @throws InvalidParameterException invalid parameterKey, parameterGroupKey, or contextInfo
+     * @throws MissingParameterException missing parameterKey, parameterGroupKey, or contextInfo
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException authorization failure
      */
     public StatusInfo removeParameterFromParameterGroup(@WebParam(name = "parameterKey") String parameterKey,
-                                                        @WebParam(name = "parameterGroupId") String parameterGroupId,
+                                                        @WebParam(name = "parameterGroupKey") String parameterGroupKey,
                                                         @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws DoesNotExistException,
             InvalidParameterException,

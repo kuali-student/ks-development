@@ -29,14 +29,14 @@ import java.io.Serializable;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ParameterGroupInfo", propOrder = {"id", "typeKey", "stateKey","name","descr",
+@XmlType(name = "ParameterGroupInfo", propOrder = {"key", "typeKey", "stateKey","name","descr",
         "meta", "attributes", "_futureElements" })
 /**
  * Represents a group of Parameters.
  * @author Mezba Mahtab, Kuali Student
  */
 public class ParameterGroupInfo
-        extends IdEntityInfo
+        extends KeyEntityInfo
         implements ParameterGroup, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,6 +71,6 @@ public class ParameterGroupInfo
     @Override
     public String toString() {
         return "ParameterGroupInfo{" +
-                "id='" + getId() + "' }";
+                "key='" + getKey() + "' }";
     }
 }

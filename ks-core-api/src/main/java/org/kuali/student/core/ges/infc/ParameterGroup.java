@@ -15,11 +15,12 @@
 package org.kuali.student.core.ges.infc;
 
 import org.kuali.student.r2.common.infc.IdEntity;
+import org.kuali.student.r2.common.infc.KeyEntity;
 
 /**
  * Represents a group of Parameters.
  * @author Mezba Mahtab, Kuali Student
  */
 public interface ParameterGroup
-        extends IdEntity {
+        extends KeyEntity {
 }
