@@ -31,12 +31,10 @@ import org.kuali.student.r2.core.hold.infc.HoldIssue;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IssueInfo", propOrder = {
-        "id", "typeKey", "stateKey", "name", "descr",
-        "organizationId", "isHoldIssueTermAndDateBased", "isHoldIssueDateBasedOnly",
+        "id", "typeKey", "stateKey", "name", "descr", "organizationId", "isHoldIssueTermBased",
         "firstAppliedDate", "lastAppliedDate","firstApplicationTermId", "lastApplicationTermId",
         "maintainHistoryOfApplicationOfHold","holdCode",
-        "meta",
-        "attributes", "_futureElements" })
+        "meta", "attributes", "_futureElements" })
 public class HoldIssueInfo extends IdEntityInfo implements HoldIssue, Serializable {
 
     ////////////////////////
@@ -47,9 +45,7 @@ public class HoldIssueInfo extends IdEntityInfo implements HoldIssue, Serializab
     @XmlElement
     private String organizationId;
     @XmlElement
-    private Boolean isHoldIssueTermAndDateBased;
-    @XmlElement
-    private Boolean isHoldIssueDateBasedOnly;
+    private Boolean isHoldIssueTermBased;
     @XmlElement
     private Date firstAppliedDate;
     @XmlElement
@@ -81,8 +77,7 @@ public class HoldIssueInfo extends IdEntityInfo implements HoldIssue, Serializab
         super(issue);
         if (null != issue) {
             this.organizationId = issue.getOrganizationId();
-            this.isHoldIssueTermAndDateBased = issue.getIsHoldIssueTermAndDateBased();
-            this.isHoldIssueDateBasedOnly = issue.getIsHoldIssueDateBasedOnly();
+            this.isHoldIssueTermBased = issue.getIsHoldIssueTermBased();
             this.firstAppliedDate = issue.getFirstAppliedDate();
             this.lastAppliedDate = issue.getLastAppliedDate();
             this.firstApplicationTermId = issue.getFirstApplicationTermId();
@@ -105,20 +100,12 @@ public class HoldIssueInfo extends IdEntityInfo implements HoldIssue, Serializab
         this.organizationId = orgId;
     }
 
-    public Boolean getIsHoldIssueTermAndDateBased() {
-        return isHoldIssueTermAndDateBased;
+    public Boolean getIsHoldIssueTermBased() {
+        return isHoldIssueTermBased;
     }
 
-    public void setIsHoldIssueTermAndDateBased(Boolean holdIssueTermAndDateBased) {
-        isHoldIssueTermAndDateBased = holdIssueTermAndDateBased;
-    }
-
-    public Boolean getIsHoldIssueDateBasedOnly() {
-        return isHoldIssueDateBasedOnly;
-    }
-
-    public void setIsHoldIssueDateBasedOnly(Boolean holdIssueDateBasedOnly) {
-        isHoldIssueDateBasedOnly = holdIssueDateBasedOnly;
+    public void setIsHoldIssueTermBased(Boolean holdIssueTermBased) {
+        isHoldIssueTermBased = holdIssueTermBased;
     }
 
     public Date getFirstAppliedDate() {
