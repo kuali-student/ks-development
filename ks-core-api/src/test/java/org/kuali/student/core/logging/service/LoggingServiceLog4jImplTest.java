@@ -34,23 +34,22 @@ public class LoggingServiceLog4jImplTest {
 
     @BeforeClass
     public static void setUpClass() {
+//
+//        File file = new File("target/ks-common-api-tests.log");
+//        if (file.exists()) {
+//            System.out.println("deleting the log file");
+//            if (!file.delete()) {
+//                throw new RuntimeException ("failed to delete file");
+//            }
+//        }
     }
 
     @AfterClass
     public static void tearDownClass() {
     }
 
-    LoggingService service;
-
     @Before
     public void setUp() {
-
-        service = new LoggingServiceLog4jImpl();
-        File file = new File("target/ks-common-api-tests.log");
-        if (file.exists()) {
-            System.out.println("deleting the log file ");
-            file.delete();
-        }
     }
 
     @After
@@ -63,6 +62,7 @@ public class LoggingServiceLog4jImplTest {
     @Test
     public void testCrud() throws Exception {
         System.out.println("crud");
+        LoggingService service = new LoggingServiceLog4jImpl();
 
         ContextInfo context = new ContextInfo();
         context.setPrincipalId("UNIT-TEST-USER");
@@ -71,7 +71,7 @@ public class LoggingServiceLog4jImplTest {
 
         
         QueryByCriteria.Builder criteria = QueryByCriteria.Builder.create();
-        List<LogInfo> list = this.service.searchForLogs(criteria.build(), context);
+        List<LogInfo> list = service.searchForLogs(criteria.build(), context);
 //        for (LogInfo info : list) {
 //            System.out.println ("log=" + info);
 //        }
@@ -86,7 +86,7 @@ public class LoggingServiceLog4jImplTest {
         
         
         criteria = QueryByCriteria.Builder.create();
-        list = this.service.searchForLogs(criteria.build(), context);
+        list = service.searchForLogs(criteria.build(), context);
 //        for (LogInfo info : list) {
 //            System.out.println ("log=" + info);
 //        }
@@ -115,7 +115,7 @@ public class LoggingServiceLog4jImplTest {
 
         original = actual;
 
-        actual = this.service.getLogEntry(original.getId(), context);
+        actual = service.getLogEntry(original.getId(), context);
         assertEquals(original.getId(), actual.getId());
         assertEquals(original.getMeta().getCreateId(), actual.getMeta().getCreateId());
         assertEquals(original.getMeta().getCreateTime(), actual.getMeta().getCreateTime());
@@ -129,8 +129,8 @@ public class LoggingServiceLog4jImplTest {
 
         original = actual;
 
-        original.setEntry(original.getEntry() + " \t updated with embedded tabs \t multiple");
-        actual = this.service.updateLogEntry(original.getId(), original, context);
+        original.setEntry(original.getEntry() + "updated with embedded multiple tabs \t\t and multiple \n\n newlines");
+        actual = service.updateLogEntry(original.getId(), original, context);
         assertEquals(original.getId(), actual.getId());
         assertEquals(original.getMeta().getCreateId(), actual.getMeta().getCreateId());
         assertEquals(original.getMeta().getCreateTime(), actual.getMeta().getCreateTime());
@@ -144,7 +144,7 @@ public class LoggingServiceLog4jImplTest {
 
         original = actual;
 
-        actual = this.service.getLogEntry(original.getId(), context);
+        actual = service.getLogEntry(original.getId(), context);
         assertEquals(original.getId(), actual.getId());
         assertEquals(original.getMeta().getCreateId(), actual.getMeta().getCreateId());
         assertEquals(original.getMeta().getCreateTime(), actual.getMeta().getCreateTime());
@@ -160,6 +160,7 @@ public class LoggingServiceLog4jImplTest {
     @Test
     public void testLoggingConvenienceMethods() throws Exception {
         System.out.println("logging");
+        LoggingService service = new LoggingServiceLog4jImpl();
 
         ContextInfo context = new ContextInfo();
         context.setPrincipalId("UNIT-TEST-USER");

@@ -137,7 +137,7 @@ public class LoggingServiceLog4jImpl implements LoggingService {
             PermissionDeniedException {
         List<String> list = new ArrayList<String>();
         for (LogInfo info : this.searchForLogs(criteria, contextInfo)) {
-            list.add (info.getKey());
+            list.add(info.getKey());
         }
         return list;
     }
@@ -217,9 +217,13 @@ public class LoggingServiceLog4jImpl implements LoggingService {
             VersionMismatchException {
         LogInfo log = this.getLog(logKey, contextInfo);
         Logger logger = Logger.getLogger(logKey);
-        // the only thing we can really update is the level
-        Level level = this.type2Level(log.getLevelTypeKey());
+        // the only thing we can really update is the level on both the logger and the file appender
+        Level level = this.type2Level(logInfo.getLevelTypeKey());
         logger.setLevel(level);
+        FileAppender fileAppender = this.getFileAppender(logger);
+        fileAppender.setThreshold(level);
+        System.out.println ("..............Set the level for logger " + logKey + " to " + level);
+                
         return this.logger2LogInfo(logger);
     }
 
@@ -281,8 +285,8 @@ public class LoggingServiceLog4jImpl implements LoggingService {
             PermissionDeniedException {
         List<String> list = new ArrayList<String>();
         for (LogEntryInfo info : this.getAllLogEntries()) {
-            if (info.getTypeKey().equals (logEntryTypeKey)) {
-                list.add (info.getId());
+            if (info.getTypeKey().equals(logEntryTypeKey)) {
+                list.add(info.getId());
             }
         }
         return list;
@@ -462,7 +466,8 @@ public class LoggingServiceLog4jImpl implements LoggingService {
             sb.append(tabParts[i]);
         }
         if (sb.length() > 0) {
-            info.setEntry(sb.toString());
+            String entry = deserialize (sb.toString());
+            info.setEntry(entry);
         }
         return info;
     }
@@ -518,8 +523,21 @@ public class LoggingServiceLog4jImpl implements LoggingService {
         sb.append("\t");
         sb.append(info.getMeta().getVersionInd());
         sb.append("\t");
-        sb.append(info.getEntry());
+        sb.append(serialize(info.getEntry()));
         return sb.toString();
+    }
+
+    // insert a UUID to be sure it does not appear in text
+    public static final String LINE_FEED_TOKEN = "87e26cb5-25b0-4355-afb9-1012d78e8010";
+
+    public static String serialize(String entry) {
+        entry = entry.replaceAll("\r\n", LINE_FEED_TOKEN);
+        entry = entry.replaceAll("\n", LINE_FEED_TOKEN);
+        return entry;
+    }
+
+    public static String deserialize(String entry) {
+        return entry.replaceAll(LINE_FEED_TOKEN, "\n");
     }
 
     /**

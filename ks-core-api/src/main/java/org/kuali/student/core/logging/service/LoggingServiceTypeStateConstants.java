@@ -14,8 +14,10 @@ public class LoggingServiceTypeStateConstants extends LoggingServiceNamespace {
      * log entry types
      */
     public static final String STARTED_LOG_ENTRY_TYPE = "kuali.logging.log.entry.type.started";
-    public static final String ABORT_LOG_ENTRY_TYPE = "kuali.logging.log.entry.type.abort";
+    public static final String PROCESSED_LOG_ENTRY_TYPE = "kuali.logging.log.entry.type.processed";
     public static final String FAILURE_LOG_ENTRY_TYPE = "kuali.logging.log.entry.type.failure";
+    public static final String PROGRESS_LOG_ENTRY_TYPE = "kuali.logging.log.entry.type.progress";
+    public static final String ABORT_LOG_ENTRY_TYPE = "kuali.logging.log.entry.type.abort";
     public static final String RESULTS_LOG_ENTRY_TYPE = "kuali.logging.log.entry.type.results";
     public static final String SUCCESS_LOG_ENTRY_TYPE = "kuali.logging.log.entry.type.success";
     
