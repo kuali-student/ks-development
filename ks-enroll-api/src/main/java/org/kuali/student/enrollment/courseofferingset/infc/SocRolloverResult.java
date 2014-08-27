@@ -55,6 +55,7 @@ public interface SocRolloverResult
      * @readOnly
      * @required
      * @impl set during the #rolloverSoc operation
+     * @deprecated use CourseOfferingSetService.getSocRolloverSnapshotValueBySocRolloverResult methods.
      */
     public List<String> getOptionKeys();
 
@@ -151,4 +152,5 @@ public interface SocRolloverResult
      * Get the date that the rollover completed.  Date includes hours/minutes/seconds.
      */
     public Date getDateCompleted();
+
 }
