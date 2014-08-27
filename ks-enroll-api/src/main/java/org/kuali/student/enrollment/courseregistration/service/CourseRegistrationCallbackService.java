@@ -1,4 +1,4 @@
-package org.kuali.student.enrollment.courseseatcount.service;
+package org.kuali.student.enrollment.courseregistration.service;
 
 
 import org.kuali.student.r2.common.dto.ContextInfo;
@@ -9,47 +9,46 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
-@WebService(name = "CourseSeatCountCallbackService", targetNamespace = CourseSeatCountCallbackNamespaceConstants.NAMESPACE)
+@WebService(name = "CourseRegistrationCallbackService", targetNamespace = CourseRegistrationCallbackNamespaceConstants.NAMESPACE)
 @SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
-public interface CourseSeatCountCallbackService {
-
+public interface CourseRegistrationCallbackService {
     /**
-     * Callback for when CourseSeatCounts are created.
+     * Callback for when CourseRegistration are created.
      *
      *
-     * @param courseSeatCountIds ids created.
+     * @param courseRegistrationIds ids created.
      * @param contextInfo information containing the principalId and
      *                              locale information about the caller of
      *                              service operation
      * @return nothing
      */
-    public StatusInfo createCourseSeatCounts(@WebParam(name = "courseSeatCountIds") List<String> courseSeatCountIds,
-                                         @WebParam(name = "contextInfo")ContextInfo contextInfo);
+    public StatusInfo createCourseRegistrations(@WebParam(name = "courseRegistration") List<String> courseRegistrationIds,
+                                          @WebParam(name = "contextInfo")ContextInfo contextInfo);
 
     /**
      * Callback for when CourseSeatCounts are updated.
      *
      *
-     * @param courseSeatCountIds ids updated.
+     * @param courseRegistrationIds ids updated.
      * @param contextInfo information containing the principalId and
      *                              locale information about the caller of
      *                              service operation
      * @return nothing
      */
-    public StatusInfo updateCourseOfferings(@WebParam(name = "courseSeatCountIds") List<String> courseSeatCountIds,
+    public StatusInfo updateCourseRegistration(@WebParam(name = "courseRegistrationIds") List<String> courseRegistrationIds,
                                             @WebParam(name = "contextInfo")ContextInfo contextInfo);
 
     /**
      * Callback for when CourseSeatCounts are deleted.
      *
      *
-     * @param courseSeatCountIds ids deleted.
+     * @param courseRegistrationIds ids deleted.
      * @param contextInfo information containing the principalId and
      *                              locale information about the caller of
      *                              service operation
      * @return nothing
      */
-    public StatusInfo deleteCourseOfferings(@WebParam(name = "courseSeatCountIds") List<String> courseSeatCountIds,
+    public StatusInfo deleteCourseRegistration(@WebParam(name = "courseRegistrationIds") List<String> courseRegistrationIds,
                                             @WebParam(name = "contextInfo")ContextInfo contextInfo );
 
 }

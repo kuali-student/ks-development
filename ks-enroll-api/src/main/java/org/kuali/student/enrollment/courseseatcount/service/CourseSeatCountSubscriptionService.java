@@ -2,7 +2,6 @@ package org.kuali.student.enrollment.courseseatcount.service;
 
 
 import org.kuali.student.enrollment.academicrecord.service.SubscriptionActionEnum;
-import org.kuali.student.enrollment.courseoffering.service.CourseOfferingCallbackService;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.exceptions.DoesNotExistException;
@@ -48,11 +47,11 @@ public interface CourseSeatCountSubscriptionService {
      *
      * @param action action to listen for
      * @param courseSeatCountId the identifier for the CourseSeatCounts to listen for.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param courseSeatCountCallbackService callback executable code to be invoked when the change event executes
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, courseSeatCountId, courseOfferingCallbackService  or contextInfo is missing or null
+     * @throws MissingParameterException action, courseSeatCountId, courseSeatCountCallbackService  or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
@@ -60,7 +59,7 @@ public interface CourseSeatCountSubscriptionService {
 
             @WebParam(name = "action") SubscriptionActionEnum action,
             @WebParam(name = "courseSeatCountId") List<String> courseSeatCountId,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
+            @WebParam(name = "courseSeatCountCallbackService") CourseSeatCountCallbackService courseSeatCountCallbackService,
             @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
@@ -71,11 +70,11 @@ public interface CourseSeatCountSubscriptionService {
      *
      * @param action action to listen for
      * @param activityOfferingId the identifier for the ActivityOffering to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param courseSeatCountCallbackService callback executable code to be invoked when the change event executes
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, activityOfferingId, courseOfferingCallbackService or contextInfo is missing or null
+     * @throws MissingParameterException action, activityOfferingId, courseSeatCountCallbackService or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
@@ -83,7 +82,7 @@ public interface CourseSeatCountSubscriptionService {
 
             @WebParam(name = "action") SubscriptionActionEnum action,
             @WebParam(name = "activityOfferingId") String activityOfferingId,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
+            @WebParam(name = "courseSeatCountCallbackService") CourseSeatCountCallbackService courseSeatCountCallbackService,
             @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
@@ -94,11 +93,11 @@ public interface CourseSeatCountSubscriptionService {
      *
      * @param action action to listen for
      * @param activityOfferingIds the identifier for the ActivityOffering to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param courseSeatCountCallbackService callback executable code to be invoked when the change event executes
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, activityOfferingIds, courseOfferingCallbackService or contextInfo is missing or null
+     * @throws MissingParameterException action, activityOfferingIds, courseSeatCountCallbackService or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
@@ -106,7 +105,7 @@ public interface CourseSeatCountSubscriptionService {
 
             @WebParam(name = "action") SubscriptionActionEnum action,
             @WebParam(name = "activityOfferingIds") List<String> activityOfferingIds,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
+            @WebParam(name = "courseSeatCountCallbackService") CourseSeatCountCallbackService courseSeatCountCallbackService,
             @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
@@ -118,11 +117,11 @@ public interface CourseSeatCountSubscriptionService {
      *
      * @param action action to listen for
      * @param courseSeatCountTypeKey the identifier for the CourseSeatCount type to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param courseSeatCountCallbackService callback executable code to be invoked when the change event executes
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, courseOfferingCallbackService or contextInfo is missing or null
+     * @throws MissingParameterException action, courseSeatCountCallbackService or contextInfo is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
@@ -130,7 +129,7 @@ public interface CourseSeatCountSubscriptionService {
 
             @WebParam(name = "action") SubscriptionActionEnum action,
             @WebParam(name = "courseSeatCountTypeKey") String courseSeatCountTypeKey,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
+            @WebParam(name = "courseSeatCountCallbackService") CourseSeatCountCallbackService courseSeatCountCallbackService,
             @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,

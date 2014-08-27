@@ -38,7 +38,7 @@ public interface CourseOfferingCallbackService {
      *                              service operation
      * @return nothing
      */
-    public StatusInfo newCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds,
+    public StatusInfo createCourseOfferings(@WebParam(name = "courseOfferingIds") List<String> courseOfferingIds,
                                          @WebParam(name = "contextInfo")ContextInfo contextInfo);
 
     /**
@@ -77,7 +77,7 @@ public interface CourseOfferingCallbackService {
      *                              service operation
      * @return nothing
      */
-    public StatusInfo newActivityOfferings(@WebParam(name = "activityOfferingIds") List<String> activityOfferingIds,
+    public StatusInfo createActivityOfferings(@WebParam(name = "activityOfferingIds") List<String> activityOfferingIds,
                                          @WebParam(name = "contextInfo")ContextInfo contextInfo);
 
     /**
