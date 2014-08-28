@@ -35,24 +35,25 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LprInfo", propOrder = {
-        "id", 
-        "typeKey", 
-        "stateKey", 
-        "effectiveDate", 
-        "expirationDate", 
-        "luiId", 
-        "personId", 
+        "id",
+        "typeKey",
+        "stateKey",
+        "effectiveDate",
+        "expirationDate",
+        "luiId",
+        "personId",
         "atpId",
-        "masterLprId", 
-        "resultValuesGroupKeys", 
-        "commitmentPercent", 
-        "meta", 
+        "masterLprId",
+        "resultValuesGroupKeys",
+        "commitmentPercent",
+        "crossListedCode",
+        "meta",
         "attributes",
         "_futureElements"})
 
-public class LprInfo 
-    extends RelationshipInfo 
-    implements Lpr, Serializable {
+public class LprInfo
+        extends RelationshipInfo
+        implements Lpr, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -64,7 +65,7 @@ public class LprInfo
 
     @XmlElement
     private String atpId;
-    
+
     @XmlElement
     private String masterLprId;
 
@@ -73,6 +74,9 @@ public class LprInfo
 
     @XmlElement
     private KualiDecimal commitmentPercent;
+
+    @XmlElement
+    private String crossListedCode;
 
     @XmlAnyElement
     private List<Element> _futureElements;
@@ -87,6 +91,7 @@ public class LprInfo
             this.personId = lpr.getPersonId();
             this.atpId = lpr.getAtpId();
             this.masterLprId = lpr.getMasterLprId();
+            this.crossListedCode = lpr.getCrossListedCode();
             this.commitmentPercent = new KualiDecimal(lpr.getCommitmentPercent().bigDecimalValue());
             if (lpr.getResultValuesGroupKeys() != null) {
                 this.resultValuesGroupKeys = new ArrayList<String>(lpr.getResultValuesGroupKeys());
@@ -128,7 +133,16 @@ public class LprInfo
 
     public void setMasterLprId(String masterLprId) {
         this.masterLprId = masterLprId;
-    }    
+    }
+
+    @Override
+    public String getCrossListedCode() {
+        return crossListedCode;
+    }
+
+    public void setCrossListedCode(String crossList) {
+        this.crossListedCode = crossListedCode;
+    }
 
     @Override
     public KualiDecimal getCommitmentPercent() {

@@ -35,31 +35,32 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CourseRegistrationInfo", propOrder = {
-        "id", 
-        "typeKey", 
-        "stateKey", 
-        "personId", 
-        "termId", 
-        "courseOfferingId", 
-        "registrationGroupId", 
-        "credits", 
+        "id",
+        "typeKey",
+        "stateKey",
+        "personId",
+        "termId",
+        "courseOfferingId",
+        "registrationGroupId",
+        "credits",
         "gradingOptionId",
-        "effectiveDate",
+        "crossListedCode",
         "lastAttendanceDate",
+        "effectiveDate",
         "expirationDate",
-        "meta", 
-        "attributes", 
+        "meta",
+        "attributes",
         "_futureElements"})
 
-public class CourseRegistrationInfo 
-    extends RelationshipInfo 
-    implements CourseRegistration, Serializable {
+public class CourseRegistrationInfo
+        extends RelationshipInfo
+        implements CourseRegistration, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @XmlElement
     private String personId;
-    
+
     @XmlElement
     private String termId;
 
@@ -68,12 +69,15 @@ public class CourseRegistrationInfo
 
     @XmlElement
     private String registrationGroupId;
-    
+
     @XmlElement
     private KualiDecimal credits;
 
     @XmlElement
     private String gradingOptionId;
+
+    @XmlElement
+    private String crossListedCode;
 
     @XmlElement
     private Date lastAttendanceDate;
@@ -104,8 +108,9 @@ public class CourseRegistrationInfo
             this.registrationGroupId = courseRegistration.getRegistrationGroupId();
             this.credits = new KualiDecimal(courseRegistration.getCredits().bigDecimalValue());
             this.gradingOptionId = courseRegistration.getGradingOptionId();
+            this.crossListedCode = courseRegistration.getCrossListedCode();
             this.lastAttendanceDate = courseRegistration.getLastAttendanceDate();
-         }
+        }
     }
 
     @Override
@@ -126,8 +131,6 @@ public class CourseRegistrationInfo
         this.termId = termId;
     }
 
-    
-    
     @Override
     public String getCourseOfferingId() {
         return courseOfferingId;
@@ -144,7 +147,7 @@ public class CourseRegistrationInfo
 
     public void setRegistrationGroupId(String registrationGroupId) {
         this.registrationGroupId = registrationGroupId;
-    } 
+    }
 
     @Override
     public KualiDecimal getCredits() {
@@ -162,6 +165,15 @@ public class CourseRegistrationInfo
 
     public void setGradingOptionId(String gradingOptionId) {
         this.gradingOptionId = gradingOptionId;
+    }
+
+    @Override
+    public String getCrossListedCode() {
+        return crossListedCode;
+    }
+
+    public void setCrossListedCode(String crossListedCode) {
+        this.crossListedCode = crossListedCode;
     }
 
     @Override

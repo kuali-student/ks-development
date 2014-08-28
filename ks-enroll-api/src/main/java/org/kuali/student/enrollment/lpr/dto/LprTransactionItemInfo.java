@@ -34,18 +34,19 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LprTransactionItemInfo", propOrder = {
-                "id", "typeKey", "stateKey", "name", "descr",
-                "transactionId", "personId", 
-                "newLuiId",
-                "existingLprId", "resultValuesGroupKeys",
-                "requestOptions", 
-                "resultingLprId",
-                "validationResults",
-                "meta", "attributes", "_futureElements"})
+        "id", "typeKey", "stateKey", "name", "descr",
+        "transactionId", "personId",
+        "newLuiId",
+        "existingLprId", "resultValuesGroupKeys",
+        "requestOptions",
+        "resultingLprId",
+        "validationResults",
+        "crossListedCode",
+        "meta", "attributes", "_futureElements"})
 
-public class LprTransactionItemInfo 
-    extends IdEntityInfo 
-    implements LprTransactionItem, Serializable {
+public class LprTransactionItemInfo
+        extends IdEntityInfo
+        implements LprTransactionItem, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,9 +70,12 @@ public class LprTransactionItemInfo
 
     @XmlElement
     private String resultingLprId;
-    
+
     @XmlElement
     private List<ValidationResultInfo> validationResults;
+
+    @XmlElement
+    private String crossListedCode;
 
     @XmlAnyElement
     private List<Element> _futureElements;
@@ -91,7 +95,9 @@ public class LprTransactionItemInfo
             this.personId = lprTransactionItem.getPersonId();
             this.newLuiId = lprTransactionItem.getNewLuiId();
             this.existingLprId = lprTransactionItem.getExistingLprId();
-            
+
+            this.crossListedCode = lprTransactionItem.getCrossListedCode();
+
             this.requestOptions = new ArrayList<LprTransactionItemRequestOptionInfo>();
             if (null != lprTransactionItem.getRequestOptions()) {
                 for (LprTransactionItemRequestOption reqOp : lprTransactionItem.getRequestOptions()) {
@@ -107,7 +113,7 @@ public class LprTransactionItemInfo
             this.validationResults = new ArrayList<ValidationResultInfo>();
             if (null != lprTransactionItem.getValidationResults()) {
                 // Make a deep copy
-                for (ValidationResultInfo info: lprTransactionItem.getValidationResults()) {
+                for (ValidationResultInfo info : lprTransactionItem.getValidationResults()) {
                     this.validationResults.add(new ValidationResultInfo(info));
                 }
             }
@@ -153,7 +159,7 @@ public class LprTransactionItemInfo
     @Override
     public List<LprTransactionItemRequestOptionInfo> getRequestOptions() {
         if (requestOptions == null) {
-            requestOptions = new ArrayList<LprTransactionItemRequestOptionInfo> ();
+            requestOptions = new ArrayList<LprTransactionItemRequestOptionInfo>();
         }
         return requestOptions;
     }
@@ -166,7 +172,6 @@ public class LprTransactionItemInfo
         this.existingLprId = existingLprId;
     }
 
-
     @Override
     public String getExistingLprId() {
         return existingLprId;
@@ -175,7 +180,7 @@ public class LprTransactionItemInfo
     @Override
     public List<String> getResultValuesGroupKeys() {
         if (this.resultValuesGroupKeys == null) {
-            this.resultValuesGroupKeys = new ArrayList<String> ();
+            this.resultValuesGroupKeys = new ArrayList<String>();
         }
         return resultValuesGroupKeys;
     }
@@ -191,5 +196,14 @@ public class LprTransactionItemInfo
 
     public void setValidationResults(List<ValidationResultInfo> validationResults) {
         this.validationResults = validationResults;
+    }
+
+    @Override
+    public String getCrossListedCode() {
+        return crossListedCode;
+    }
+
+    public void setCrossListedCode(String crossList) {
+        this.crossListedCode = crossListedCode;
     }
 }

@@ -38,25 +38,26 @@ import org.w3c.dom.Element;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RegistrationRequestItemInfo", propOrder = {
-                "id", "name", "descr", "typeKey", "stateKey",
-                "registrationRequestId", 
-                "personId", 
-                "registrationGroupId",
-                "existingCourseRegistrationId", 
-                "credits", 
-                "gradingOptionId",
-                "requestedEffectiveDate",
-                "lastAttendanceDate",
-                "okToWaitlist", 
-                "okToHoldUntilList", "validationResults",
-                "meta", "attributes", "_futureElements"})
+        "id", "name", "descr", "typeKey", "stateKey",
+        "registrationRequestId",
+        "personId",
+        "registrationGroupId",
+        "existingCourseRegistrationId",
+        "credits",
+        "gradingOptionId",
+        "requestedEffectiveDate",
+        "lastAttendanceDate",
+        "okToWaitlist",
+        "okToHoldUntilList", "validationResults",
+        "crossListedCode", "courseRegistrationId", "courseWaitlistEntryId",
+        "meta", "attributes", "_futureElements"})
 
-public class RegistrationRequestItemInfo 
-    extends IdEntityInfo 
-    implements RegistrationRequestItem, Serializable {
+public class RegistrationRequestItemInfo
+        extends IdEntityInfo
+        implements RegistrationRequestItem, Serializable {
 
     private static final long serialVersionUID = 1L;
-  
+
     @XmlElement
     private String registrationRequestId;
 
@@ -90,6 +91,15 @@ public class RegistrationRequestItemInfo
     @XmlElement
     private List<ValidationResultInfo> validationResults;
 
+    @XmlElement
+    private String crossListedCode;
+
+    @XmlElement
+    private String courseRegistrationId;
+
+    @XmlElement
+    private String courseWaitlistEntryId;
+
     @XmlAnyElement
     private List<Element> _futureElements;
 
@@ -104,7 +114,7 @@ public class RegistrationRequestItemInfo
      * RegistrationRequestItem.
      *
      * @param reqistrationRequestItem the RegistrationRequestItem to
-     *        copy
+     *                                copy
      */
     public RegistrationRequestItemInfo(RegistrationRequestItem registrationRequestItem) {
         super(registrationRequestItem);
@@ -123,7 +133,10 @@ public class RegistrationRequestItemInfo
             this.okToWaitlist = registrationRequestItem.getOkToWaitlist();
             this.okToHoldUntilList = registrationRequestItem.getOkToHoldUntilList();
             this.validationResults = new ArrayList<ValidationResultInfo>();
-            for(ValidationResult validationResult:registrationRequestItem.getValidationResults ()){
+            this.crossListedCode = registrationRequestItem.getCrossListedCode();
+            this.courseRegistrationId = registrationRequestItem.getCourseRegistrationId();
+            this.courseWaitlistEntryId = registrationRequestItem.getCourseWaitlistEntryId();
+            for (ValidationResult validationResult : registrationRequestItem.getValidationResults()) {
                 this.getValidationResults().add(new ValidationResultInfo(validationResult));
             }
         }
@@ -230,5 +243,32 @@ public class RegistrationRequestItemInfo
 
     public void setValidationResults(List<ValidationResultInfo> validationResults) {
         this.validationResults = validationResults;
+    }
+
+    @Override
+    public String getCrossListedCode() {
+        return crossListedCode;
+    }
+
+    public void setCrossListedCode(String crossListedCode) {
+        this.crossListedCode = crossListedCode;
+    }
+
+    @Override
+    public String getCourseRegistrationId() {
+        return courseRegistrationId;
+    }
+
+    public void setCourseRegistrationId(String courseRegistrationId) {
+        this.courseRegistrationId = courseRegistrationId;
+    }
+
+    @Override
+    public String getCourseWaitlistEntryId() {
+        return courseWaitlistEntryId;
+    }
+
+    public void setCourseWaitlistEntryId(String courseWaitlistEntryId) {
+        this.courseWaitlistEntryId = courseWaitlistEntryId;
     }
 }

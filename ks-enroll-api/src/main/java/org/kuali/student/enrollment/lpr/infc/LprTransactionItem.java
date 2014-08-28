@@ -26,19 +26,19 @@ import org.kuali.student.r2.common.infc.IdEntity;
  * of a person (student) to a LUI. The transaction item also handle
  * removing, updating, swapping out an old LUI for a new LUI for a
  * person.
- * 
+ *
  * @author Kuali Student Team (sambit)
  */
 
-public interface LprTransactionItem 
-    extends IdEntity {
+public interface LprTransactionItem
+        extends IdEntity {
 
     /**
      * The type of the transaction item.
-     * 
+     * <p/>
      * The types of LPR transaction item are things like ADD, UPDATE,
      * DROP, and SWAP.
-     * 
+     *
      * @name Type Key
      * @required
      * @readOnly
@@ -48,13 +48,12 @@ public interface LprTransactionItem
 
     /**
      * The state of this transaction item
-     * 
+     * <p/>
      * The states of the LPR transaction item are things like DRAFT,
      * SUBMITTED, and FAILED.
-     * 
+     *
      * @name State Key
      * @required
-     *
      */
     @Override
     public String getStateKey();
@@ -62,7 +61,7 @@ public interface LprTransactionItem
     /**
      * The person id for whom this request is to generate or update
      * the LPR.
-     * 
+     *
      * @name Person Id
      * @required
      */
@@ -71,7 +70,7 @@ public interface LprTransactionItem
     /**
      * The identifier of the transaction that contains this
      * transaction item.
-     * 
+     *
      * @name Transaction Id
      * @required
      * @readOnly
@@ -80,7 +79,7 @@ public interface LprTransactionItem
 
     /**
      * The LUI id for a new relation request.
-     * 
+     *
      * @name New LUI Id
      */
     public String getNewLuiId();
@@ -88,7 +87,7 @@ public interface LprTransactionItem
     /**
      * The existing Lpr id for an existing relation for delete or
      * update requests.
-     * 
+     *
      * @name Existing LPR Id
      */
     public String getExistingLprId();
@@ -96,14 +95,14 @@ public interface LprTransactionItem
     /**
      * Specify the various request (or registration ) options for
      * creating this relationship.
-     * 
+     *
      * @name Request Options
      */
     public List<? extends LprTransactionItemRequestOption> getRequestOptions();
 
     /**
      * The LPR that resulted from processing this transaction item.
-     * 
+     *
      * @name Resulting LPR Id
      */
     public String getResultingLprId();
@@ -111,10 +110,10 @@ public interface LprTransactionItem
     /**
      * The keys of the result values groups to be applied to the LPR
      * once created.
-     * 
+     * <p/>
      * For example, setting the grading option to pass/fail or the
      * credits to 3 for a course.
-     * 
+     *
      * @name Result Values Group Keys
      */
     public List<String> getResultValuesGroupKeys();
@@ -124,9 +123,19 @@ public interface LprTransactionItem
      * these represent the results of that check.  The kinds of validation
      * result items are defined by the implementation.
      *
-     * @name Validation Results
-     *
      * @return List of validation result items
+     * @name Validation Results
      */
     public List<ValidationResultInfo> getValidationResults();
+
+    /**
+     * The code of the crosslisted course.
+     * <p/>
+     * For example if ENGL255 is actual course crosslisted with WMST255,
+     * when WMST255 is added id will be the one of ENGL255, and code
+     * WMST255 will be saved in crossList field (for displaying purpose)
+     *
+     * @name Cross Listed Course Code
+     */
+    public String getCrossListedCode();
 }
