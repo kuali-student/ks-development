@@ -51,7 +51,7 @@ public interface Lpr
 
     /**
      * The ATP for the LPR.
-     * <p/>
+     *
      * This the is the ATP that governs the creation and management of
      * this LPR.  Typically is will be the same as the ATP associated
      * with the LUI but does not have to be.
@@ -83,7 +83,7 @@ public interface Lpr
 
     /**
      * The keys of the result values groups to be applied to this LPR
-     * <p/>
+     *
      * For example, setting the grading option to pass/fail or the
      * credits to 3 for this course.
      *
@@ -93,7 +93,7 @@ public interface Lpr
 
     /**
      * The code of the crosslisted course.
-     * <p/>
+     *
      * For example if ENGL255 is actual course crosslisted with WMST255,
      * when WMST255 is added id will be the one of ENGL255, and code
      * WMST255 will be saved in crossList field (for displaying purpose)

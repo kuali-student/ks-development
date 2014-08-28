@@ -35,7 +35,7 @@ public interface LprTransactionItem
 
     /**
      * The type of the transaction item.
-     * <p/>
+     *
      * The types of LPR transaction item are things like ADD, UPDATE,
      * DROP, and SWAP.
      *
@@ -48,7 +48,7 @@ public interface LprTransactionItem
 
     /**
      * The state of this transaction item
-     * <p/>
+     *
      * The states of the LPR transaction item are things like DRAFT,
      * SUBMITTED, and FAILED.
      *
@@ -110,7 +110,7 @@ public interface LprTransactionItem
     /**
      * The keys of the result values groups to be applied to the LPR
      * once created.
-     * <p/>
+     *
      * For example, setting the grading option to pass/fail or the
      * credits to 3 for a course.
      *
@@ -130,7 +130,7 @@ public interface LprTransactionItem
 
     /**
      * The code of the crosslisted course.
-     * <p/>
+     *
      * For example if ENGL255 is actual course crosslisted with WMST255,
      * when WMST255 is added id will be the one of ENGL255, and code
      * WMST255 will be saved in crossList field (for displaying purpose)

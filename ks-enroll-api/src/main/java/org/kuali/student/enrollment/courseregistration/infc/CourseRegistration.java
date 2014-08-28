@@ -26,7 +26,7 @@ import java.util.Date;
 /**
  * Course Registration is the consolidated view of the details of a
  * student's relation with a course.
- * <p/>
+ *
  * The CourseRegistration is created only upon the successful
  * registration of the student into the course as a result of a
  * RegistrationRequest, and not after waitlist or any other type of
@@ -48,7 +48,7 @@ public interface CourseRegistration
 
     /**
      * The Id of the term that governs this registration.
-     * <p/>
+     *
      * Note: this typically is the same as the termId on the
      * associated Course Offering but may be different.  This is
      * especially true if the Course Offering term is a mini within
@@ -85,7 +85,7 @@ public interface CourseRegistration
      * The number of credits for which the student
      * registered. Typically, this number should be in the range
      * defined at the CourseOffering or RegistrationGroup.
-     * <p/>
+     *
      * This value is a number represented as a string.
      *
      * @name Credits
@@ -116,7 +116,7 @@ public interface CourseRegistration
 
     /**
      * The code of the crosslisted course.
-     * <p/>
+     *
      * For example if ENGL255 is actual course crosslisted with WMST255,
      * when WMST255 is added id will be the one of ENGL255, and code
      * WMST255 will be saved in crossList field (for displaying purpose)

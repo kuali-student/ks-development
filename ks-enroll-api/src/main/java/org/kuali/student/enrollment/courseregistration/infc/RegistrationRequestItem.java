@@ -27,21 +27,21 @@ import org.kuali.student.r2.common.infc.ValidationResult;
 /**
  * Represents a single transaction item for a Student and Registration
  * Group.
- * <p/>
+ *
  * The possible types of RegistrationRequestItem are ADD, DROP, SWAP
  * or UPDATE. These types represent adding (waitlisting, holdlisting),
  * dropping courses, swapping sections, or changing the registration
  * options.
- * <p/>
+ *
  * The Transaction Item Type indicates if this is for an ADD, DROP,
  * SWAP or UPDATE.
- * <p/>
+ *
  * 1. Register for course - RegistrationRequestItem Type is ADD,
  * newRegistrationGroupId is the RegistrationGroup.
- * <p/>
+ *
  * 2. Register for course but waitlist if seat not available OR
  * waitlist for course - same as above and okToWaitlist is true.
- * <p/>
+ *
  * 3. Swap between RegistrationGroup within same CourseOffering - Type
  * is SWAP, both new and existing RegistrationGroup Ids populated. New
  * RegistrationGroup is to be the one replaced with the old
@@ -73,7 +73,7 @@ public interface RegistrationRequestItem
     /**
      * The RegistrationGroup to which the student will be registered
      * upon a successful submission of this item.
-     * <p/>
+     *
      * This is populated for ADD, DROP, UPDATE and SWAP types of
      * RegistrationRequestItems.
      *
@@ -86,7 +86,7 @@ public interface RegistrationRequestItem
     /**
      * In the case of a DROP or SWAP or UPDATE, the "existing" course registration
      * Id in which the student is currently registered.
-     * <p/>
+     *
      * For an ADD, this field should be null.
      *
      * @name Existing Course Registration Id
@@ -154,7 +154,7 @@ public interface RegistrationRequestItem
 
     /**
      * The code of the crosslisted course.
-     * <p/>
+     *
      * For example if ENGL255 is actual course crosslisted with WMST255,
      * when WMST255 is added id will be the one of ENGL255, and code
      * WMST255 will be saved in crossList field (for displaying purpose)
