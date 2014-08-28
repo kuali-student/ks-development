@@ -55,7 +55,7 @@ public interface SocRolloverResult
      * @readOnly
      * @required
      * @impl set during the #rolloverSoc operation
-     * @deprecated use CourseOfferingSetService.getSocRolloverSnapshotValueBySocRolloverResult methods.
+     * @deprecated by Mezba. As of Aug 28, 2014, use CourseOfferingSetService.getSocRolloverSnapshotValueBySocRolloverResult methods.
      */
     public List<String> getOptionKeys();
 

@@ -127,6 +127,7 @@ public class SocRolloverResultInfo
     }
 
     @Override
+    @Deprecated
     public List<String> getOptionKeys() {
         if (this.optionKeys == null) {
             this.optionKeys = new ArrayList<String>();
@@ -134,6 +135,12 @@ public class SocRolloverResultInfo
         return optionKeys;
     }
 
+    /**
+     * Sets the Option Keys specified to control the rollover process
+     *
+     * @deprecated by Mezba. As of Aug 28, 2014, use CourseOfferingSetService.getSocRolloverSnapshotValueBySocRolloverResult methods.
+     */
+    @Deprecated
     public void setOptionKeys(List<String> optionKeys) {
         this.optionKeys = optionKeys;
     }
