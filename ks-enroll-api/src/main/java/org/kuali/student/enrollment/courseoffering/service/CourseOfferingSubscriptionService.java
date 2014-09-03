@@ -24,21 +24,26 @@ import org.kuali.student.r2.common.exceptions.MissingParameterException;
 import org.kuali.student.r2.common.exceptions.OperationFailedException;
 import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
 
+import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.ws.wsaddressing.W3CEndpointReference;
 import java.util.List;
 
 
-@WebService(name = "CourseOfferingSubscriptionService", targetNamespace = CourseOfferingSubscriptionNamespaceConstants.NAMESPACE)
-@SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
+@WebService(name = "CourseOfferingSubscriptionService", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE)
+@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
+@XmlSeeAlso({ObjectFactory.class})
 public interface CourseOfferingSubscriptionService {
 
     /**
      * Subscribe a callback to listen for ActivityOfferings for any Activity.
      *
      * @param action action to listen for
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes.
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
@@ -46,10 +51,12 @@ public interface CourseOfferingSubscriptionService {
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToActivityOfferings(
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToActivityOfferings")
+    public String subscribeToActivityOfferings(@WebParam(partName = "callback_action", name = "SubscribeToActivityOfferings", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                               @WebParam(partName = "callback_object", name = "SubscribeToActivityOfferings", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                               @WebParam(partName = "callback_context", name = "SubscribeToActivityOfferings", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE)ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -60,7 +67,7 @@ public interface CourseOfferingSubscriptionService {
      *
      * @param action action to listen for
      * @param termId the identifier for the Term to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
@@ -68,11 +75,13 @@ public interface CourseOfferingSubscriptionService {
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToActivityOfferingsByTerm(
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "termId") String termId,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToActivityOfferingsByTerm")
+    public String subscribeToActivityOfferingsByTerm(@WebParam(partName = "callback_action", name = "SubscribeToActivityOfferingsByTerm", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                                     @WebParam(partName = "callback_term_id", name = "SubscribeToActivityOfferingsByTerm", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) String termId,
+                                                     @WebParam(partName = "callback_object", name = "SubscribeToActivityOfferingsByTerm", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                                     @WebParam(partName = "callback_context", name = "SubscribeToActivityOfferingsByTerm", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -83,7 +92,7 @@ public interface CourseOfferingSubscriptionService {
      *
      * @param action action to listen for
      * @param activityId the identifier for the Activity to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
@@ -91,11 +100,13 @@ public interface CourseOfferingSubscriptionService {
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToActivityOfferingsByActivity(
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "activityId") String activityId,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToActivityOfferingsByActivity")
+    public String subscribeToActivityOfferingsByActivity(@WebParam(partName = "callback_action", name = "SubscribeToActivityOfferingsByActivity", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                                         @WebParam(partName = "callback_activity_id", name = "SubscribeToActivityOfferingsByActivity", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) String activityId,
+                                                         @WebParam(partName = "callback_object", name = "SubscribeToActivityOfferingsByActivity", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                                         @WebParam(partName = "callback_context", name = "SubscribeToActivityOfferingsByActivity", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -106,7 +117,7 @@ public interface CourseOfferingSubscriptionService {
      *
      * @param action action to listen for
      * @param activityOfferingTypeKey the identifier for the ActivityOffering type to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes.
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
@@ -114,31 +125,36 @@ public interface CourseOfferingSubscriptionService {
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToActivityOfferingsByType(
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "activityOfferingTypeKey") String activityOfferingTypeKey,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToActivityOfferingsByType")
+    public String subscribeToActivityOfferingsByType(@WebParam(partName = "callback_action", name = "SubscribeToActivityOfferingsByType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                                     @WebParam(partName = "callback_activity_type_key", name = "SubscribeToActivityOfferingsByType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) String activityOfferingTypeKey,
+                                                     @WebParam(partName = "callback_object", name = "SubscribeToActivityOfferingsByType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                                     @WebParam(partName = "callback_context", name = "SubscribeToActivityOfferingsByType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
+
     /**
      * Subscribe a callback to listen for new CourseOfferings for any course.
      *
      * @param action action to listen for
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes.
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, courseOfferingCallbackService  or contextInfo is missing or null
+     * @throws MissingParameterException a parameter is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToCourseOfferings(
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToCourseOfferings")
+    public String subscribeToCourseOfferings(@WebParam(partName = "callback_action", name = "SubscribeToCourseOfferings", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                             @WebParam(partName = "callback_object", name = "SubscribeToCourseOfferings", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                             @WebParam(partName = "callback_context", name = "SubscribeToCourseOfferings", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -149,42 +165,44 @@ public interface CourseOfferingSubscriptionService {
      *
      * @param action action to listen for
      * @param courseOfferingIds a list of CourseOffering identifiers to
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes.
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, courseOfferingIds, courseOfferingCallbackService  or contextInfo is missing or null
+     * @throws MissingParameterException a parameter is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToCourseOfferingsByIds(
-
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "courseOfferingIds") List<String> courseOfferingIds,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToCourseOfferingsByIds")
+    public String subscribeToCourseOfferingsByIds(@WebParam(partName = "callback_action", name = "SubscribeToCourseOfferingsByIds", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                                  @WebParam(partName = "callback_course_offering_ids", name = "SubscribeToCourseOfferingsByIds", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) List<String> courseOfferingIds,
+                                                  @WebParam(partName = "callback_object", name = "SubscribeToCourseOfferingsByIds", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                                  @WebParam(partName = "callback_context", name = "SubscribeToCourseOfferingsByIds", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
+
     /**
      * Subscribe a callback to listen for new CourseOfferings for a given term.
      *
      * @param action action to listen for
      * @param termId the identifier for the Term to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, courseOfferingCallbackService  or contextInfo is missing or null
+     * @throws MissingParameterException a parameter is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToCourseOfferingsByTerm(
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "termId") String termId,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToCourseOfferingsByTerm")
+    public String subscribeToCourseOfferingsByTerm(@WebParam(partName = "callback_action", name = "SubscribeToCourseOfferingsByTerm", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                                   @WebParam(partName = "callback_term_id", name = "SubscribeToCourseOfferingsByTerm", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) String termId,
+                                                   @WebParam(partName = "callback_object", name = "SubscribeToCourseOfferingsByTerm", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                                   @WebParam(partName = "callback_context", name = "SubscribeToCourseOfferingsByTerm", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -195,19 +213,20 @@ public interface CourseOfferingSubscriptionService {
      *
      * @param action action to listen for
      * @param courseId the identifier for the Course to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, courseOfferingCallbackService  or contextInfo is missing or null
+     * @throws MissingParameterException a parameter is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToCourseOfferingsByCourse(
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "courseId") String courseId,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToCourseOfferingsByCourse")
+    public String subscribeToCourseOfferingsByCourse(@WebParam(partName = "callback_action", name = "SubscribeToCourseOfferingsByCourse", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                                     @WebParam(partName = "callback_course_id", name = "SubscribeToCourseOfferingsByCourse", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) String courseId,
+                                                     @WebParam(partName = "callback_object", name = "SubscribeToCourseOfferingsByCourse", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                                     @WebParam(partName = "callback_context", name = "SubscribeToCourseOfferingsByCourse", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
@@ -218,23 +237,25 @@ public interface CourseOfferingSubscriptionService {
      *
      * @param action action to listen for
      * @param courseOfferingTypeKey the identifier for the CourseOffering type to be retrieved.
-     * @param courseOfferingCallbackService callback executable code to be invoked when the change event executes
+     * @param W3CEndpointReference callback executable code to be invoked when the change event executes.
      * @param contextInfo information containing the principalId and locale information about the caller of the service operation
      * @return callback registration id that can be used to explicitly desubscribe the listener.
      * @throws InvalidParameterException contextInfo is not valid
-     * @throws MissingParameterException action, courseOfferingCallbackService  or contextInfo is missing or null
+     * @throws MissingParameterException a parameter is missing or null
      * @throws OperationFailedException unable to complete request
      * @throws PermissionDeniedException an authorization failure occurred
      */
-    public String subscribeToCourseOfferingsByType(
-            @WebParam(name = "action") SubscriptionActionEnum action,
-            @WebParam(name = "courseOfferingTypeKey") String courseOfferingTypeKey,
-            @WebParam(name = "courseOfferingCallbackService") CourseOfferingCallbackService courseOfferingCallbackService,
-            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+    @WebResult(name = "returnType", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE, partName = "the_return")
+    @WebMethod(operationName = "SubscribeToCourseOfferingsByType")
+    public String subscribeToCourseOfferingsByType(@WebParam(partName = "callback_action", name = "SubscribeToCourseOfferingsByCourse", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) SubscriptionActionEnum action,
+                                                   @WebParam(partName = "callback_course_offering_type_key", name = "SubscribeToCourseOfferingsByCourse", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) String courseOfferingTypeKey,
+                                                   @WebParam(partName = "callback_object", name = "SubscribeToCourseOfferingsByCourse", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) W3CEndpointReference callbackObject,
+                                                   @WebParam(partName = "callback_context", name = "SubscribeToCourseOfferingsByCourse", targetNamespace = CourseOfferingCallbackNamespaceConstants.NAMESPACE) ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
+
     /**
      * Remove the subscription of callback to stop listening.
      *
