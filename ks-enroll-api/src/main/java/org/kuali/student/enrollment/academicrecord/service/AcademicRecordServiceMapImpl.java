@@ -99,11 +99,10 @@ public class AcademicRecordServiceMapImpl implements AcademicRecordService {
     @Override
     public List<StudentCourseRecordInfo> getStudentCourseRecordsForCourse(String personId, String courseId,
             ContextInfo contextInfo)
-            throws DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException {
+        throws InvalidParameterException,
+               MissingParameterException,
+               OperationFailedException,
+               PermissionDeniedException {
         // UNKNOWN
         throw new OperationFailedException("getStudentCourseRecordsForCourse has not been implemented");
     }
@@ -111,11 +110,10 @@ public class AcademicRecordServiceMapImpl implements AcademicRecordService {
     @Override
     public List<StudentCourseRecordInfo> getStudentCourseRecordsForCourses(String personId, List<String> courseIds,
             ContextInfo contextInfo)
-            throws DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException {
+        throws InvalidParameterException,
+               MissingParameterException,
+               OperationFailedException,
+               PermissionDeniedException {
         // UNKNOWN
         throw new OperationFailedException("getStudentCourseRecordsForCourses has not been implemented");
     }
@@ -201,12 +199,11 @@ public class AcademicRecordServiceMapImpl implements AcademicRecordService {
     }
 
     @Override
-    public List<StudentProgramRecordInfo> getStudentProgramRecords(String personId, ContextInfo contextInfo)
-            throws DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException {
+    public List<StudentProgramRecordInfo> getStudentProgramRecordsByStudent(String personId, ContextInfo contextInfo)
+        throws InvalidParameterException,
+               MissingParameterException,
+               OperationFailedException,
+               PermissionDeniedException {
         // UNKNOWN
         throw new OperationFailedException("getStudentProgramRecords has not been implemented");
     }
@@ -556,12 +553,11 @@ public class AcademicRecordServiceMapImpl implements AcademicRecordService {
 
     @Override
     public StatusInfo deleteStudentCourseRecord(String studentCourseRecordId, ContextInfo contextInfo)
-            throws DataValidationErrorException,
-            DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException {
+        throws DoesNotExistException,
+               InvalidParameterException,
+               MissingParameterException,
+               OperationFailedException,
+               PermissionDeniedException {
         // DELETE
         if (this.studentCourseRecordMap.remove(studentCourseRecordId) == null) {
             throw new OperationFailedException(studentCourseRecordId);

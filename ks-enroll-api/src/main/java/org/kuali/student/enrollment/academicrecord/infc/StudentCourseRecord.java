@@ -33,9 +33,18 @@ public interface StudentCourseRecord
     extends IdNamelessEntity {
 
     /**
-     * Id of the course that was taken by the student
-     * @name Course Offering Id
+     * The Id of the Student.
+     *
+     * @name Person Id
+     * @required
      * @readOnly
+     */
+    public String getPersonId();
+
+    /**
+     * Id of the course that was taken by the student
+     *
+     * @name Course Offering Id
      */
     public String getCourseOfferingId();
 
@@ -43,10 +52,11 @@ public interface StudentCourseRecord
      *  The Source is represented by a Type to indicate what crated
      *  this record. Examples are "native" that implies the exietence
      *  of a Course Registration or a "transfer articulation" that may
-     *  imply the existence of other data.
+     *  imply the existence of other data. 
+     *
+     *  @notes should be the Type of StudentCourseRecord?
      *
      *  @name Source Type Key
-     *  @readOnly
      */
     public String getSourceTypeKey();
 
@@ -55,28 +65,14 @@ public interface StudentCourseRecord
      * available for native source types.
      *
      * @name Course Registration Id
-     * @readOnly
      */
     public String getCourseRegistrationId();
-
-    /**
-     * The Id of the Student.
-     *
-     * @name Person Id
-     * @readOnly
-     * @required
-     * @impl retrieved from the Course Registration
-     */
-    public String getPersonId();
 
     /**
      * The title of the course that was in effect at the time
      * the student took the course. 
      *
      * @name Course Title
-     * @readOnly
-     * @impl retrieved from the CourseOffering related to the Course
-     *       Registration
      */
     public String getCourseTitle();
 
@@ -85,9 +81,6 @@ public interface StudentCourseRecord
      * the student took the course. 
      *
      * @name Course Code
-     * @readOnly
-     * @impl retrieved from the Registration Group related to the Course
-     *       Registration
      */
     public String getCourseCode();
 
@@ -96,9 +89,6 @@ public interface StudentCourseRecord
      * in effect at the time the student took the course. ???
      *
      * @name Activity Code
-     * @readOnly
-     * @impl retrieved from the Course Offering related to the Course
-     *       Registration
      */
     public String getActivityCode();
 
@@ -106,9 +96,6 @@ public interface StudentCourseRecord
      * The term Id of the term in which the student took the offering.
      *
      * @name Term Id
-     * @readonly
-     * @impl retrieved from the Term related to the Course Offering
-     *       in the Course Registration
      */
     public String getTermId();
 
@@ -116,9 +103,6 @@ public interface StudentCourseRecord
      * The name of the term in which the student took the offering.
      *
      * @name Term Name
-     * @readonly
-     * @impl retrieved from the Term related to the Course Offering 
-     *       in the Course Registration
      */
     public String getTermName();
 
@@ -126,9 +110,6 @@ public interface StudentCourseRecord
      * The start date of the course.
      *
      * @name Course Begin Date
-     * @readonly
-     * @impl retrieved from the Term related to the Course Offering 
-     *       in the Course Registration
      */
     public Date getCourseBeginDate();
 
@@ -136,9 +117,6 @@ public interface StudentCourseRecord
      * The end date of the course.
      *
      * @name Course End Date
-     * @readonly
-     * @impl retrieved from the Term related to the Course Offering 
-     *       in the Course Registration
      */
     public Date getCourseEndDate();
 
@@ -146,7 +124,6 @@ public interface StudentCourseRecord
      * The grade the student was assigned for the course.
      *
      * @name Assigned Grade Value
-     * @readonly
      */
     public String getAssignedGradeValue();
 
@@ -154,8 +131,6 @@ public interface StudentCourseRecord
      * The Id for the grading scale for the assigned grade.
      *
      * @name Assigned Grade Scale Key
-     * @readonly
-     * @impl the Id of the Result Scale
      */
     public String getAssignedGradeScaleKey();
 
@@ -163,7 +138,6 @@ public interface StudentCourseRecord
      * The grade the student was assigned for the course.
      *
      * @name Administrative Grade Value Key
-     * @readonly
      */
     public String getAdministrativeGradeValue();
 
@@ -171,8 +145,6 @@ public interface StudentCourseRecord
      * The Id for the grading scale for the administrative grade.
      *
      * @name Administrative Grade Scale Key
-     * @readonly
-     * @impl the Id of the Result Scale
      */
     public String getAdministrativeGradeScaleKey();
 
@@ -180,7 +152,6 @@ public interface StudentCourseRecord
      * The calculated grade the student earned for the course.
      *
      * @name Calculated Grade Value
-     * @readonly
      */
     public String getCalculatedGradeValue();
 
@@ -188,8 +159,6 @@ public interface StudentCourseRecord
      * The Id for the grading scale for the calculated grade.
      *
      * @name Calculated Grade Scale Key
-     * @readonly
-     * @impl the Key of the Result Scale
      */
     public String getCalculatedGradeScaleKey();
 
@@ -198,7 +167,6 @@ public interface StudentCourseRecord
      *
      * @return a string representing a floating point decimal number
      * @name Credits Attempted
-     * @readonly
      */
     public String getCreditsAttempted();
 
@@ -207,7 +175,6 @@ public interface StudentCourseRecord
      *
      * @return a string representing a floating point decimal number
      * @name Credits Earned
-     * @readonly
      */
     public String getCreditsEarned();
 

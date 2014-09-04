@@ -32,7 +32,6 @@ import org.kuali.student.r2.common.exceptions.ReadOnlyException;
 import org.kuali.student.r2.common.exceptions.VersionMismatchException;
 
 /**
- *
  * @author nwright
  */
 public class AcademicRecordServiceDecorator implements AcademicRecordService {
@@ -148,13 +147,12 @@ public class AcademicRecordServiceDecorator implements AcademicRecordService {
     }
 
     @Override
-    public List<StudentProgramRecordInfo> getStudentProgramRecords(String personId, ContextInfo contextInfo) throws
-            DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException {
-        return getNextDecorator().getStudentProgramRecords(personId, contextInfo);
+    public List<StudentProgramRecordInfo> getStudentProgramRecordsByStudent(String personId, ContextInfo contextInfo) 
+        throws InvalidParameterException,
+               MissingParameterException,
+               OperationFailedException,
+               PermissionDeniedException {
+        return getNextDecorator().getStudentProgramRecordsByStudent(personId, contextInfo);
     }
 
     @Override
@@ -220,21 +218,21 @@ public class AcademicRecordServiceDecorator implements AcademicRecordService {
 
     @Override
     public List<StudentCourseRecordInfo> getStudentCourseRecordsForCourse(String personId, String courseId,
-            ContextInfo contextInfo) throws DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException {
+            ContextInfo contextInfo)
+        throws InvalidParameterException,
+               MissingParameterException,
+               OperationFailedException,
+               PermissionDeniedException {
         return getNextDecorator().getStudentCourseRecordsForCourse(personId, courseId, contextInfo);
     }
 
     @Override
     public List<StudentCourseRecordInfo> getStudentCourseRecordsForCourses(String personId, List<String> courseIds,
-            ContextInfo contextInfo) throws DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException {
+            ContextInfo contextInfo) 
+        throws InvalidParameterException,
+               MissingParameterException,
+               OperationFailedException,
+               PermissionDeniedException {
         return getNextDecorator().getStudentCourseRecordsForCourses(personId, courseIds, contextInfo);
     }
 
@@ -420,7 +418,6 @@ public class AcademicRecordServiceDecorator implements AcademicRecordService {
 
     @Override
     public StatusInfo deleteStudentCourseRecord(String studentCourseRecordId, ContextInfo contextInfo) throws
-            DataValidationErrorException,
             DoesNotExistException,
             InvalidParameterException,
             MissingParameterException,

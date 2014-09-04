@@ -5,44 +5,40 @@ import org.kuali.student.r2.common.infc.IdEntity;
 import java.util.Date;
 
 /**
- * @Version 2.0
- * @Author Sri komandur@uw.edu
+ * 
  */
-public interface StudentCredentialRecord extends IdEntity {
-    /**
-     * Id of the program that was enrolled in by the student.
-     *
-     * @name Program Id
-     * @readOnly
-     * @required
-     */
-    public String getProgramId();
+
+public interface StudentCredentialRecord 
+    extends IdEntity {
 
     /**
      * The Id of the Student.
      *
      * @name Person Id
-     * @readOnly
      * @required
-     * @impl retrieved from the Course Registration
+     * @readOnly
      */
     public String getPersonId();
+
+    /**
+     * Id of the program that was enrolled in by the student.
+     *
+     * @name Program Id
+     */
+    public String getProgramId();
 
     /**
      * Title of the program that was in effect at the time the student took the
      * course
      *
      * @name Program Title
-     * @readOnly
-     * @required
      */
     public String getProgramTitle();
 
     /**
      * Program Code
+     *
      * @name Program Code
-     * @readOnly
-     * @required
      */
     public String getProgramCode();
 
@@ -50,8 +46,6 @@ public interface StudentCredentialRecord extends IdEntity {
      * Date the student was admitted 
      *
      * @name Date Admitted
-     * @readOnly
-     * @required
      */
     public Date getDateAdmitted();
 
@@ -59,7 +53,6 @@ public interface StudentCredentialRecord extends IdEntity {
      * Date the student was awarded
      * 
      * @name Date Awarded
-     * @readOnly
      */
     public Date getDateAwarded();
 

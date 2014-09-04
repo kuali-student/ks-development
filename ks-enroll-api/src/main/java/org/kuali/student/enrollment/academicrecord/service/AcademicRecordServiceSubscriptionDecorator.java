@@ -249,13 +249,12 @@ public class AcademicRecordServiceSubscriptionDecorator extends AcademicRecordSe
     }
 
     @Override
-    public StatusInfo deleteStudentCourseRecord(String studentCourseRecordId, ContextInfo contextInfo) throws
-            DataValidationErrorException,
-            DoesNotExistException,
-            InvalidParameterException,
-            MissingParameterException,
-            OperationFailedException,
-            PermissionDeniedException {
+    public StatusInfo deleteStudentCourseRecord(String studentCourseRecordId, ContextInfo contextInfo) 
+        throws DoesNotExistException,
+               InvalidParameterException,
+               MissingParameterException,
+               OperationFailedException,
+               PermissionDeniedException {
         StudentCourseRecordInfo info = this.getNextDecorator().getStudentCourseRecord(studentCourseRecordId, contextInfo);
         StatusInfo status = this.getNextDecorator().deleteStudentCourseRecord(studentCourseRecordId, contextInfo);
         Selector target = new Selector(SubscriptionActionEnum.UPDATE, null);
