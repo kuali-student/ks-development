@@ -20,8 +20,8 @@ import java.util.List;
                 "id", "typeKey", "stateKey", "name", "descr",
                 "personId", "programId", "programOfferingId",
                 "programTypeKey", "programCode", "programTitle",
-                "admittedDate", "enrollmentBeginDate", "enrollmentBrginTermId",
-                "enrollmentBeginTermName", "enrollmentEnddate", "enrollmentEndTermId",
+                "admittedDate", "enrollmentBeginDate", "enrollmentBeginTermId",
+                "enrollmentBeginTermName", "enrollmentEndDate", "enrollmentEndTermId",
                 "enrollmentEndTermName", "creditsEarned", "classStanding", 
                 "childPrograms", "meta", "attributes", "_futureElements"})
 
