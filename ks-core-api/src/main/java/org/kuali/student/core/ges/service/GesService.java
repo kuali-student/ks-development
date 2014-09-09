@@ -590,8 +590,11 @@ public interface GesService {
      * @param criteria    the criteria that restricts the values returned by this method.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return A List of applicable values. The values returned will be sorted based on priority, atp id and atp type.
-     *         Values with duplicate priorities, atp id and atp type will be returned in an unspecified order.
+     * @return  A List of applicable values, sorted. The key word is applicable. The values returned will be based
+     *          primarily on priority. If there are values with duplicate priorities, the sort order may or
+     *          may not be specified. For some evaluations, such as course based criteria, the atp id and the
+     *          atp type will be looked at to return the values in the most applicable order. If two values are
+     *          of equal 'applicability', they will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterKey, personId, or
      *                                   contextInfo is missing or null
@@ -622,8 +625,11 @@ public interface GesService {
      * @param onDate the date that will be used for the evaluation.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return A List of applicable values. The values returned will be sorted based on priority, atp id and atp type.
-     *         Values with duplicate priorities, atp id and atp type will be returned in an unspecified order.
+     * @return  A List of applicable values, sorted. The key word is applicable. The values returned will be based
+     *          primarily on priority. If there are values with duplicate priorities, the sort order may or
+     *          may not be specified. For some evaluations, such as course based criteria, the atp id and the
+     *          atp type will be looked at to return the values in the most applicable order. If two values are
+     *          of equal 'applicability', they will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterKey, personId, or
      *                                   contextInfo is missing or null
@@ -712,9 +718,11 @@ public interface GesService {
      * @param criteria    the criteria that restricts the values returned by this method.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return  A List of applicable values for the parameters. The values returned will be sorted based
-     *          on parameter key and then priority, atp id and atp type. Values with duplicate parameterKey,
-     *          priorities, atp id and atp type will be returned in an unspecified order.
+     * @return  A List of applicable values, sorted. The key word is applicable. The values returned will be based
+     *          primarily on priority. If there are values with duplicate priorities, the sort order may or
+     *          may not be specified. For some evaluations, such as course based criteria, the atp id and the
+     *          atp type will be looked at to return the values in the most applicable order. If two values are
+     *          of equal 'applicability', they will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterKeys, personId, or
      *                                   contextInfo is missing or null
@@ -742,9 +750,11 @@ public interface GesService {
      * @param onDate the date that will be used for the evaluation.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return  A List of applicable values for the parameters. The values returned will be sorted based
-     *          on parameter key and then priority, atp id and atp type. Values with duplicate parameterKey,
-     *          priorities, atp id and atp type will be returned in an unspecified order.
+     * @return  A List of applicable values, sorted. The key word is applicable. The values returned will be based
+     *          primarily on priority. If there are values with duplicate priorities, the sort order may or
+     *          may not be specified. For some evaluations, such as course based criteria, the atp id and the
+     *          atp type will be looked at to return the values in the most applicable order. If two values are
+     *          of equal 'applicability', they will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterKeys, personId, or
      *                                   contextInfo is missing or null
@@ -772,9 +782,11 @@ public interface GesService {
      * @param criteria          the criteria that restricts the values returned by this method.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return  A List of applicable values for the parameters. The values returned will be sorted based
-     *          on parameter key and then priority, atp id and atp type. Values with duplicate parameterKey,
-     *          priorities, atp id and atp type will be returned in an unspecified order.
+     * @return  A List of applicable values, sorted. The key word is applicable. The values returned will be based
+     *          primarily on priority. If there are values with duplicate priorities, the sort order may or
+     *          may not be specified. For some evaluations, such as course based criteria, the atp id and the
+     *          atp type will be looked at to return the values in the most applicable order. If two values are
+     *          of equal 'applicability', they will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterGroupKey, personId, or
      *                                   contextInfo is missing or null
@@ -803,9 +815,11 @@ public interface GesService {
      * @param onDate the date that will be used for the evaluation.
      * @param contextInfo information containing the principalId and
      *                    locale information about the caller of service operation
-     * @return  A List of applicable values for the parameters. The values returned will be sorted based
-     *          on parameter key and then priority, atp id and atp type. Values with duplicate parameterKey,
-     *          priorities, atp id and atp type will be returned in an unspecified order.
+     * @return  A List of applicable values, sorted. The key word is applicable. The values returned will be based
+     *          primarily on priority. If there are values with duplicate priorities, the sort order may or
+     *          may not be specified. For some evaluations, such as course based criteria, the atp id and the
+     *          atp type will be looked at to return the values in the most applicable order. If two values are
+     *          of equal 'applicability', they will be returned in an unspecified order.
      * @throws InvalidParameterException contextInfo is not valid
      * @throws MissingParameterException parameterGroupKey, personId, or
      *                                   contextInfo is missing or null
@@ -1141,8 +1155,5 @@ public interface GesService {
             MissingParameterException,
             OperationFailedException,
             PermissionDeniedException;
-
-
-
 
 }
