@@ -26,7 +26,7 @@ public interface Parameter extends KeyEntity {
      * @name Ges Value Type
      * @required
      */
-    GesValueTypeEnum getGesGesValueTypeEnum();
+    GesValueTypeEnum getGesValueTypeEnum();
 
     /**
      * Indicates if duplicate priorities are allowed for all values associated with this parameter.
