@@ -21,6 +21,7 @@ public enum GesValueTypeEnum {
     STRING,
     BOOLEAN,
     NUMERIC,
+    DATE,
     KUALI_DECIMAL,
     AMOUNT,
     CURRENCY_AMOUNT,
