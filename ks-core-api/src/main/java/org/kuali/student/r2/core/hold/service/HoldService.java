@@ -13,6 +13,7 @@
  */
 package org.kuali.student.r2.core.hold.service;
 
+import java.util.Date;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -174,6 +175,30 @@ public interface HoldService {
             PermissionDeniedException;
 
     /**
+     * Retrieves a list of active applied holds, that pertain to the given
+     * Person on a date. An active Hold is any open Hold that has had not been released or
+     * canceled.
+     *
+     * @param personId an Id of a Person
+     * @param onDate the date that will be used for the evaluation.
+     * @param contextInfo Context information containing the principalId and
+     * locale information about the caller of service operation
+     * @return a list of Holds
+     * @throws InvalidParameterException invalid parameter
+     * @throws MissingParameterException missing parameter
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public List<AppliedHoldInfo> getActiveAppliedHoldsByPersonOnDate(
+            @WebParam(name = "personId") String personId,
+            @WebParam(name = "onDate") Date onDate,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
      * Retrieves a list of all Holds by Issue for a Person.
      *
      * @param holdIssueId an Issue
@@ -188,6 +213,30 @@ public interface HoldService {
      */
     public List<AppliedHoldInfo> getAppliedHoldsByIssueAndPerson(@WebParam(name = "holdIssueId") String holdIssueId,
             @WebParam(name = "personId") String personId,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Retrieves a list of all Holds by Issue for a Person on a date.
+     *
+     * @param holdIssueId an Issue
+     * @param personId Id of a person
+     * @param onDate the date that will be used for the evaluation.
+     * @param contextInfo Context information containing the principalId and
+     * locale information about the caller of service operation
+     * @return a list of Holds
+     * @throws InvalidParameterException invalid parameter
+     * @throws MissingParameterException missing parameter
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public List<AppliedHoldInfo> getAppliedHoldsByIssueAndPersonOnDate(
+            @WebParam(name = "holdIssueId") String holdIssueId,
+            @WebParam(name = "personId") String personId,
+            @WebParam(name = "onDate") Date onDate,
             @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,
@@ -212,6 +261,32 @@ public interface HoldService {
     public List<AppliedHoldInfo> getActiveAppliedHoldsByIssueAndPerson(
             @WebParam(name = "holdIssueId") String holdIssueId,
             @WebParam(name = "personId") String personId,
+            @WebParam(name = "contextInfo") ContextInfo contextInfo)
+            throws InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException;
+
+    /**
+     * Retrieves a list of active applied holds, both warning and blocking, by
+     * hold Issue for a Person on a date. An active Hold is any open Hold that has had not
+     * been released or canceled.
+     *
+     * @param holdIssueId an Issue
+     * @param personId Id of a person
+     * @param onDate the date that will be used for the evaluation.
+     * @param contextInfo Context information containing the principalId and
+     * locale information about the caller of service operation
+     * @return a list of Holds
+     * @throws InvalidParameterException invalid parameter
+     * @throws MissingParameterException missing parameter
+     * @throws OperationFailedException unable to complete request
+     * @throws PermissionDeniedException authorization failure
+     */
+    public List<AppliedHoldInfo> getActiveAppliedHoldsByIssueAndPersonOnDate(
+            @WebParam(name = "holdIssueId") String holdIssueId,
+            @WebParam(name = "personId") String personId,
+            @WebParam(name = "onDate") Date onDate,
             @WebParam(name = "contextInfo") ContextInfo contextInfo)
             throws InvalidParameterException,
             MissingParameterException,

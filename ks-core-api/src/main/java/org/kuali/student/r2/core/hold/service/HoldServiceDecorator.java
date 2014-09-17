@@ -13,6 +13,7 @@
  */
 package org.kuali.student.r2.core.hold.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.kuali.rice.core.api.criteria.QueryByCriteria;
@@ -25,6 +26,8 @@ import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
 
 import org.kuali.student.r2.common.exceptions.*;
+
+import javax.jws.WebParam;
 
 public class HoldServiceDecorator
         implements HoldService {
@@ -168,5 +171,20 @@ public class HoldServiceDecorator
     @Override
     public HoldIssueInfo createHoldIssue(String issueTypeKey, HoldIssueInfo issueInfo, ContextInfo contextInfo) throws DataValidationErrorException, InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, ReadOnlyException {
         return getNextDecorator().createHoldIssue(issueTypeKey, issueInfo, contextInfo);
+    }
+
+    @Override
+    public List<AppliedHoldInfo> getActiveAppliedHoldsByPersonOnDate(String personId, Date onDate, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getActiveAppliedHoldsByPersonOnDate(personId, onDate, contextInfo);
+    }
+
+    @Override
+    public List<AppliedHoldInfo> getAppliedHoldsByIssueAndPersonOnDate(String holdIssueId, String personId, Date onDate, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getAppliedHoldsByIssueAndPersonOnDate(holdIssueId, personId, onDate, contextInfo);
+    }
+
+    @Override
+    public List<AppliedHoldInfo> getActiveAppliedHoldsByIssueAndPersonOnDate(String holdIssueId, String personId, Date onDate, ContextInfo contextInfo) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        return getNextDecorator().getActiveAppliedHoldsByIssueAndPersonOnDate(holdIssueId, personId, onDate, contextInfo);
     }
 }
