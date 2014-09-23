@@ -42,6 +42,14 @@ public interface StudentCourseRecord
     public String getPersonId();
 
     /**
+     * The version independent id of the clu
+     * @name Course Id
+     * @required
+     * @readOnly
+     */
+    public String getCourseId();
+
+    /**
      * Id of the course that was taken by the student
      *
      * @name Course Offering Id
