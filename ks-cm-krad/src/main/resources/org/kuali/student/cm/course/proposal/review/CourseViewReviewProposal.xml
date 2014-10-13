@@ -493,7 +493,6 @@
                             <bean parent="CM-Proposal-Button-ReturnToPrevious"/>
                             <bean parent="CM-Proposal-Button-Cancel"
                                   p:style="margin-right: 10px;"/>
-                            <bean parent="CM-Proposal-Button-Close" p:style="margin-right: 10px;"/>
                         </list>
                     </property>
                 </bean>
@@ -582,15 +581,7 @@
     <bean id="CM-Proposal-Button-Cancel-parentBean" parent="Uif-ActionLink" abstract="true">
         <property name="actionLabel" value="Cancel"/>
         <property name="methodToCall" value="back"/>
-        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_CLOSE] and !#isCompareView}"/>
-    </bean>
-
-    <!-- parent bean structure for Close button which should behave the same for both CS and regular users -->
-    <bean id="CM-Proposal-Button-Close" parent="CM-Proposal-Button-Close-parentBean" />
-    <bean id="CM-Proposal-Button-Close-parentBean" parent="Uif-ActionLink" abstract="true">
-        <property name="actionLabel" value="Close"/>
-        <property name="methodToCall" value="back"/>
-        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_CLOSE] and #isCompareView}"/>
+        <property name="render" value="@{#actionFlags[#Constants.KUALI_ACTION_CAN_CLOSE]}"/>
     </bean>
 
     <!-- parent bean structure for Withdraw button which should behave the same for both CS and regular users -->
