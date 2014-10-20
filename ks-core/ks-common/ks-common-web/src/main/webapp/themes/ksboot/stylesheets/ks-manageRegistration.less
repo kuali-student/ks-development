@@ -1,0 +1,117 @@
+.ks-ManageRegistration {
+    & #Uif-BreadcrumbWrapper {
+      height: 30px;
+      overflow: hidden;
+    }
+
+    &-button {
+      margin-top: 1.7rem;
+    }
+
+    &--startDate, &-lastDate {
+      font-weight: normal;
+      white-space: nowrap;
+    }
+
+    &-studentGroup {
+      font-weight: bold;
+      white-space: nowrap;
+
+        & a {
+          white-space: nowrap;
+        }
+    }
+
+    &-AppointmentWindow {
+        & > div {
+          float: left;
+        }
+
+        & .table-bordered {
+            border: 0 none;
+
+            & > thead > tr > th,
+            & > tbody > tr > th,
+            & > tfoot > tr > th,
+            & > thead > tr > td,
+            & > tbody > tr > td,
+            & > tfoot > tr > td {
+                border: none;
+                vertical-align: bottom;
+            }
+        }
+
+        & table.uif-gridLayout th {
+            background: none;
+
+            &[scope="row"] label {
+              float: none;
+            }
+        }
+    }
+
+    select.input-sm {
+        height: 33px;
+    }
+}
+
+
+#addRegistrationWindowCollection .uif-tableCollectionLayout {
+   &  > thead > tr > th,
+   &  > tbody > tr > th,
+   &  > tfoot > tr > th,
+   &  > thead > tr > td,
+   &  > tbody > tr > td,
+   &  > tfoot > tr > td {
+      padding: 1rem 0.5rem 0.5rem 0;
+   }
+
+   & label {
+     padding-left: 1rem;
+   }
+}
+
+.ks-icon-color {
+  color: @link-color !important;
+
+    &:hover,
+    &:focus {
+      color: @link-hover-color !important;
+    }
+}
+
+/* Manage Registration Windows
+   Windows table section
+*/
+.ks-appointmentWindow-table {
+    & tr {
+      border-top:  1px solid #d3d3d3;
+      border-bottom:  1px solid #d3d3d3;
+
+        & label,
+        & div {
+          white-space: nowrap;
+        }
+
+        & .uif-collection-column-action div{
+          .ks-mixin--flex;
+        }
+    }
+
+    & #addRegistrationWindowCollection_add {
+      text-transform: capitalize;
+    }
+
+    & .uif-boxLayoutHorizontalItem {
+      margin-right: 0px;
+    }
+}
+
+#KS-RegistrationWindowsManagement-ConfirmBreakAppointments-Dialog,
+#KS-RegistrationWindowsManagement-ConfirmDelete-Dialog {
+    width: 16em;
+
+    & fieldset {
+        padding-top: 1rem;
+    }
+}
