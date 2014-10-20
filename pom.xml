@@ -42,6 +42,8 @@
         <ks.ap.version>0.8.0-FR2-M1-SNAPSHOT</ks.ap.version>
         <ks.fa.version>0.1.0-FR2-M1-SNAPSHOT</ks.fa.version>
         <!-- 3rd party library/plugin version definitions -->
+	<fusion-maven-plugin.version>0.0.4</fusion-maven-plugin.version>
+	<fusion-maven-plugin.fuse.phase>none</fusion-maven-plugin.fuse.phase>
         <activemq.version>5.9.0</activemq.version>
         <antlr.runtime.version>3.1.1</antlr.runtime.version>
         <antlr.legacy.version>2.7.7</antlr.legacy.version>
@@ -97,7 +99,6 @@
         <!-- Oracle values sync'd with the deploy environments -->
         <oracle.version>11.2.0.2</oracle.version>
         <oracle.artifactId>ojdbc6_g</oracle.artifactId>
-        <plugin.externals.version>1.0.14</plugin.externals.version>
         <plugin.sonar.version>2.4</plugin.sonar.version>
         <powermock.version>1.5.6</powermock.version>
         <project.java.enforcer.version>[${project.java.min.version},1.8)</project.java.enforcer.version>
@@ -290,43 +291,6 @@
                     </dependencies>
                 </plugin>
                 <plugin>
-                    <groupId>org.kuali.maven.plugins</groupId>
-                    <artifactId>externals-maven-plugin</artifactId>
-                    <configuration>
-                        <commitMessage>[externals-maven-plugin] Automated pom formatting</commitMessage>
-                        <mappings>
-                            <mapping>
-                                <module>ks-ap</module>
-                                <versionProperty>ks.ap.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-fa</module>
-                                <versionProperty>ks.fa.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-api</module>
-                                <versionProperty>ks.api.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-core</module>
-                                <versionProperty>ks.core.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-enroll</module>
-                                <versionProperty>ks.enroll.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-lum</module>
-                                <versionProperty>ks.lum.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-deployments</module>
-                                <versionProperty>ks.deployments.version</versionProperty>
-                            </mapping>
-                        </mappings>
-                    </configuration>
-                </plugin>
-                <plugin>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${plugin.enforcer.version}</version>
                 </plugin>
@@ -431,6 +395,63 @@
             </plugins>
         </pluginManagement>
         <plugins>
+		<plugin>
+                    <groupId>org.kuali.maven.plugins</groupId>
+                    <artifactId>fusion-maven-plugin</artifactId>
+		    <version>${fusion-maven-plugin.version}</version>
+                    <configuration>
+                        <mappings>
+                            <mapping>
+                                <module>ks-api</module>
+				<branchName>enrollment_ks-api_branches_2.0.0-Mx</branchName>
+                                <versionProperty>ks.api.version</versionProperty>
+                            </mapping>
+                            <mapping>
+                                <module>ks-core</module>
+				<branchName>enrollment_ks-core_trunk</branchName>
+                                <versionProperty>ks.core.version</versionProperty>
+                            </mapping>			    
+			    <mapping>
+                                <module>ks-lum</module>
+				<branchName>enrollment_ks-lum_trunk</branchName>
+                                <versionProperty>ks.lum.version</versionProperty>
+                            </mapping>
+			    <mapping>
+                                <module>ks-enroll</module>
+				<branchName>enrollment_ks-enroll_trunk</branchName>
+                                <versionProperty>ks.enroll.version</versionProperty>
+                            </mapping>
+			    <mapping>
+                                <module>ks-fa</module>
+				<branchName>enrollment_ks-fa_trunk</branchName>
+                                <versionProperty>ks.fa.version</versionProperty>
+                            </mapping>
+                            <mapping>
+                                <module>ks-ap</module>
+				<branchName>enrollment_ks-ap_trunk</branchName>
+                                <versionProperty>ks.ap.version</versionProperty>
+                            </mapping>
+                            <mapping>
+                                <module>ks-deployments</module>
+				<branchName>enrollment_ks-deployments_trunk</branchName>
+                                <versionProperty>ks.deployments.version</versionProperty>
+                            </mapping>
+                        </mappings>
+                    </configuration>
+
+		    <executions>
+                    	<execution>
+                        	<id>fuse</id>
+	                        <goals>
+        	                    <goal>fuse</goal>
+                	        </goals>
+                        	<phase>${fusion-maven-plugin.fuse.phase}</phase>
+				<!-- run this on the command line:  mvn validate -Dfusion-maven-plugin.fuse.phase=validate -e -N -->
+			</execution>
+		    </executions>
+   
+                </plugin>
+
             <plugin>
                 <!-- use this plugin to help ensure build reproducibility -->
                 <artifactId>maven-enforcer-plugin</artifactId>
