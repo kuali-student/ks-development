@@ -87,8 +87,13 @@
         <ks.lum.version>2.0.4-cm-SNAPSHOT</ks.lum.version>
         <ks.deployments.version>2.0.4-cm-SNAPSHOT</ks.deployments.version>
         <!-- 3rd party library/plugin version definitions -->
-	<fusion-maven-plugin.version>0.0.4</fusion-maven-plugin.version>
-	<fusion-maven-plugin.fuse.phase>none</fusion-maven-plugin.fuse.phase>
+        <fusion-maven-plugin.version>0.0.4</fusion-maven-plugin.version>
+        <fusion-maven-plugin.fuse.phase>none</fusion-maven-plugin.fuse.phase>
+        <fusion-maven-plugin.tag-build.phase>none</fusion-maven-plugin.tag-build.phase>
+        <fusion-maven-plugin.tag-pull-request.phase>none</fusion-maven-plugin.tag-pull-request.phase>
+        <!-- Set this to be the name of the variable containing the pull request number -->
+        <!-- It is used inside of the tag mojo to retrieve it from the environment -->
+        <fusion-maven-plugin.tag.pull-request-number-property/>
         <antlr.runtime.version>3.1.1</antlr.runtime.version>
         <antlr.legacy.version>2.7.7</antlr.legacy.version>
         <aspectj.version>1.6.8</aspectj.version>
@@ -192,7 +197,7 @@
     <build>
         <pluginManagement>
             <plugins>
-               <plugin>
+                <plugin>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${plugin.enforcer.version}</version>
                 </plugin>
@@ -282,48 +287,72 @@
             </plugins>
         </pluginManagement>
         <plugins>
-   	    <plugin>
-                    <groupId>org.kuali.maven.plugins</groupId>
-                    <artifactId>fusion-maven-plugin</artifactId>
-		    <version>${fusion-maven-plugin.version}</version>
-                    <configuration>
-                        <mappings>
-                            <mapping>
-                                <module>ks-api</module>
-				<branchName>enrollment_ks-api_branches_CM-2.0</branchName>
-                                <versionProperty>ks.api.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-core</module>
-				<branchName>enrollment_ks-core_branches_CM-2.0</branchName>
-                                <versionProperty>ks.core.version</versionProperty>
-                            </mapping>			    
-			    <mapping>
-                                <module>ks-lum</module>
-				<branchName>enrollment_ks-lum_branches_CM-2.0</branchName>
-                                <versionProperty>ks.lum.version</versionProperty>
-                            </mapping>
-                            <mapping>
-                                <module>ks-deployments</module>
-				<branchName>enrollment_ks-deployments_branches_CM-2.0</branchName>
-                                <versionProperty>ks.deployments.version</versionProperty>
-                            </mapping>
-                        </mappings>
-                    </configuration>
-
-		    <executions>
-                    	<execution>
-                        	<id>fuse</id>
-	                        <goals>
-        	                    <goal>fuse</goal>
-                	        </goals>
-                        	<phase>${fusion-maven-plugin.fuse.phase}</phase>
-				<!-- run this on the command line:  mvn validate -Dfusion-maven-plugin.fuse.phase=validate -e -N -->
-			</execution>
-		    </executions>
-   
-                </plugin>
-
+            <plugin>
+                <groupId>org.kuali.maven.plugins</groupId>
+                <artifactId>fusion-maven-plugin</artifactId>
+                <version>${fusion-maven-plugin.version}</version>
+                <configuration>
+                    <mappings>
+                        <mapping>
+                            <module>ks-api</module>
+                            <branchName>enrollment_ks-api_branches_CM-2.0</branchName>
+                            <versionProperty>ks.api.version</versionProperty>
+                        </mapping>
+                        <mapping>
+                            <module>ks-core</module>
+                            <branchName>enrollment_ks-core_branches_CM-2.0</branchName>
+                            <versionProperty>ks.core.version</versionProperty>
+                        </mapping>
+                        <mapping>
+                            <module>ks-lum</module>
+                            <branchName>enrollment_ks-lum_branches_CM-2.0</branchName>
+                            <versionProperty>ks.lum.version</versionProperty>
+                        </mapping>
+                        <mapping>
+                            <module>ks-deployments</module>
+                            <branchName>enrollment_ks-deployments_branches_CM-2.0</branchName>
+                            <versionProperty>ks.deployments.version</versionProperty>
+                        </mapping>
+                    </mappings>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>fuse</id>
+                        <goals>
+                            <goal>fuse</goal>
+                        </goals>
+                        <phase>${fusion-maven-plugin.fuse.phase}</phase>
+                        <!-- run this on the command line:  mvn validate -Dfusion-maven-plugin.fuse.phase=validate -e -N -->
+                    </execution>
+                    <execution>
+                        <id>tag-pull-request</id>
+                        <phase>${fusion-maven-plugin.tag-pull-request.phase}</phase>
+                        <goals>
+                            <goal>tag</goal>
+                        </goals>
+                        <configuration>
+                            <tagStyle>BUILD_NUMBER</tagStyle>
+                            <buildNumberProperty>
+						${fusion-maven-plugin.tag.pull-request-number-property}
+					</buildNumberProperty>
+                            <buildText>pull-request</buildText>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>tag-build</id>
+                        <phase>${fusion-maven-plugin.tag-build.phase}</phase>
+                        <goals>
+                            <goal>tag</goal>
+                        </goals>
+                        <configuration>
+                            <tagStyle>BUILD_NUMBER</tagStyle>
+                            <buildNumberProperty>
+						BUILD_NUMBER
+					</buildNumberProperty>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <!-- use this plugin to help ensure build reproducibility -->
                 <artifactId>maven-enforcer-plugin</artifactId>
