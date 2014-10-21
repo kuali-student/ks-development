@@ -1,8 +1,0 @@
-# module = ks-api branch Path = enrollment/ks-api/branches/CM-2.0 revision = 41626
-ks-api::enrollment_ks-api_branches_CM-2.0::f559b4d9f5d4392060fdd45b313d033fb13bec5c
-# module = ks-core branch Path = enrollment/ks-core/branches/CM-2.0 revision = 41626
-ks-core::enrollment_ks-core_branches_CM-2.0::59c18d7ea52d6d5e3a5fca46c0cd2088aa631274
-# module = ks-lum branch Path = enrollment/ks-lum/branches/CM-2.0 revision = 41626
-ks-lum::enrollment_ks-lum_branches_CM-2.0::cde961e9d5e49809740f4a33b0d1721d2f13b395
-# module = ks-deployments branch Path = enrollment/ks-deployments/branches/CM-2.0 revision = 41626
-ks-deployments::enrollment_ks-deployments_branches_CM-2.0::cd810011f205e7a665410b6441993f2785fa773e
